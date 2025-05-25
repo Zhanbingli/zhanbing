@@ -21,12 +21,12 @@ export async function generateMetadata({ params }: PostPageProps) {
     const { id } = await params
     const postData = await getPostData(id)
     return {
-      title: `${postData.title} | 我的个人博客`,
+      title: `${postData.title} | 展兵的个人博客`,
       description: postData.excerpt || postData.title,
     }
   } catch {
     return {
-      title: '文章未找到 | 我的个人博客',
+      title: '文章未找到 | 展兵的个人博客',
     }
   }
 }
