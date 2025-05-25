@@ -11,7 +11,7 @@ export default function Home() {
         {/* 博客头部 */}
         <header className="text-center mb-16">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            展兵的个人博客
+            blog of lizhanbing
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             分享技术心得、学习笔记和生活感悟的地方
@@ -87,7 +87,7 @@ export default function Home() {
         {/* 页脚 */}
         <footer className="mt-16 pt-8 border-t border-gray-200 text-center">
           <p className="text-gray-600">
-            © 2024 展兵的个人博客. 使用 Next.js 构建
+            © 2025 blog of lizhanbing. 使用 Next.js 构建
           </p>
         </footer>
       </div>

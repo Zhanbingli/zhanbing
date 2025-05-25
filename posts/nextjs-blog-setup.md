@@ -1,6 +1,6 @@
 ---
 title: '使用 Next.js 搭建静态博客的完整指南'
-date: '2024-01-20'
+date: '2025-05-25'
 excerpt: '详细介绍如何使用 Next.js、TypeScript 和 Tailwind CSS 搭建一个现代化的静态博客网站。'
 tags: ['Next.js', 'TypeScript', 'Tailwind CSS', '静态网站', '教程']
 ---

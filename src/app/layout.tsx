@@ -6,24 +6,24 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "展兵的个人博客",
-    template: "%s | 展兵的个人博客"
+    default: "blog of lizhanbing",
+    template: "%s | blog of lizhanbing"
   },
   description: "分享技术心得、学习笔记和生活感悟的个人博客",
   keywords: ["博客", "技术", "编程", "学习", "分享", "展兵"],
-  authors: [{ name: "展兵" }],
-  creator: "展兵",
+  authors: [{ name: "lizhanbing" }],
+  creator: "lizhanbing",
   openGraph: {
     type: "website",
     locale: "zh_CN",
-    url: "https://zhanbing.site",
-    title: "展兵的个人博客",
+    url: "https://lizhanbing.site",
+    title: "blog of lizhanbing",
     description: "分享技术心得、学习笔记和生活感悟的个人博客",
-    siteName: "展兵的个人博客",
+    siteName: "blog of lizhanbing",
   },
   twitter: {
     card: "summary_large_image",
-    title: "展兵的个人博客",
+    title: "blog of lizhanbing",
     description: "分享技术心得、学习笔记和生活感悟的个人博客",
   },
   robots: {

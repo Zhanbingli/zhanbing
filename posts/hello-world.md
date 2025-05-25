@@ -1,6 +1,6 @@
 ---
 title: '欢迎来到我的博客'
-date: '2024-01-15'
+date: '2025-05-25'
 excerpt: '这是我的第一篇博客文章，欢迎大家来到我的个人博客！'
 tags: ['欢迎', '博客', '开始']
 ---
@@ -33,6 +33,6 @@ tags: ['欢迎', '博客', '开始']
 如果你有任何问题或建议，欢迎通过以下方式联系我：
 
 - 网站：https://zhanbing.site
-- GitHub：https://github.com/yourusername
+- GitHub：https://github.com/Zhanbingli
 
 感谢你的阅读，期待与你的交流！ 
