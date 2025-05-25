@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "preview": "npm run build && npx serve out"
+    "new": "./scripts/new-post.sh",
+    "publish": "./scripts/publish.sh",
+    "preview": "npm run build && npm run start"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
