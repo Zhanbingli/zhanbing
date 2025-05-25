@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: "分享技术心得、学习笔记和生活感悟的个人博客",
   },
   robots: {
-    index: true,
+    index: true, 
     follow: true,
   },
 };
