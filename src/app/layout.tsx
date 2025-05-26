@@ -6,39 +6,38 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "blog of lizhanbing",
-    template: "%s | blog of lizhanbing"
+    default: "展兵的技术博客 | ZhanBing.site",
+    template: "%s | 展兵的技术博客"
   },
-  description: "分享技术心得、学习笔记和生活感悟的个人博客",
-  keywords: ["博客", "技术", "编程", "学习", "分享", "lizhanbing", "前端", "后端", "全栈开发"],
-  authors: [{ name: "lizhanbing", url: "https://zhanbing.site" }],
-  creator: "lizhanbing",
-  publisher: "lizhanbing",
+  description: "分享前端开发、技术学习和编程心得的个人博客",
+  keywords: ["前端开发", "技术博客", "JavaScript", "React", "Next.js", "编程"],
+  authors: [{ name: "展兵", url: "https://zhanbing.site" }],
+  creator: "展兵",
+  publisher: "展兵",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   metadataBase: new URL("https://zhanbing.site"),
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": [{ url: "/feed.xml", title: "RSS Feed" }],
+    },
   },
   openGraph: {
     type: "website",
     locale: "zh_CN",
     url: "https://zhanbing.site",
-    title: "blog of lizhanbing",
-    description: "分享技术心得、学习笔记和生活感悟的个人博客",
-    siteName: "blog of lizhanbing",
-    images: [
-      {
-        url: "/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: "blog of lizhanbing",
-      },
-    ],
+    title: "展兵的技术博客",
+    description: "分享前端开发、技术学习和编程心得的个人博客",
+    siteName: "展兵的技术博客",
   },
   twitter: {
     card: "summary_large_image",
-    title: "blog of lizhanbing",
-    description: "分享技术心得、学习笔记和生活感悟的个人博客",
-    images: ["/og-image.svg"],
+    title: "展兵的技术博客",
+    description: "分享前端开发、技术学习和编程心得的个人博客",
   },
   robots: {
     index: true, 
@@ -58,9 +57,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="zh-CN">
       <body className={inter.className}>
