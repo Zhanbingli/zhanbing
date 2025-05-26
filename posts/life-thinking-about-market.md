@@ -1,6 +1,6 @@
 ---
 title: 'learning do difficult things'
-date: '2025-5-26'
+date: '2025-05-26'
 excerpt: 'change make me progress'
 tags: ['thinking']
 ---
