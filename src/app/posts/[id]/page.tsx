@@ -141,10 +141,10 @@ export default async function Post({ params }: PostPageProps) {
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
                 <div className="flex items-center space-x-4 mb-4 sm:mb-0">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">展</span>
+                    <span className="text-white font-bold text-sm">占</span>
                   </div>
                   <div>
-                    <div className="text-sm font-medium text-gray-900">展兵</div>
+                    <div className="text-sm font-medium text-gray-900">占兵</div>
                     <time className="text-sm text-gray-500" dateTime={postData.date}>
                       {formatDate(postData.date)}
                     </time>
