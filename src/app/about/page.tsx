@@ -3,7 +3,7 @@ import Navigation from '@/components/Navigation'
 
 export const metadata = {
   title: '关于我',
-  description: '了解更多关于占兵和这个技术博客的信息',
+  description: '了解更多关于zhanbing和这个技术博客的信息',
 }
 
 export default function AboutPage() {
@@ -15,7 +15,7 @@ export default function AboutPage() {
         {/* Header */}
         <header className="text-center mb-16">
           <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-4xl">占</span>
+            <span className="text-white font-bold text-4xl">Z</span>
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-6">
@@ -23,7 +23,7 @@ export default function AboutPage() {
           </h1>
           
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            你好，我是占兵，一名热爱技术的探索者，我希望将世界有趣的一面展示给你！
+            你好，我是zhanbing，一名热爱技术的探索者，我希望将世界有趣的一面展示给你！
           </p>
         </header>
 

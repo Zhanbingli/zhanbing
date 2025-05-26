@@ -27,22 +27,22 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     
     return {
       title: postData.title,
-      description: postData.excerpt || `阅读 ${postData.title} - 展兵的技术博客`,
+      description: postData.excerpt || `阅读 ${postData.title} - zhanbing`,
       keywords: postData.tags?.join(', ') || '',
-      authors: [{ name: '展兵', url: baseUrl }],
+      authors: [{ name: 'zhanbing', url: baseUrl }],
       openGraph: {
         title: postData.title,
-        description: postData.excerpt || `阅读 ${postData.title} - 展兵的技术博客`,
+        description: postData.excerpt || `阅读 ${postData.title} - zhanbing`,
         type: 'article',
         publishedTime: postData.date,
-        authors: ['展兵'],
+        authors: ['zhanbing'],
         tags: postData.tags,
         url: `${baseUrl}/posts/${id}`,
       },
       twitter: {
         card: 'summary_large_image',
         title: postData.title,
-        description: postData.excerpt || `阅读 ${postData.title} - 展兵的技术博客`,
+        description: postData.excerpt || `阅读 ${postData.title} - zhanbing`,
       },
       alternates: {
         canonical: `/posts/${id}`,
@@ -83,12 +83,12 @@ export default async function Post({ params }: PostPageProps) {
     description: postData.excerpt || postData.title,
     author: {
       '@type': 'Person',
-      name: '展兵',
+      name: 'zhanbing',
       url: 'https://zhanbing.site',
     },
     publisher: {
       '@type': 'Person',
-      name: '展兵',
+      name: 'zhanbing',
     },
     datePublished: postData.date,
     dateModified: postData.date,
@@ -144,7 +144,7 @@ export default async function Post({ params }: PostPageProps) {
                     <span className="text-white font-bold text-sm">占</span>
                   </div>
                   <div>
-                    <div className="text-sm font-medium text-gray-900">占兵</div>
+                    <div className="text-sm font-medium text-gray-900">zhanbing</div>
                     <time className="text-sm text-gray-500" dateTime={postData.date}>
                       {formatDate(postData.date)}
                     </time>

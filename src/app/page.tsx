@@ -160,29 +160,11 @@ export default function Home() {
           </div>
         </main>
 
-        {/* Newsletter */}
-        <section className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center text-white">
-          <h3 className="text-2xl font-bold mb-4">保持联系</h3>
-          <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-            订阅我的博客，第一时间获取最新的技术文章和学习心得
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <input
-              type="email"
-              placeholder="输入你的邮箱地址"
-              className="px-4 py-3 rounded-lg text-gray-900 w-full sm:w-80 focus:ring-2 focus:ring-white focus:outline-none"
-            />
-            <button className="px-6 py-3 bg-white text-blue-600 font-medium rounded-lg hover:bg-gray-100 transition-colors duration-200 w-full sm:w-auto">
-              订阅更新
-            </button>
-          </div>
-        </section>
-
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-gray-200 text-center">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-600 mb-4 md:mb-0">
-              © 2025 展兵的技术博客. 使用 Next.js 构建，托管在 GitHub Pages
+              © 2025 zhanbing. 使用 Next.js 构建，托管在 GitHub Pages
             </p>
             <div className="flex space-x-6">
               <Link href="/about" className="text-gray-600 hover:text-blue-600 transition-colors duration-200">
