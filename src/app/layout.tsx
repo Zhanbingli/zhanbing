@@ -6,14 +6,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "展兵的技术博客 | ZhanBing.site",
-    template: "%s | 展兵的技术博客"
+    default: "占兵的技术博客 | ZhanBing.site",
+    template: "%s | 占兵的技术博客"
   },
   description: "分享前端开发、技术学习和编程心得的个人博客",
   keywords: ["前端开发", "技术博客", "JavaScript", "React", "Next.js", "编程"],
-  authors: [{ name: "展兵", url: "https://zhanbing.site" }],
-  creator: "展兵",
-  publisher: "展兵",
+  authors: [{ name: "占兵", url: "https://zhanbing.site" }],
+  creator: "占兵",
+  publisher: "占兵",
   formatDetection: {
     email: false,
     address: false,
@@ -30,13 +30,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "zh_CN",
     url: "https://zhanbing.site",
-    title: "展兵的技术博客",
+    title: "占兵的技术博客",
     description: "分享前端开发、技术学习和编程心得的个人博客",
-    siteName: "展兵的技术博客",
+    siteName: "占兵的技术博客",
   },
   twitter: {
     card: "summary_large_image",
-    title: "展兵的技术博客",
+    title: "占兵的技术博客",
     description: "分享前端开发、技术学习和编程心得的个人博客",
   },
   robots: {
