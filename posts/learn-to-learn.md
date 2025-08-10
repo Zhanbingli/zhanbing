@@ -1,31 +1,29 @@
 ---
-title: "学会学习"
-data: '2025-08-10'
-excerpt: '基于项目的内驱力学习'
+title: "Learn to Learn"
+date: '2025-08-10'
+excerpt: 'Learning driven by intrinsic motivation through projects'
 tags: ['learn']
 ---
 
-> How to become expert at thing:
+> How to become an expert at something:
 
-1 iteratively take on concrete projects and accomplish them depth-wise, learning “on demand” (i.e. don’t learn bottom-up breadth-wise)
+1. Iteratively take on concrete projects and accomplish them in depth, learning “on demand” (i.e., don’t learn bottom-up breadth-wise).
+2. Teach or summarize everything you learn in your own words.
+3. Only compare yourself to your younger self, never to others.
 
-2 teach/summarize everything you learn in your own words
+We spend a lot of time learning—at least over 10 years from elementary school to university, our lives are bound to "learning."
 
-3 only compare yourself to younger you, never to others
+However, as someone about to graduate from university, I recently realized what learning truly is and what it should look like.
 
-我们花了很多时间在学习上，至少从小学到大学的10多年时间里，生活都被「学习」绑定。
+In the past, I spent a lot of time solving math problems just for a grade, but I never truly experienced the joy of learning. Looking back now, I was immersed in a state of "pseudo-learning." Apart from the seemingly impressive grades, it left me with nothing, and I’ve almost forgotten that I was once considered a "top student."
 
-可是作为一个快大学毕业的人，我最近才发现什么是学习，真正的学习应该是什么样子的。
+Over the past year, intensive English reading has not only provided me with high-quality input but also allowed me to truly experience the joy of "learning by doing." It has even made me fall in love with English—a language I once strongly resisted.
 
-过去那种为了一个分数，花上大量时间钻研某个数学问题的我似乎从未真正体会过学习带来的快感。现在回看，我一直沉浸在「伪学习」的状态中，除了曾经看似耀眼的分数外，并未给我留下什么，甚至我都快忘记了自己曾经也是所谓的「学霸」。
+In an era where learning resources are extremely accessible, "learning how to learn" is a skill we must continuously iterate throughout our lives. I’m fortunate to have figured out this topic during university—a seemingly simple yet challenging problem for most people.
 
-最近一年高强度的英文阅读除了带给我高质量的输入外，还让我真正体会到「学以致用」的乐趣，也从内心深处喜欢上了英文——这个曾经多么排斥的语言。
+Humans are naturally curious about new things. As we grow, we inevitably encounter the unknown, which requires us to spend a lot of time understanding (learning). Thus, learning is not only a lifelong task but also an innate advantage. However, with the widespread adoption of standardized scoring, people gradually lose the joy of learning for curiosity’s sake and associate low scores with a lack of intelligence. In reality, learning new things doesn’t require high intelligence. While being smart might accelerate understanding, not being "smart enough" doesn’t prevent someone from mastering what they love.
 
-在一个学习资源获取变得极为便捷的时代里，「学会学习」才是我们终身都应该持续迭代的知识。我很庆幸自己能够在大学里弄明白「学习」这个课题，这个看似简单，却又让大部分人头疼的难题。
+I’m increasingly realizing that "people might actually be taught to hate learning." At least, certain environments can indeed make people dislike learning. A person who hates learning and someone who hasn’t received higher education but still loves learning are fundamentally different. The key difference is that the former has lost the "curiosity to explore the world," while the latter can still progress through learning.
 
-人天生就对新东西充满好奇，而在成长的过程中必然会遇到未知的事物，这使得他们必须要花大量时间去弄懂（学习），所以学习不仅是终身的课题，还是与生俱来的优势。可是随着标准化评分的普及，人们逐渐丧失了那种只为满足好奇心而学习的乐趣，并将获得低分与自己不够聪明或者智商不高挂钩，但其实学习新东西真的不需要多高的智商，智商高也许可以让你加速理解，但不够聪明也并不能阻碍一个人真正学会自己热爱的东西。
-
-我现在越来越发觉「人可能真的是被教傻的」，至少某种环境的存在确实会让人讨厌学习。一个讨厌学习的人和一个没受过高等教育，但依然热爱学习的人是完全不同的，他们的本质区别在于前者失去了「探索世界的好奇心」，而后者依然可以通过学习进步。
-
-你可能有过这样的体验，那些看似没有接触过什么高等教育的父辈，但是他们很多人都为了生存而积累起了一门手艺，也许这手艺活很辛苦，但他们多年来积累的经验依然会很有价值，至少比我们大学四年因为不爱学习而「水过来」的学位要有价值得多。
+You might have experienced this: many of our parents, who seemingly haven’t had much exposure to higher education, have accumulated a craft or skill for survival. While this craft might be labor-intensive, the experience they’ve gained over the years is still valuable—arguably more so than a degree earned over four years of university without a love for learning.
 
