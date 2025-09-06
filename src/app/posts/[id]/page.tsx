@@ -77,7 +77,7 @@ export default async function Post({ params }: PostPageProps) {
 
   const headings: { id: string; text: string; level: number }[] = []
 
-  let enhancedHtml = postData.content
+  const enhancedHtml = postData.content
     // 抽取 h2/h3，注入 id
     .replace(/<h([23])(.*?)>([\s\S]*?)<\/h\1>/g, (_m, lvl, attrs, inner) => {
       const cleanText = String(inner).replace(/<[^>]+>/g, '').trim()
