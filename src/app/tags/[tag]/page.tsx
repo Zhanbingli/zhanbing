@@ -15,6 +15,9 @@ export async function generateMetadata({ params }: TagPageProps) {
   return {
     title: `标签: ${decodedTag}`,
     description: `查看所有关于 "${decodedTag}" 的文章`,
+    alternates: {
+      canonical: `/tags/${encodeURIComponent(decodedTag)}`,
+    },
   }
 }
 

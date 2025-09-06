@@ -30,6 +30,14 @@ read -p "📄 请输入文章摘要: " excerpt
 # 询问标签
 read -p "🏷️  请输入标签 (用逗号分隔): " tags_input
 
+# 是否草稿
+read -p "🧪 是否标记为草稿？(y/N): " draft_input
+if [[ "$draft_input" == "y" || "$draft_input" == "Y" ]]; then
+    draft_flag=true
+else
+    draft_flag=false
+fi
+
 # 处理标签
 if [[ -n "$tags_input" ]]; then
     # 将逗号分隔的标签转换为 YAML 数组格式
@@ -54,6 +62,7 @@ title: '$title'
 date: '$current_date'
 excerpt: '$excerpt'
 tags: $tags_yaml
+draft: $draft_flag
 ---
 
 # $title

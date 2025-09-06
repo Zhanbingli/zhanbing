@@ -5,6 +5,9 @@ import Navigation from '@/components/Navigation'
 export const metadata = {
   title: '标签分类',
   description: '浏览所有文章标签和分类',
+  alternates: {
+    canonical: '/tags',
+  },
 }
 
 export default function TagsPage() {

@@ -12,29 +12,18 @@ interface SearchResult {
   date: string
   excerpt?: string
   tags?: string[]
-  content: string
   score: number
 }
 
-interface PostData {
-  id: string
-  title: string
-  date: string
-  excerpt?: string
-  tags?: string[]
-  content: string
-}
+type SearchIndexItem = Omit<SearchResult, 'score'>
 
-interface SearchPageClientProps {
-  allPosts: PostData[]
-}
-
-export default function SearchPageClient({ allPosts }: SearchPageClientProps) {
+export default function SearchPageClient() {
   const searchParams = useSearchParams()
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [initialQuery, setInitialQuery] = useState('')
+  const [index, setIndex] = useState<SearchIndexItem[] | null>(null)
 
   const performSearch = useCallback(async (searchTerm: string) => {
     if (!searchTerm.trim()) {
@@ -47,7 +36,8 @@ export default function SearchPageClient({ allPosts }: SearchPageClientProps) {
     try {
       const results: SearchResult[] = []
 
-      allPosts.forEach(post => {
+      const data = index ?? []
+      data.forEach(post => {
         let score = 0
         const searchTermLower = searchTerm.toLowerCase()
         
@@ -69,11 +59,6 @@ export default function SearchPageClient({ allPosts }: SearchPageClientProps) {
             }
           })
         }
-        
-        // 搜索内容
-        if (post.content.toLowerCase().includes(searchTermLower)) {
-          score += 1
-        }
 
         if (score > 0) {
           results.push({
@@ -92,7 +77,24 @@ export default function SearchPageClient({ allPosts }: SearchPageClientProps) {
     } finally {
       setIsLoading(false)
     }
-  }, [allPosts])
+  }, [index])
+
+  // 加载轻量索引（仅一次）
+  useEffect(() => {
+    let aborted = false
+    const loadIndex = async () => {
+      try {
+        const res = await fetch('/search-index.json', { cache: 'force-cache' })
+        const data: SearchIndexItem[] = await res.json()
+        if (!aborted) setIndex(data)
+      } catch (e) {
+        console.error('Failed to load search index', e)
+        if (!aborted) setIndex([])
+      }
+    }
+    loadIndex()
+    return () => { aborted = true }
+  }, [])
 
   useEffect(() => {
     const query = searchParams.get('q') || ''

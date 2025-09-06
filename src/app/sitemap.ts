@@ -13,6 +13,14 @@ export default function sitemap() {
     priority: 0.8,
   }))
 
+  const allTags = Array.from(new Set(posts.flatMap(p => p.tags || [])))
+  const tagUrls = allTags.map((tag) => ({
+    url: `${baseUrl}/tags/${encodeURIComponent(tag)}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
   return [
     {
       url: baseUrl,
@@ -20,6 +28,13 @@ export default function sitemap() {
       changeFrequency: 'weekly' as const,
       priority: 1,
     },
+    {
+      url: `${baseUrl}/tags`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
     ...postUrls,
+    ...tagUrls,
   ]
-} 
+}

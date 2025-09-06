@@ -1,15 +1,12 @@
 import { Suspense } from 'react'
-import { getSortedPostsData } from '@/lib/posts'
 import SearchPageClient from './SearchPageClient'
 
 export const metadata = {
   title: '搜索文章',
   description: '搜索博客中的技术文章和学习笔记',
-}
-
-function SearchPageContent() {
-  const allPosts = getSortedPostsData()
-  return <SearchPageClient allPosts={allPosts} />
+  alternates: {
+    canonical: '/search',
+  },
 }
 
 export default function SearchPage() {
@@ -22,7 +19,7 @@ export default function SearchPage() {
         </div>
       </div>
     }>
-      <SearchPageContent />
+      <SearchPageClient />
     </Suspense>
   )
-} 
+}

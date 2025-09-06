@@ -33,11 +33,20 @@ export const metadata: Metadata = {
     title: "zhanbing",
     description: "分享前端开发、技术学习和编程心得的个人博客",
     siteName: "zhanbing",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "zhanbing",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "zhanbing",
     description: "分享前端开发、技术学习和编程心得的个人博客",
+    images: ["/og-image.svg"],
   },
   robots: {
     index: true, 

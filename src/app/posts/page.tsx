@@ -6,6 +6,9 @@ import Navigation from '@/components/Navigation'
 export const metadata = {
   title: '全部文章',
   description: '浏览我的所有博客文章，包括技术分享、学习笔记和编程心得',
+  alternates: {
+    canonical: '/posts',
+  },
 }
 
 export default function PostsPage() {
@@ -78,7 +81,7 @@ export default function PostsPage() {
         {/* Articles List */}
         <main>
           <div className="space-y-8">
-            {sortedPosts.map(({ id, date, title, excerpt, tags }: PostData, index: number) => (
+            {sortedPosts.map(({ id, date, title, excerpt, tags, readingTime }: PostData, index: number) => (
               <article
                 key={id}
                 className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
@@ -144,7 +147,7 @@ export default function PostsPage() {
                     </Link>
                     
                     <div className="text-sm text-gray-500">
-                      约 {Math.max(1, Math.ceil((excerpt?.length || 100) / 200))} 分钟阅读
+                      约 {Math.max(1, (readingTime ?? 1))} 分钟阅读
                     </div>
                   </div>
                 </div>
