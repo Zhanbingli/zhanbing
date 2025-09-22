@@ -1,5 +1,5 @@
 ---
-title: 'AI Tool: The Ultimate Action Amplifier'
+title: 'AI Tools: The Ultimate Action Amplifier'
 date: '2025-09-20'
 excerpt: "How We've Shifted from Knowledge Competition to Action Competition"
 tags: ['personal growth', 'motivation', 'learning']
