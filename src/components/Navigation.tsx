@@ -35,7 +35,7 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 container-mobile">
+    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 container-mobile">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 nav-mobile-landscape">
           {/* Logo */}
@@ -47,18 +47,12 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             <Link 
               href="/" 
               className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
             >
               首页
-            </Link>
-            <Link 
-              href="/tags" 
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
-            >
-              标签
             </Link>
             <Link 
               href="/about" 
@@ -194,13 +188,6 @@ export default function Navigation() {
                 onClick={closeMenus}
               >
                 首页
-              </Link>
-              <Link 
-                href="/tags" 
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium py-3 px-2 rounded-lg hover:bg-gray-50 touch-target"
-                onClick={closeMenus}
-              >
-                标签
               </Link>
               <Link 
                 href="/about" 

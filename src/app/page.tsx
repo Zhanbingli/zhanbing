@@ -5,6 +5,7 @@ import Navigation from '@/components/Navigation'
 
 export default function Home() {
   const allPostsData = getSortedPostsData()
+  const latestUpdate = allPostsData[0]?.date
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
@@ -23,36 +24,25 @@ export default function Home() {
           </div>
           
           {/* Stats */}
-          <div className="flex justify-center items-center space-x-8 mb-8">
-            <div className="text-center">
+          <div className="flex flex-wrap justify-center gap-8 mb-8 text-center">
+            <div>
               <div className="text-2xl font-bold text-gray-900">{allPostsData.length}</div>
               <div className="text-sm text-gray-600">篇文章</div>
             </div>
-            <div className="w-px h-8 bg-gray-300"></div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-gray-900">
-                {Array.from(new Set(allPostsData.flatMap(post => post.tags || []))).length}
-              </div>
-              <div className="text-sm text-gray-600">个标签</div>
-            </div>
-            <div className="w-px h-8 bg-gray-300"></div>
-            <div className="text-center">
+            <div>
               <div className="text-2xl font-bold text-gray-900">2025</div>
               <div className="text-sm text-gray-600">年开始</div>
             </div>
+            {latestUpdate && (
+              <div>
+                <div className="text-2xl font-bold text-gray-900">{formatDate(latestUpdate)}</div>
+                <div className="text-sm text-gray-600">最近更新</div>
+              </div>
+            )}
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link
-              href="/tags"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
-            >
-              <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-              </svg>
-              浏览标签
-            </Link>
             <Link
               href="/feed.xml"
               className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
@@ -66,28 +56,6 @@ export default function Home() {
             </Link>
           </div>
         </header>
-
-        {/* Featured Tags */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">热门标签</h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            {Array.from(new Set(allPostsData.flatMap(post => post.tags || [])))
-              .slice(0, 8)
-              .map((tag) => (
-                <Link
-                  key={tag}
-                  href={`/tags/${encodeURIComponent(tag)}`}
-                  className="inline-flex items-center px-4 py-2 bg-white text-gray-700 rounded-full border border-gray-200 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 shadow-sm hover:shadow-md"
-                >
-                  <span className="text-sm font-medium">{tag}</span>
-                  <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-                    {allPostsData.filter(post => post.tags?.includes(tag)).length}
-                  </span>
-                </Link>
-              ))}
-          </div>
-        </section>
-
         {/* Articles */}
         <main>
           <div className="flex items-center justify-between mb-8">
@@ -101,7 +69,7 @@ export default function Home() {
           </div>
           
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {allPostsData.slice(0, 6).map(({ id, date, title, excerpt, tags }) => (
+            {allPostsData.slice(0, 6).map(({ id, date, title, excerpt }) => (
               <article
                 key={id}
                 className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
@@ -111,11 +79,6 @@ export default function Home() {
                     <time className="text-sm text-gray-500" dateTime={date}>
                       {formatDate(date)}
                     </time>
-                    {tags && tags.length > 0 && (
-                      <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-                        {tags[0]}
-                      </span>
-                    )}
                   </div>
                   
                   <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-200">
@@ -140,19 +103,6 @@ export default function Home() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </Link>
-                    
-                    {tags && tags.length > 1 && (
-                      <div className="flex space-x-1">
-                        {tags.slice(1, 3).map((tag) => (
-                          <span
-                            key={tag}
-                            className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 </div>
               </article>

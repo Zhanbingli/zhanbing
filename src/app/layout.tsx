@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -74,7 +71,7 @@ export default function RootLayout({
 
   return (
     <html lang="zh-CN">
-      <body className={inter.className}>
+      <body className="bg-white text-slate-900 antialiased">
         {gaId ? (
           <>
             <Script
