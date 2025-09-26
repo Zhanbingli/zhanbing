@@ -84,6 +84,8 @@ html {
 .prose {
   color: #374151;
   max-width: none;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .prose h1,
@@ -154,6 +156,7 @@ html {
   border-radius: 0.5rem;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+  max-width: 100%;
 }
 
 .prose pre code {
@@ -289,6 +292,10 @@ html {
     margin-bottom: 1rem;
   }
 
+  .prose code {
+    white-space: pre-wrap;
+  }
+
   .prose img {
     width: 100%;
     height: auto;
@@ -299,10 +306,17 @@ html {
     margin-left: -0.5rem;
     margin-right: -0.5rem;
     border-radius: 0.75rem;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
   .prose pre {
     padding: 1rem;
+  }
+
+  .prose table {
+    display: block;
+    overflow-x: auto;
   }
 }
 
