@@ -152,17 +152,17 @@ export default async function Post({ params }: PostPageProps) {
       />
       <div className="min-h-screen bg-white text-slate-900">
         <Navigation />
-        <main className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(0,1fr)]">
-            <article className="space-y-12">
+        <main className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+          <div className="grid gap-10 md:gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(0,1fr)]">
+            <article className="space-y-10 md:space-y-12">
               <header className="relative space-y-8">
                 <div className="absolute -inset-x-12 -top-12 h-32 bg-slate-100/60 blur-3xl"></div>
                 <div className="relative space-y-6">
                   <p className="text-xs uppercase tracking-[0.45em] text-slate-400">Reading</p>
-                  <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
                     {postData.title}
                   </h1>
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
                     <div className="inline-flex items-center gap-3">
                       <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-slate-100 text-sm font-medium">
                         占
@@ -180,7 +180,7 @@ export default async function Post({ params }: PostPageProps) {
                     </span>
                   </div>
                   {postData.excerpt && (
-                    <p className="max-w-2xl text-lg leading-relaxed text-slate-600">
+                    <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-slate-600">
                       {postData.excerpt}
                     </p>
                   )}
@@ -201,7 +201,7 @@ export default async function Post({ params }: PostPageProps) {
               </header>
 
               <div
-                className="prose prose-lg max-w-none prose-headings:font-semibold prose-headings:text-slate-900 prose-a:text-slate-900 prose-a:underline-offset-4 hover:prose-a:text-slate-600 prose-code:text-indigo-600 prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-pre:bg-slate-950 prose-pre:text-slate-100 prose-blockquote:border-l-4 prose-blockquote:border-slate-900/20 prose-blockquote:bg-slate-100/60 prose-blockquote:py-1.5 prose-blockquote:px-4"
+                className="prose max-w-none sm:prose-lg prose-headings:font-semibold prose-headings:text-slate-900 prose-a:text-slate-900 prose-a:underline-offset-4 hover:prose-a:text-slate-600 prose-code:text-indigo-600 prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-pre:bg-slate-950 prose-pre:text-slate-100 prose-blockquote:border-l-4 prose-blockquote:border-slate-900/20 prose-blockquote:bg-slate-100/60 prose-blockquote:py-1.5 prose-blockquote:px-4"
                 dangerouslySetInnerHTML={{ __html: enhancedHtml }}
               />
 
@@ -212,8 +212,8 @@ export default async function Post({ params }: PostPageProps) {
                   excerpt={postData.excerpt || postData.title}
                   url={`https://zhanbing.site/posts/${id}`}
                 />
-                <div className="flex flex-wrap gap-3 text-sm text-slate-500">
-                  <Link href="/" className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 hover:border-slate-900 hover:text-slate-900 transition">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 text-sm text-slate-500">
+                  <Link href="/" className="flex w-full sm:inline-flex sm:w-auto items-center justify-center gap-2 rounded-full border border-slate-300 px-4 py-2 hover:border-slate-900 hover:text-slate-900 transition">
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                     </svg>

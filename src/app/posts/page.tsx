@@ -27,29 +27,29 @@ export default function PostsPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       <Navigation />
       
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         {/* Header */}
-        <header className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-6">
+        <header className="text-center mb-12 md:mb-16">
+          <h1 className="text-3xl sm:text-5xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-6">
             全部文章
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
             探索我的技术世界，从前端开发到编程心得，记录每一次学习与成长
           </p>
 
           {/* Stats */}
-          <div className="flex justify-center items-center space-x-8 mb-8">
-            <div className="text-center">
+          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 mb-8">
+            <div className="text-center flex-1 min-w-[140px]">
               <div className="text-2xl font-bold text-gray-900">{totalPosts}</div>
               <div className="text-sm text-gray-600">篇文章</div>
             </div>
-            <div className="w-px h-8 bg-gray-300"></div>
-            <div className="text-center">
+            <div className="hidden sm:block w-px h-8 bg-gray-300"></div>
+            <div className="text-center flex-1 min-w-[140px]">
               <div className="text-2xl font-bold text-gray-900">{allTags.length}</div>
               <div className="text-sm text-gray-600">个标签</div>
             </div>
-            <div className="w-px h-8 bg-gray-300"></div>
-            <div className="text-center">
+            <div className="hidden sm:block w-px h-8 bg-gray-300"></div>
+            <div className="text-center flex-1 min-w-[140px]">
               <div className="text-2xl font-bold text-gray-900">{thisYearPosts}</div>
               <div className="text-sm text-gray-600">今年发布</div>
             </div>
@@ -59,7 +59,7 @@ export default function PostsPage() {
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
             <Link
               href="/tags"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
+              className="flex w-full sm:inline-flex sm:w-auto items-center justify-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
             >
               <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
@@ -68,7 +68,7 @@ export default function PostsPage() {
             </Link>
             <Link
               href="/search"
-              className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
+              className="flex w-full sm:inline-flex sm:w-auto items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
             >
               <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -86,9 +86,9 @@ export default function PostsPage() {
                 key={id}
                 className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
               >
-                <div className="p-8">
+                <div className="p-6 sm:p-8">
                   {/* Article Header */}
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                  <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-6">
                     <div className="flex items-center space-x-4 mb-4 md:mb-0">
                       <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg text-white font-bold text-sm">
                         {index + 1}
@@ -128,17 +128,17 @@ export default function PostsPage() {
                     </h2>
                     
                     {excerpt && (
-                      <p className="text-gray-600 text-lg leading-relaxed line-clamp-3">
+                      <p className="text-gray-600 text-base sm:text-lg leading-relaxed line-clamp-3">
                         {excerpt}
                       </p>
                     )}
                   </div>
 
                   {/* Article Footer */}
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <Link
                       href={`/posts/${id}`}
-                      className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 text-lg"
+                      className="flex w-full sm:inline-flex sm:w-auto items-center justify-center sm:justify-start text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 text-lg"
                     >
                       阅读全文
                       <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,7 +146,7 @@ export default function PostsPage() {
                       </svg>
                     </Link>
                     
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500 text-center sm:text-right">
                       约 {Math.max(1, (readingTime ?? 1))} 分钟阅读
                     </div>
                   </div>
@@ -175,7 +175,7 @@ export default function PostsPage() {
         <div className="mt-16 text-center">
           <Link
             href="/"
-            className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors duration-200"
+            className="flex w-full sm:inline-flex sm:w-auto items-center justify-center px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors duration-200"
           >
             <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

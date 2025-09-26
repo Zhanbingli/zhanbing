@@ -11,20 +11,20 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       <Navigation />
       
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         {/* Hero Section */}
-        <header className="text-center mb-16">
+        <header className="text-center mb-12 md:mb-16">
           <div className="mb-8">
-            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-6">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-6">
               欢迎来到我的技术世界
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
               在这里分享前端开发心得、技术学习笔记和编程实践经验
             </p>
           </div>
           
           {/* Stats */}
-          <div className="flex flex-wrap justify-center gap-8 mb-8 text-center">
+          <div className="flex flex-wrap justify-center gap-5 sm:gap-8 mb-8 text-center">
             <div>
               <div className="text-2xl font-bold text-gray-900">{allPostsData.length}</div>
               <div className="text-sm text-gray-600">篇文章</div>
@@ -45,7 +45,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
             <Link
               href="/feed.xml"
-              className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
+              className="flex w-full sm:inline-flex sm:w-auto items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -58,7 +58,7 @@ export default function Home() {
         </header>
         {/* Articles */}
         <main>
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-8">
             <h2 className="text-3xl font-bold text-gray-900">最新文章</h2>
             <Link 
               href="/posts" 
@@ -68,11 +68,11 @@ export default function Home() {
             </Link>
           </div>
           
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {allPostsData.slice(0, 6).map(({ id, date, title, excerpt }) => (
               <article
                 key={id}
-                className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+                className="group h-full bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
               >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -93,10 +93,10 @@ export default function Home() {
                     </p>
                   )}
                   
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <Link
                       href={`/posts/${id}`}
-                      className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
+                      className="flex w-full sm:inline-flex sm:w-auto items-center justify-center sm:justify-start text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
                     >
                       阅读全文
                       <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,11 +112,11 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-gray-200 text-center">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-600 mb-4 md:mb-0">
+          <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
+            <p className="text-gray-600">
               © 2025 zhanbing. 使用 Next.js 构建，托管在 GitHub Pages
             </p>
-            <div className="flex space-x-6">
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
               <Link href="/about" className="text-gray-600 hover:text-blue-600 transition-colors duration-200">
                 关于
               </Link>

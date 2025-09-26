@@ -24,6 +24,10 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* 自定义样式 */
@@ -268,6 +272,37 @@ html {
   body {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    font-size: 15px;
+  }
+
+  .prose {
+    font-size: 1rem;
+    line-height: 1.8;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  .prose p,
+  .prose ul,
+  .prose ol {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose img {
+    width: 100%;
+    height: auto;
+  }
+
+  .prose table,
+  .prose pre {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    border-radius: 0.75rem;
+  }
+
+  .prose pre {
+    padding: 1rem;
   }
 }
 
