@@ -155,8 +155,8 @@ export default async function Post({ params }: PostPageProps) {
         <main className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
           <div className="grid gap-10 md:gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(0,1fr)]">
             <article className="space-y-10 md:space-y-12">
-              <header className="relative space-y-8">
-                <div className="absolute -inset-x-12 -top-12 h-32 bg-slate-100/60 blur-3xl"></div>
+              <header className="relative space-y-8 overflow-hidden">
+                <div className="absolute inset-x-0 -top-16 h-32 bg-slate-100/50 blur-3xl sm:-inset-x-12 sm:h-36"></div>
                 <div className="relative space-y-6">
                   <p className="text-xs uppercase tracking-[0.45em] text-slate-400">Reading</p>
                   <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
