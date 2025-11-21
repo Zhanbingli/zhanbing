@@ -6,135 +6,132 @@ import Navigation from '@/components/Navigation'
 export default function Home() {
   const allPostsData = getSortedPostsData()
   const latestUpdate = allPostsData[0]?.date
+  const featuredPosts = allPostsData.slice(0, 6)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen">
       <Navigation />
-      
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
-        {/* Hero Section */}
-        <header className="text-center mb-12 md:mb-16">
-          <div className="mb-8">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-6">
-              欢迎来到我的技术世界
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
-              在这里分享前端开发心得、技术学习笔记和编程实践经验
-            </p>
-          </div>
-          
-          {/* Stats */}
-          <div className="flex flex-wrap justify-center gap-5 sm:gap-8 mb-8 text-center">
-            <div>
-              <div className="text-2xl font-bold text-gray-900">{allPostsData.length}</div>
-              <div className="text-sm text-gray-600">篇文章</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-gray-900">2025</div>
-              <div className="text-sm text-gray-600">年开始</div>
-            </div>
+
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-10 md:py-14 space-y-10">
+        <section className="rounded-2xl bg-white/90 border border-slate-200 shadow-sm p-8 md:p-10">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Personal Notes</p>
+          <h1 className="mt-3 text-3xl sm:text-4xl font-semibold text-slate-900">
+            写给自己，也写给同路人的技术手记
+          </h1>
+          <p className="mt-3 text-lg text-slate-600 max-w-3xl leading-relaxed">
+            以阅读体验为中心，记录前端开发、工程化和学习方法。希望让每一篇文章都像一次轻松的对话。
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-600">
+            <span className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-[var(--accent)] font-medium">
+              共 {allPostsData.length} 篇文章
+            </span>
             {latestUpdate && (
-              <div>
-                <div className="text-2xl font-bold text-gray-900">{formatDate(latestUpdate)}</div>
-                <div className="text-sm text-gray-600">最近更新</div>
-              </div>
+              <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1">
+                最近更新：{formatDate(latestUpdate)}
+              </span>
             )}
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/posts"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-white shadow-sm transition hover:translate-y-px hover:bg-[#0c316f]"
+            >
+              浏览全部文章
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
             <Link
               href="/feed.xml"
-              className="flex w-full sm:inline-flex sm:w-auto items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-5 py-2 text-slate-700 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <svg className="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M3.429 2.571c0-.952.771-1.714 1.714-1.714.952 0 1.714.762 1.714 1.714 0 .943-.762 1.714-1.714 1.714-.943 0-1.714-.771-1.714-1.714zM3.429 7.429c3.771 0 6.857 3.086 6.857 6.857h2.286c0-5.029-4.114-9.143-9.143-9.143v2.286zM3.429 12.286c1.257 0 2.286 1.029 2.286 2.286H8c0-2.514-2.057-4.571-4.571-4.571v2.285z"/>
-              </svg>
               RSS 订阅
             </Link>
           </div>
-        </header>
-        {/* Articles */}
-        <main>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">最新文章</h2>
+        </section>
+
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Latest</p>
+              <h2 className="text-2xl font-semibold text-slate-900">最近更新</h2>
+            </div>
             <Link 
               href="/posts" 
-              className="text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
+              className="text-sm font-medium text-[var(--accent)] hover:underline"
             >
-              查看全部 →
+              查看全部
             </Link>
           </div>
-          
-          <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {allPostsData.slice(0, 6).map(({ id, date, title, excerpt }) => (
-              <article
-                key={id}
-                className="group h-full bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
-              >
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <time className="text-sm text-gray-500" dateTime={date}>
-                      {formatDate(date)}
-                    </time>
-                  </div>
-                  
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-200">
-                    <Link href={`/posts/${id}`}>
-                      {title}
-                    </Link>
-                  </h3>
-                  
-                  {excerpt && (
-                    <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
-                      {excerpt}
-                    </p>
-                  )}
-                  
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <Link
-                      href={`/posts/${id}`}
-                      className="flex w-full sm:inline-flex sm:w-auto items-center justify-center sm:justify-start text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
-                    >
-                      阅读全文
-                      <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </main>
 
-        {/* Footer */}
-        <footer className="mt-16 pt-8 border-t border-gray-200 text-center">
-          <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
-            <p className="text-gray-600">
-              © 2025 zhanbing. 使用 Next.js 构建，托管在 GitHub Pages
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-              <Link href="/about" className="text-gray-600 hover:text-blue-600 transition-colors duration-200">
-                关于
-              </Link>
-              <Link href="/feed.xml" className="text-gray-600 hover:text-blue-600 transition-colors duration-200">
-                RSS
-              </Link>
-              <a 
-                href="https://github.com/Zhanbingli" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
+          <ul className="space-y-4">
+            {featuredPosts.map(({ id, date, title, excerpt, tags, readingTime }) => (
+              <li
+                key={id}
+                className="group rounded-xl border border-slate-200 bg-white/90 p-5 sm:p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-sm text-slate-500">
+                  <time dateTime={date}>{formatDate(date)}</time>
+                  <span className="inline-flex items-center gap-2 text-xs sm:text-sm">
+                    <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
+                    约 {Math.max(1, readingTime ?? 1)} 分钟阅读
+                  </span>
+                </div>
+
+                <h3 className="mt-2 text-xl font-semibold text-slate-900 leading-snug">
+                  <Link href={`/posts/${id}`} className="hover:text-[var(--accent)]">
+                    {title}
+                  </Link>
+                </h3>
+
+                {excerpt && (
+                  <p className="mt-2 text-slate-600 leading-relaxed line-clamp-2">
+                    {excerpt}
+                  </p>
+                )}
+
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  {tags?.slice(0, 3).map((tag) => (
+                    <Link
+                      key={tag}
+                      href={`/tags/${encodeURIComponent(tag)}`}
+                      className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 hover:bg-slate-200"
+                    >
+                      {tag}
+                    </Link>
+                  ))}
+                  <Link
+                    href={`/posts/${id}`}
+                    className="inline-flex items-center gap-1 text-sm font-medium text-[var(--accent)] hover:underline"
+                  >
+                    阅读全文
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <footer className="border-t border-slate-200/70 pt-6 text-sm text-slate-600">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p>© 2025 zhanbing · 写作与设计都在不断打磨</p>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link href="/about" className="hover:text-[var(--accent)]">关于</Link>
+              <Link href="/feed.xml" className="hover:text-[var(--accent)]">RSS</Link>
+              <a href="https://github.com/Zhanbingli" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent)]">
                 GitHub
               </a>
             </div>
           </div>
         </footer>
-      </div>
+      </main>
     </div>
   )
 }

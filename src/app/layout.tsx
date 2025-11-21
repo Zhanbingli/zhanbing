@@ -71,7 +71,7 @@ export default function RootLayout({
 
   return (
     <html lang="zh-CN">
-      <body className="bg-white text-slate-900 antialiased">
+      <body className="bg-[var(--background)] text-slate-900 antialiased">
         {gaId ? (
           <>
             <Script

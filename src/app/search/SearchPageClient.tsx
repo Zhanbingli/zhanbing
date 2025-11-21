@@ -131,32 +131,31 @@ export default function SearchPageClient() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen">
       <Navigation />
       
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
-        <header className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-6">
-            搜索文章
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-            在这里搜索你感兴趣的技术文章和学习笔记
-          </p>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-10 md:py-14">
+        <header className="space-y-6 mb-10">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Search</p>
+          <div>
+            <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">搜索文章</h1>
+            <p className="mt-2 text-lg text-slate-600 max-w-3xl leading-relaxed">
+              直接输入关键词，搜索标题、摘要或标签。保持界面克制，让阅读和筛选更专注。
+            </p>
+          </div>
 
-          {/* Search Form */}
-          <form onSubmit={handleSearch} className="max-w-2xl mx-auto">
+          <form onSubmit={handleSearch} className="max-w-3xl">
             <div className="relative">
               <input
                 type="text"
                 placeholder="输入关键词搜索文章..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 shadow-sm"
+                className="w-full pl-12 pr-4 py-3 text-base border border-slate-200 bg-white rounded-full focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all duration-150 shadow-sm"
               />
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <svg
-                  className="h-6 w-6 text-gray-400"
+                  className="h-5 w-5 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -171,7 +170,7 @@ export default function SearchPageClient() {
               </div>
               <button
                 type="submit"
-                className="absolute right-2 top-2 bottom-2 px-6 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                className="absolute right-1.5 top-1.5 bottom-1.5 px-5 bg-[var(--accent)] text-white text-sm font-medium rounded-full shadow-sm hover:bg-[#0c316f] transition-colors duration-150"
               >
                 搜索
               </button>
@@ -180,17 +179,17 @@ export default function SearchPageClient() {
         </header>
 
         {/* Search Results */}
-        <main>
+        <main className="space-y-6">
           {initialQuery && (
-            <div className="mb-8">
+            <div className="rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-xl font-semibold text-slate-900">
                   搜索结果
                 </h2>
-                <div className="text-gray-600">
+                <div className="text-slate-600 text-sm">
                   {isLoading ? (
                     <div className="flex items-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24">
+                      <svg className="animate-spin -ml-1 mr-3 h-4 w-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
@@ -201,34 +200,34 @@ export default function SearchPageClient() {
                   )}
                 </div>
               </div>
-              
-              <div className="mt-2 text-gray-600">
-                搜索关键词: <span className="font-medium text-blue-600">&ldquo;{initialQuery}&rdquo;</span>
+
+              <div className="mt-2 text-slate-600 text-sm">
+                搜索关键词: <span className="font-medium text-[var(--accent)]">&ldquo;{initialQuery}&rdquo;</span>
               </div>
             </div>
           )}
 
           {!isLoading && searchResults.length === 0 && initialQuery && (
             <div className="text-center py-16">
-              <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-                <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-20 h-20 mx-auto mb-6 bg-white rounded-full flex items-center justify-center border border-slate-200">
+                <svg className="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">没有找到相关文章</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-xl font-semibold text-slate-900 mb-2">没有找到相关文章</h3>
+              <p className="text-slate-600 mb-6">
                 尝试使用不同的关键词或者浏览所有文章
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <Link
                   href="/"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                  className="inline-flex items-center px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-full shadow-sm hover:bg-[#0c316f] transition-colors duration-150"
                 >
                   浏览所有文章
                 </Link>
                 <Link
                   href="/tags"
-                  className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                  className="inline-flex items-center px-6 py-3 border border-slate-200 text-slate-700 font-medium rounded-full hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-150"
                 >
                   查看标签分类
                 </Link>
@@ -237,66 +236,60 @@ export default function SearchPageClient() {
           )}
 
           {searchResults.length > 0 && (
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2">
               {searchResults.map(({ id, date, title, excerpt, tags, score }) => (
                 <article
                   key={id}
-                  className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+                  className="group rounded-xl border border-slate-200 bg-white/90 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                 >
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <time className="text-sm text-gray-500" dateTime={date}>
-                        {formatDate(date)}
-                      </time>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-xs text-gray-500">
-                          相关度: {score}
+                  <div className="flex items-center justify-between mb-3 text-sm text-slate-500">
+                    <time dateTime={date}>{formatDate(date)}</time>
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] text-slate-700">相关度 {score}</span>
+                      {tags && tags.length > 0 && (
+                        <span className="inline-block bg-[var(--accent-soft)] text-[var(--accent)] text-[11px] px-2 py-0.5 rounded-full">
+                          {tags[0]}
                         </span>
-                        {tags && tags.length > 0 && (
-                          <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-                            {tags[0]}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-200">
-                      <Link href={`/posts/${id}`}>
-                        {highlightText(title, initialQuery)}
-                      </Link>
-                    </h3>
-                    
-                    {excerpt && (
-                      <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
-                        {highlightText(excerpt, initialQuery)}
-                      </p>
-                    )}
-                    
-                    <div className="flex items-center justify-between">
-                      <Link
-                        href={`/posts/${id}`}
-                        className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
-                      >
-                        阅读全文
-                        <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
-                      
-                      {tags && tags.length > 1 && (
-                        <div className="flex space-x-1">
-                          {tags.slice(1, 3).map((tag) => (
-                            <Link
-                              key={tag}
-                              href={`/tags/${encodeURIComponent(tag)}`}
-                              className="inline-block bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full transition-colors duration-200"
-                            >
-                              {highlightText(tag, initialQuery)}
-                            </Link>
-                          ))}
-                        </div>
                       )}
                     </div>
+                  </div>
+
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2 leading-snug">
+                    <Link href={`/posts/${id}`} className="hover:text-[var(--accent)]">
+                      {highlightText(title, initialQuery)}
+                    </Link>
+                  </h3>
+                  
+                  {excerpt && (
+                    <p className="text-slate-600 mb-3 leading-relaxed line-clamp-3">
+                      {highlightText(excerpt, initialQuery)}
+                    </p>
+                  )}
+                  
+                  <div className="flex items-center justify-between">
+                    <Link
+                      href={`/posts/${id}`}
+                      className="inline-flex items-center text-sm font-medium text-[var(--accent)] hover:underline"
+                    >
+                      阅读全文
+                      <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                    
+                    {tags && tags.length > 1 && (
+                      <div className="flex flex-wrap gap-1">
+                        {tags.slice(1, 3).map((tag) => (
+                          <Link
+                            key={tag}
+                            href={`/tags/${encodeURIComponent(tag)}`}
+                            className="inline-block bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs px-2 py-1 rounded-full transition-colors duration-150"
+                          >
+                            {highlightText(tag, initialQuery)}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </article>
               ))}
@@ -305,25 +298,25 @@ export default function SearchPageClient() {
 
           {!initialQuery && (
             <div className="text-center py-16">
-              <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-24 h-24 mx-auto mb-6 bg-white rounded-full flex items-center justify-center border border-slate-200">
+                <svg className="w-12 h-12 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">开始搜索</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-xl font-semibold text-slate-900 mb-2">开始搜索</h3>
+              <p className="text-slate-600 mb-6">
                 输入关键词来搜索文章标题、内容或标签
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <Link
                   href="/"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                  className="inline-flex items-center px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-full shadow-sm hover:bg-[#0c316f] transition-colors duration-150"
                 >
                   浏览最新文章
                 </Link>
                 <Link
                   href="/tags"
-                  className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                  className="inline-flex items-center px-6 py-3 border border-slate-200 text-slate-700 font-medium rounded-full hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-150"
                 >
                   查看标签分类
                 </Link>

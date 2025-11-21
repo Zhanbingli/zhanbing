@@ -5,11 +5,11 @@ import Navigation from '@/components/Navigation'
 import { notFound } from 'next/navigation'
 
 interface TagPageProps {
-  params: Promise<{ tag: string }>
+  params: { tag: string }
 }
 
 export async function generateMetadata({ params }: TagPageProps) {
-  const { tag } = await params
+  const { tag } = params
   const decodedTag = decodeURIComponent(tag)
   
   return {
@@ -31,7 +31,7 @@ export async function generateStaticParams() {
 }
 
 export default async function TagPage({ params }: TagPageProps) {
-  const { tag } = await params
+  const { tag } = params
   const decodedTag = decodeURIComponent(tag)
   const allPostsData = getSortedPostsData()
   
@@ -52,10 +52,10 @@ export default async function TagPage({ params }: TagPageProps) {
   )).slice(0, 8)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen">
       <Navigation />
       
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-12">
         {/* Header */}
         <header className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-6">

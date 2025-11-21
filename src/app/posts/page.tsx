@@ -24,166 +24,120 @@ export default function PostsPage() {
   const thisYearPosts = allPostsData.filter((post: PostData) => new Date(post.date).getFullYear() === currentYear).length
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen">
       <Navigation />
-      
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
-        {/* Header */}
-        <header className="text-center mb-12 md:mb-16">
-          <h1 className="text-3xl sm:text-5xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-6">
-            全部文章
-          </h1>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
-            探索我的技术世界，从前端开发到编程心得，记录每一次学习与成长
+
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-10 md:py-14 space-y-8">
+        <header className="rounded-2xl bg-white/90 border border-slate-200 shadow-sm p-8 md:p-10">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Archive</p>
+          <h1 className="mt-3 text-3xl sm:text-4xl font-semibold text-slate-900">全部文章</h1>
+          <p className="mt-3 text-lg text-slate-600 leading-relaxed max-w-3xl">
+            按时间排序的写作档案。保持篇幅克制、语气诚恳，让你能快速浏览并找到感兴趣的内容。
           </p>
 
-          {/* Stats */}
-          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 mb-8">
-            <div className="text-center flex-1 min-w-[140px]">
-              <div className="text-2xl font-bold text-gray-900">{totalPosts}</div>
-              <div className="text-sm text-gray-600">篇文章</div>
-            </div>
-            <div className="hidden sm:block w-px h-8 bg-gray-300"></div>
-            <div className="text-center flex-1 min-w-[140px]">
-              <div className="text-2xl font-bold text-gray-900">{allTags.length}</div>
-              <div className="text-sm text-gray-600">个标签</div>
-            </div>
-            <div className="hidden sm:block w-px h-8 bg-gray-300"></div>
-            <div className="text-center flex-1 min-w-[140px]">
-              <div className="text-2xl font-bold text-gray-900">{thisYearPosts}</div>
-              <div className="text-sm text-gray-600">今年发布</div>
-            </div>
+          <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-600">
+            <span className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-[var(--accent)] font-medium">
+              {totalPosts} 篇文章
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1">
+              {allTags.length} 个标签
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1">
+              {thisYearPosts} 篇发表于 {currentYear}
+            </span>
           </div>
 
-          {/* Quick navigation */}
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link
-              href="/tags"
-              className="flex w-full sm:inline-flex sm:w-auto items-center justify-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
-            >
-              <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-              </svg>
-              按标签浏览
-            </Link>
+          <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/search"
-              className="flex w-full sm:inline-flex sm:w-auto items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-white shadow-sm transition hover:translate-y-px hover:bg-[#0c316f]"
             >
-              <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               搜索文章
             </Link>
+            <Link
+              href="/tags"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-slate-700 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+              </svg>
+              按标签浏览
+            </Link>
           </div>
         </header>
 
-        {/* Articles List */}
-        <main>
-          <div className="space-y-8">
-            {sortedPosts.map(({ id, date, title, excerpt, tags, readingTime }: PostData, index: number) => (
-              <article
-                key={id}
-                className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
-              >
-                <div className="p-6 sm:p-8">
-                  {/* Article Header */}
-                  <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-6">
-                    <div className="flex items-center space-x-4 mb-4 md:mb-0">
-                      <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg text-white font-bold text-sm">
-                        {index + 1}
-                      </div>
-                      <time className="text-sm text-gray-500 font-medium" dateTime={date}>
-                        {formatDate(date)}
-                      </time>
-                    </div>
-                    
-                    {/* Tags */}
-                    {tags && tags.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {tags.slice(0, 3).map((tag) => (
-                          <Link
-                            key={tag}
-                            href={`/tags/${encodeURIComponent(tag)}`}
-                            className="inline-block bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full hover:bg-blue-200 transition-colors duration-200"
-                          >
-                            {tag}
-                          </Link>
-                        ))}
-                        {tags.length > 3 && (
-                          <span className="inline-block bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">
-                            +{tags.length - 3}
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  </div>
+        <section className="space-y-4">
+          {sortedPosts.map(({ id, date, title, excerpt, tags, readingTime }: PostData) => (
+            <article
+              key={id}
+              className="group rounded-xl border border-slate-200 bg-white/90 p-5 sm:p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-sm text-slate-500">
+                <time dateTime={date}>{formatDate(date)}</time>
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm">
+                  <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
+                  约 {Math.max(1, (readingTime ?? 1))} 分钟阅读
+                </span>
+              </div>
 
-                  {/* Article Content */}
-                  <div className="mb-6">
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-200 leading-tight">
-                      <Link href={`/posts/${id}`} className="hover:underline">
-                        {title}
-                      </Link>
-                    </h2>
-                    
-                    {excerpt && (
-                      <p className="text-gray-600 text-base sm:text-lg leading-relaxed line-clamp-3">
-                        {excerpt}
-                      </p>
-                    )}
-                  </div>
+              <h2 className="mt-2 text-xl sm:text-2xl font-semibold text-slate-900 leading-snug">
+                <Link href={`/posts/${id}`} className="hover:text-[var(--accent)]">
+                  {title}
+                </Link>
+              </h2>
 
-                  {/* Article Footer */}
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <Link
-                      href={`/posts/${id}`}
-                      className="flex w-full sm:inline-flex sm:w-auto items-center justify-center sm:justify-start text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 text-lg"
-                    >
-                      阅读全文
-                      <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                    
-                    <div className="text-sm text-gray-500 text-center sm:text-right">
-                      约 {Math.max(1, (readingTime ?? 1))} 分钟阅读
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+              {excerpt && (
+                <p className="mt-2 text-slate-600 leading-relaxed line-clamp-2">
+                  {excerpt}
+                </p>
+              )}
 
-          {/* No posts message */}
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                {tags?.slice(0, 4).map((tag) => (
+                  <Link
+                    key={tag}
+                    href={`/tags/${encodeURIComponent(tag)}`}
+                    className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 hover:bg-slate-200"
+                  >
+                    {tag}
+                  </Link>
+                ))}
+                <Link
+                  href={`/posts/${id}`}
+                  className="inline-flex items-center gap-1 text-sm font-medium text-[var(--accent)] hover:underline"
+                >
+                  阅读全文
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+            </article>
+          ))}
+
           {sortedPosts.length === 0 && (
             <div className="text-center py-16">
-              <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-                <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-medium text-gray-900 mb-2">暂无文章</h3>
-              <p className="text-gray-600">
-                文章正在努力创作中，敬请期待！
-              </p>
+              <p className="text-xl font-semibold text-slate-800 mb-2">暂无文章</p>
+              <p className="text-slate-600">写作进行中，很快就会有内容和你见面。</p>
             </div>
           )}
-        </main>
+        </section>
 
-        {/* Back to Home */}
-        <div className="mt-16 text-center">
+        <div className="text-center pt-6 border-t border-slate-200/70">
           <Link
             href="/"
-            className="flex w-full sm:inline-flex sm:w-auto items-center justify-center px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors duration-200"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-5 py-2 text-slate-700 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
-            <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             返回首页
           </Link>
         </div>
-      </div>
+      </main>
     </div>
   )
-} 
+}

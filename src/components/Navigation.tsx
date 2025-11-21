@@ -35,28 +35,28 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 container-mobile">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 border-b border-slate-200/70 bg-[var(--background)]/90 backdrop-blur container-mobile">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6">
         <div className="flex justify-between items-center h-16 nav-mobile-landscape">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 flex-shrink-0 touch-target" onClick={closeMenus}>
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">ZB</span>
+            <div className="w-9 h-9 bg-[#0f3d91] rounded-lg flex items-center justify-center shadow-sm">
+              <span className="text-white font-semibold text-sm">ZB</span>
             </div>
-            <span className="font-bold text-xl text-gray-900 hidden sm:inline">zhanbing</span>
+            <span className="font-bold text-lg text-slate-900 hidden sm:inline">zhanbing</span>
           </Link>
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-6">
             <Link 
               href="/" 
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+              className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium"
             >
               首页
             </Link>
             <Link 
               href="/about" 
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+              className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium"
             >
               关于
             </Link>
@@ -70,7 +70,7 @@ export default function Navigation() {
                 placeholder="搜索文章..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200"
+                className="w-64 pl-10 pr-4 py-2 border border-slate-200 bg-white rounded-full focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all duration-150 shadow-sm"
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <svg
@@ -95,7 +95,7 @@ export default function Navigation() {
             {/* Search button */}
             <button 
               onClick={toggleSearch}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 p-2 touch-target rounded-lg hover:bg-gray-100"
+              className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 p-2 touch-target rounded-lg hover:bg-white/70"
               aria-label="搜索"
             >
               <svg
@@ -116,7 +116,7 @@ export default function Navigation() {
             {/* Menu button */}
             <button 
               onClick={toggleMobileMenu}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 p-2 touch-target rounded-lg hover:bg-gray-100"
+              className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 p-2 touch-target rounded-lg hover:bg-white/70"
               aria-label="菜单"
             >
               <svg
@@ -147,7 +147,7 @@ export default function Navigation() {
 
         {/* Mobile Search */}
         {isSearchOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4 mobile-nav-transition">
+          <div className="md:hidden border-t border-slate-200/80 py-4 mobile-nav-transition">
             <form onSubmit={handleSearch} className="flex items-center">
               <div className="relative flex-1">
                 <input
@@ -155,7 +155,7 @@ export default function Navigation() {
                   placeholder="搜索文章..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200"
+                  className="w-full pl-10 pr-4 py-3 text-base border border-slate-200 bg-white rounded-xl focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all duration-150 shadow-sm"
                   autoFocus
                 />
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -180,18 +180,18 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4 mobile-nav-transition">
+          <div className="md:hidden border-t border-slate-200/80 py-4 mobile-nav-transition bg-white/70 rounded-b-xl shadow-sm">
             <div className="flex flex-col space-y-2">
               <Link 
                 href="/" 
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium py-3 px-2 rounded-lg hover:bg-gray-50 touch-target"
+                className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium py-3 px-2 rounded-lg hover:bg-white touch-target"
                 onClick={closeMenus}
               >
                 首页
               </Link>
               <Link 
                 href="/about" 
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium py-3 px-2 rounded-lg hover:bg-gray-50 touch-target"
+                className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium py-3 px-2 rounded-lg hover:bg-white touch-target"
                 onClick={closeMenus}
               >
                 关于
