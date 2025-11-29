@@ -1,32 +1,32 @@
-# 图片资源组织结构
+# Image asset structure
 
-## 目录说明
+## Directory
 
 ```
 public/images/
-├── posts/              # 博客文章相关图片
-│   ├── article-name/   # 按文章名称分组
-│   │   ├── cover.jpg   # 封面图
-│   │   ├── demo-1.png  # 演示图片1
-│   │   └── demo-2.gif  # 演示图片2
-│   └── common/         # 通用图片
-├── avatars/            # 头像图片
-├── icons/              # 图标文件
-└── backgrounds/        # 背景图片
+├── posts/              # Blog post images
+│   ├── article-name/   # Grouped by post name
+│   │   ├── cover.jpg   # Cover
+│   │   ├── demo-1.png  # Example image 1
+│   │   └── demo-2.gif  # Example image 2
+│   └── common/         # Shared images
+├── avatars/            # Avatars
+├── icons/              # Icons
+└── backgrounds/        # Backgrounds
 ```
 
-## 图片命名规范
+## Naming rules
 
-- 使用小写字母和连字符
-- 避免中文和特殊字符
-- 描述性命名，如：`nextjs-blog-setup-cover.jpg`
-- 为动图使用 `.gif` 扩展名
-- 为截图使用 `.png` 扩展名
-- 为照片使用 `.jpg` 扩展名
+- Use lowercase letters and hyphens
+- Avoid non-ASCII or special characters
+- Be descriptive, e.g. `nextjs-blog-setup-cover.jpg`
+- Use `.gif` for animations
+- Use `.png` for screenshots
+- Use `.jpg` for photos
 
-## 图片优化建议
+## Optimization tips
 
-- 压缩图片以减小文件大小
-- 使用合适的格式（WebP > JPEG > PNG）
-- 控制图片尺寸，通常不超过 1200px 宽度
-- 为图片添加 alt 属性以提高可访问性 
+- Compress images to keep file sizes small
+- Pick the right format (WebP > JPEG > PNG)
+- Keep widths under ~1200px when possible
+- Always provide alt text for accessibility

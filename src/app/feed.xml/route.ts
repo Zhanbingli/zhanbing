@@ -9,7 +9,7 @@ export async function GET() {
   const baseUrl = 'https://zhanbing.site'
   
   const itemsXml = await Promise.all(posts.map(async (post) => {
-    // 将 Markdown 转换为 HTML，用于全文内容
+    // Convert Markdown to HTML for full content
     const processed = await remark().use(html).process(post.content)
     const contentHtml = processed.toString()
     return `
@@ -29,9 +29,9 @@ export async function GET() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>blog of lizhanbing</title>
-    <description>分享技术心得、学习笔记和生活感悟的个人博客</description>
+    <description>A personal blog sharing frontend insights, learning notes, and life takeaways.</description>
     <link>${baseUrl}</link>
-    <language>zh-CN</language>
+    <language>en-US</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml"/>
     ${itemsXml.join('')}

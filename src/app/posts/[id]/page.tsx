@@ -4,6 +4,7 @@ import { getPostData, getSortedPostsData } from '@/lib/posts'
 import { formatDate } from '@/lib/utils'
 import Navigation from '@/components/Navigation'
 import ShareButton from '@/components/ShareButton'
+import TableOfContents, { type TocHeading } from '@/components/TableOfContents'
 import type { Metadata } from 'next'
 
 interface PostPageProps {
@@ -27,12 +28,12 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     
     return {
       title: postData.title,
-      description: postData.excerpt || `阅读 ${postData.title} - zhanbing`,
+      description: postData.excerpt || `Read ${postData.title} on zhanbing`,
       keywords: postData.tags?.join(', ') || '',
       authors: [{ name: 'zhanbing', url: baseUrl }],
       openGraph: {
         title: postData.title,
-        description: postData.excerpt || `阅读 ${postData.title} - zhanbing`,
+        description: postData.excerpt || `Read ${postData.title} on zhanbing`,
         type: 'article',
         publishedTime: postData.date,
         authors: ['zhanbing'],
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       twitter: {
         card: 'summary_large_image',
         title: postData.title,
-        description: postData.excerpt || `阅读 ${postData.title} - zhanbing`,
+        description: postData.excerpt || `Read ${postData.title} on zhanbing`,
       },
       alternates: {
         canonical: `/posts/${id}`,
@@ -50,8 +51,8 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     }
   } catch {
     return {
-      title: '文章未找到',
-      description: '您访问的文章不存在',
+      title: 'Post not found',
+      description: 'The post you are looking for does not exist.',
     }
   }
 }
@@ -66,7 +67,7 @@ export default async function Post({ params }: PostPageProps) {
     notFound()
   }
 
-  // 简易 TOC 生成与内容增强（为 h2/h3 注入 id；为 img 添加 lazy 属性）
+  // Basic TOC generation and content enhancements (inject ids into h2/h3; add lazy images)
   const slugify = (text: string) =>
     text
       .toLowerCase()
@@ -75,10 +76,10 @@ export default async function Post({ params }: PostPageProps) {
       .trim()
       .replace(/\s+/g, '-')
 
-  const headings: { id: string; text: string; level: number }[] = []
+  const headings: TocHeading[] = []
 
   const enhancedHtml = postData.content
-    // 抽取 h2/h3，注入 id
+    // Extract h2/h3 and inject ids
     .replace(/<h([23])(.*?)>([\s\S]*?)<\/h\1>/g, (_m, lvl, attrs, inner) => {
       const cleanText = String(inner).replace(/<[^>]+>/g, '').trim()
       const idVal = slugify(cleanText)
@@ -87,12 +88,12 @@ export default async function Post({ params }: PostPageProps) {
       const newAttrs = hasId ? attrs : `${attrs} id="${idVal}"`
       return `<h${lvl}${newAttrs}>${inner}</h${lvl}>`
     })
-    // 图片懒加载
+    // Lazy-load images
     .replace(/<img(\s+[^>]*)?>/g, (m) => {
       if (/loading=\"lazy\"/.test(m)) return m
       return m.replace('<img', '<img loading="lazy" decoding="async"')
     })
-    // 外链新窗口打开（保守：仅 http/https 且不含本站域名）
+    // Open external links in new tab (http/https and not this domain)
     .replace(/<a(\s+[^>]*href=\"(http[s]?:\/\/[^\"]+)\"[^>]*)>/g, (m, attrs, href) => {
       if (/zhanbing\.site/.test(href)) return m
       const hasTarget = /\starget=\"_blank\"/.test(attrs)
@@ -104,7 +105,7 @@ export default async function Post({ params }: PostPageProps) {
       return out
     })
 
-  // 获取相关文章（相同标签的其他文章）
+  // Fetch related posts (shared tags)
   const allPosts = getSortedPostsData()
   const relatedPosts = allPosts
     .filter(post => 
@@ -113,7 +114,7 @@ export default async function Post({ params }: PostPageProps) {
     )
     .slice(0, 3)
 
-  // 结构化数据 (JSON-LD)
+  // Structured data (JSON-LD)
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -141,7 +142,7 @@ export default async function Post({ params }: PostPageProps) {
     },
     keywords: postData.tags?.join(', ') || '',
     articleSection: 'Technology',
-    inLanguage: 'zh-CN',
+    inLanguage: 'en-US',
   }
 
   return (
@@ -161,7 +162,7 @@ export default async function Post({ params }: PostPageProps) {
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              返回文章列表
+              Back to posts
             </Link>
             <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Article</p>
             <h1 className="text-3xl sm:text-4xl font-semibold text-slate-900 leading-snug">
@@ -176,7 +177,7 @@ export default async function Post({ params }: PostPageProps) {
               <time dateTime={postData.date}>{formatDate(postData.date)}</time>
               <span className="inline-flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
-                约 {Math.max(1, postData.readingTime ?? 1)} 分钟阅读
+                About {Math.max(1, postData.readingTime ?? 1)} min read
               </span>
               {postData.tags?.map((tag) => (
                 <Link
@@ -191,20 +192,7 @@ export default async function Post({ params }: PostPageProps) {
           </header>
 
           {headings.length > 0 && (
-            <div className="block lg:hidden rounded-xl border border-slate-200 bg-white/90 p-4 shadow-sm">
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-2">目录</p>
-              <nav className="space-y-2 text-sm text-slate-600">
-                {headings.map((h) => (
-                  <a
-                    key={h.id}
-                    href={`#${h.id}`}
-                    className={`block rounded-lg px-2 py-1 transition hover:bg-slate-100 ${h.level === 3 ? 'pl-4 text-slate-500' : ''}`}
-                  >
-                    {h.text}
-                  </a>
-                ))}
-              </nav>
-            </div>
+            <TableOfContents headings={headings} className="block lg:hidden" collapsible />
           )}
 
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_240px]">
@@ -215,7 +203,7 @@ export default async function Post({ params }: PostPageProps) {
               />
 
               <div className="mt-8 flex flex-col gap-4 border-t border-slate-200 pt-6">
-                <p className="text-sm text-slate-600">喜欢这篇文章？分享给朋友是对作者最大的鼓励。</p>
+                <p className="text-sm text-slate-600">Enjoyed this post? Share it with a friend.</p>
                 <ShareButton
                   title={postData.title}
                   excerpt={postData.excerpt || postData.title}
@@ -225,19 +213,8 @@ export default async function Post({ params }: PostPageProps) {
             </article>
 
             {headings.length > 0 && (
-              <aside className="hidden lg:block lg:sticky lg:top-28 rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-2">目录</p>
-                <nav className="space-y-2 text-sm text-slate-600">
-                  {headings.map((h) => (
-                    <a
-                      key={h.id}
-                      href={`#${h.id}`}
-                      className={`block rounded-lg px-2 py-1 transition hover:bg-slate-100 hover:text-slate-900 ${h.level === 3 ? 'pl-4 text-slate-500' : ''}`}
-                    >
-                      {h.text}
-                    </a>
-                  ))}
-                </nav>
+              <aside className="hidden lg:block">
+                <TableOfContents headings={headings} sticky />
               </aside>
             )}
           </div>
@@ -245,9 +222,9 @@ export default async function Post({ params }: PostPageProps) {
           {relatedPosts.length > 0 && (
             <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 md:p-7 shadow-sm space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-semibold text-slate-900">延伸阅读</h2>
+                <h2 className="text-2xl font-semibold text-slate-900">Related reading</h2>
                 <Link href="/posts" className="text-sm font-medium text-[var(--accent)] hover:underline">
-                  所有文章
+                  All posts
                 </Link>
               </div>
               <ul className="space-y-3">

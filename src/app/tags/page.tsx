@@ -3,8 +3,8 @@ import { getSortedPostsData } from '@/lib/posts'
 import Navigation from '@/components/Navigation'
 
 export const metadata = {
-  title: '标签分类',
-  description: '浏览所有文章标签和分类',
+  title: 'Tags',
+  description: 'Browse all tags and categories across the blog.',
   alternates: {
     canonical: '/tags',
   },
@@ -13,7 +13,7 @@ export const metadata = {
 export default function TagsPage() {
   const allPostsData = getSortedPostsData()
   
-  // 统计所有标签
+  // Count all tags
   const tagCounts = allPostsData.reduce((acc, post) => {
     if (post.tags) {
       post.tags.forEach(tag => {
@@ -33,10 +33,10 @@ export default function TagsPage() {
         {/* Header */}
         <header className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-6">
-            标签分类
+            Tags
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            通过标签快速找到你感兴趣的文章内容
+            Find the topics you care about through tags.
           </p>
         </header>
 
@@ -45,17 +45,17 @@ export default function TagsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">{sortedTags.length}</div>
-              <div className="text-gray-600">个标签</div>
+              <div className="text-gray-600">Tags</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-purple-600 mb-2">{allPostsData.length}</div>
-              <div className="text-gray-600">篇文章</div>
+              <div className="text-gray-600">Posts</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-indigo-600 mb-2">
                 {Math.round(Object.values(tagCounts).reduce((a, b) => a + b, 0) / sortedTags.length * 10) / 10}
               </div>
-              <div className="text-gray-600">平均文章数</div>
+              <div className="text-gray-600">Avg posts per tag</div>
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@ export default function TagsPage() {
                   </span>
                 </div>
                 <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                  {count} 篇
+                  {count} posts
                 </span>
               </div>
               
@@ -84,11 +84,11 @@ export default function TagsPage() {
               </h3>
               
               <p className="text-gray-600 text-sm">
-                查看所有关于 &ldquo;{tag}&rdquo; 的文章
+                View every post tagged &ldquo;{tag}&rdquo;
               </p>
               
               <div className="mt-4 flex items-center text-blue-600 group-hover:text-blue-800 transition-colors duration-200">
-                <span className="text-sm font-medium">浏览文章</span>
+                <span className="text-sm font-medium">Browse posts</span>
                 <svg className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
@@ -99,7 +99,7 @@ export default function TagsPage() {
 
         {/* Popular Tags */}
         <section className="mt-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">热门标签</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Popular tags</h2>
           <div className="flex flex-wrap justify-center gap-4">
             {sortedTags.slice(0, 10).map(([tag, count]) => (
               <Link
@@ -125,7 +125,7 @@ export default function TagsPage() {
             <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            返回首页
+            Back to home
           </Link>
         </div>
       </div>

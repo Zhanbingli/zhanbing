@@ -7,8 +7,8 @@ export const metadata: Metadata = {
     default: "zhanbing | ZhanBing.site",
     template: "%s | zhanbing"
   },
-  description: "分享前端开发、技术学习和编程心得的个人博客",
-  keywords: ["前端开发", "技术博客", "JavaScript", "React", "Next.js", "编程"],
+  description: "A personal blog sharing frontend development, learning notes, and programming thoughts.",
+  keywords: ["frontend", "tech blog", "JavaScript", "React", "Next.js", "coding"],
   authors: [{ name: "zhanbing", url: "https://zhanbing.site" }],
   creator: "zhanbing",
   publisher: "zhanbing",
@@ -26,10 +26,10 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "zh_CN",
+    locale: "en_US",
     url: "https://zhanbing.site",
     title: "zhanbing",
-    description: "分享前端开发、技术学习和编程心得的个人博客",
+    description: "A personal blog sharing frontend development, learning notes, and programming thoughts.",
     siteName: "zhanbing",
     images: [
       {
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "zhanbing",
-    description: "分享前端开发、技术学习和编程心得的个人博客",
+    description: "A personal blog sharing frontend development, learning notes, and programming thoughts.",
     images: ["/og-image.svg"],
   },
   robots: {
@@ -70,7 +70,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="zh-CN">
+    <html lang="en">
       <body className="bg-[var(--background)] text-slate-900 antialiased">
         {gaId ? (
           <>

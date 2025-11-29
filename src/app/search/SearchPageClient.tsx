@@ -41,17 +41,17 @@ export default function SearchPageClient() {
         let score = 0
         const searchTermLower = searchTerm.toLowerCase()
         
-        // 搜索标题 (权重最高)
+        // Match title (highest weight)
         if (post.title.toLowerCase().includes(searchTermLower)) {
           score += 10
         }
         
-        // 搜索摘要
+        // Match excerpt
         if (post.excerpt && post.excerpt.toLowerCase().includes(searchTermLower)) {
           score += 5
         }
         
-        // 搜索标签
+        // Match tags
         if (post.tags) {
           post.tags.forEach(tag => {
             if (tag.toLowerCase().includes(searchTermLower)) {
@@ -68,7 +68,7 @@ export default function SearchPageClient() {
         }
       })
 
-      // 按相关性排序
+      // Sort by relevance
       results.sort((a, b) => b.score - a.score)
       setSearchResults(results)
     } catch (error) {
@@ -79,7 +79,7 @@ export default function SearchPageClient() {
     }
   }, [index])
 
-  // 加载轻量索引（仅一次）
+  // Load a lightweight index (once)
   useEffect(() => {
     let aborted = false
     const loadIndex = async () => {
@@ -138,9 +138,9 @@ export default function SearchPageClient() {
         <header className="space-y-6 mb-10">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Search</p>
           <div>
-            <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">搜索文章</h1>
+            <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">Search posts</h1>
             <p className="mt-2 text-lg text-slate-600 max-w-3xl leading-relaxed">
-              直接输入关键词，搜索标题、摘要或标签。保持界面克制，让阅读和筛选更专注。
+              Type a keyword to search through titles, excerpts, and tags. Clean layout keeps focus on reading.
             </p>
           </div>
 
@@ -148,7 +148,7 @@ export default function SearchPageClient() {
             <div className="relative">
               <input
                 type="text"
-                placeholder="输入关键词搜索文章..."
+                placeholder="Search posts by keyword..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 text-base border border-slate-200 bg-white rounded-full focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all duration-150 shadow-sm"
@@ -172,7 +172,7 @@ export default function SearchPageClient() {
                 type="submit"
                 className="absolute right-1.5 top-1.5 bottom-1.5 px-5 bg-[var(--accent)] text-white text-sm font-medium rounded-full shadow-sm hover:bg-[#0c316f] transition-colors duration-150"
               >
-                搜索
+                Search
               </button>
             </div>
           </form>
@@ -184,7 +184,7 @@ export default function SearchPageClient() {
             <div className="rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-slate-900">
-                  搜索结果
+                  Search results
                 </h2>
                 <div className="text-slate-600 text-sm">
                   {isLoading ? (
@@ -193,16 +193,16 @@ export default function SearchPageClient() {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      搜索中...
+                      Searching...
                     </div>
                   ) : (
-                    `找到 ${searchResults.length} 个结果`
+                    `Found ${searchResults.length} result${searchResults.length === 1 ? '' : 's'}`
                   )}
                 </div>
               </div>
 
               <div className="mt-2 text-slate-600 text-sm">
-                搜索关键词: <span className="font-medium text-[var(--accent)]">&ldquo;{initialQuery}&rdquo;</span>
+                Keyword: <span className="font-medium text-[var(--accent)]">&ldquo;{initialQuery}&rdquo;</span>
               </div>
             </div>
           )}
@@ -214,22 +214,22 @@ export default function SearchPageClient() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-2">没有找到相关文章</h3>
+              <h3 className="text-xl font-semibold text-slate-900 mb-2">No posts found</h3>
               <p className="text-slate-600 mb-6">
-                尝试使用不同的关键词或者浏览所有文章
+                Try a different keyword or browse the collections.
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <Link
                   href="/"
                   className="inline-flex items-center px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-full shadow-sm hover:bg-[#0c316f] transition-colors duration-150"
                 >
-                  浏览所有文章
+                  Browse all posts
                 </Link>
                 <Link
                   href="/tags"
                   className="inline-flex items-center px-6 py-3 border border-slate-200 text-slate-700 font-medium rounded-full hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-150"
                 >
-                  查看标签分类
+                  View tags
                 </Link>
               </div>
             </div>
@@ -245,7 +245,7 @@ export default function SearchPageClient() {
                   <div className="flex items-center justify-between mb-3 text-sm text-slate-500">
                     <time dateTime={date}>{formatDate(date)}</time>
                     <div className="flex items-center gap-2">
-                      <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] text-slate-700">相关度 {score}</span>
+                      <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] text-slate-700">Relevance {score}</span>
                       {tags && tags.length > 0 && (
                         <span className="inline-block bg-[var(--accent-soft)] text-[var(--accent)] text-[11px] px-2 py-0.5 rounded-full">
                           {tags[0]}
@@ -271,7 +271,7 @@ export default function SearchPageClient() {
                       href={`/posts/${id}`}
                       className="inline-flex items-center text-sm font-medium text-[var(--accent)] hover:underline"
                     >
-                      阅读全文
+                      Read more
                       <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -303,22 +303,22 @@ export default function SearchPageClient() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-2">开始搜索</h3>
+              <h3 className="text-xl font-semibold text-slate-900 mb-2">Start searching</h3>
               <p className="text-slate-600 mb-6">
-                输入关键词来搜索文章标题、内容或标签
+                Enter a keyword to search titles, excerpts, or tags.
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <Link
                   href="/"
                   className="inline-flex items-center px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-full shadow-sm hover:bg-[#0c316f] transition-colors duration-150"
                 >
-                  浏览最新文章
+                  Browse latest posts
                 </Link>
                 <Link
                   href="/tags"
                   className="inline-flex items-center px-6 py-3 border border-slate-200 text-slate-700 font-medium rounded-full hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-150"
                 >
-                  查看标签分类
+                  View tags
                 </Link>
               </div>
             </div>

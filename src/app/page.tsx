@@ -16,19 +16,19 @@ export default function Home() {
         <section className="rounded-2xl bg-white/90 border border-slate-200 shadow-sm p-8 md:p-10">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Personal Notes</p>
           <h1 className="mt-3 text-3xl sm:text-4xl font-semibold text-slate-900">
-            写给自己，也写给同路人的技术手记
+            Notes for myself, shared with fellow travelers in tech
           </h1>
           <p className="mt-3 text-lg text-slate-600 max-w-3xl leading-relaxed">
-            以阅读体验为中心，记录前端开发、工程化和学习方法。希望让每一篇文章都像一次轻松的对话。
+            Focused on a calm reading experience—capturing frontend craft, engineering workflows, and ways to learn. I hope every post feels like an easy conversation.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-600">
             <span className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-[var(--accent)] font-medium">
-              共 {allPostsData.length} 篇文章
+              {allPostsData.length} posts
             </span>
             {latestUpdate && (
               <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1">
-                最近更新：{formatDate(latestUpdate)}
+                Last updated: {formatDate(latestUpdate)}
               </span>
             )}
           </div>
@@ -38,7 +38,7 @@ export default function Home() {
               href="/posts"
               className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-white shadow-sm transition hover:translate-y-px hover:bg-[#0c316f]"
             >
-              浏览全部文章
+              Browse all posts
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -49,7 +49,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              RSS 订阅
+              RSS feed
             </Link>
           </div>
         </section>
@@ -58,13 +58,13 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Latest</p>
-              <h2 className="text-2xl font-semibold text-slate-900">最近更新</h2>
+              <h2 className="text-2xl font-semibold text-slate-900">Recent updates</h2>
             </div>
             <Link 
               href="/posts" 
               className="text-sm font-medium text-[var(--accent)] hover:underline"
             >
-              查看全部
+              View all
             </Link>
           </div>
 
@@ -78,7 +78,7 @@ export default function Home() {
                   <time dateTime={date}>{formatDate(date)}</time>
                   <span className="inline-flex items-center gap-2 text-xs sm:text-sm">
                     <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
-                    约 {Math.max(1, readingTime ?? 1)} 分钟阅读
+                    About {Math.max(1, readingTime ?? 1)} min read
                   </span>
                 </div>
 
@@ -108,7 +108,7 @@ export default function Home() {
                     href={`/posts/${id}`}
                     className="inline-flex items-center gap-1 text-sm font-medium text-[var(--accent)] hover:underline"
                   >
-                    阅读全文
+                    Read more
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -121,9 +121,9 @@ export default function Home() {
 
         <footer className="border-t border-slate-200/70 pt-6 text-sm text-slate-600">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p>© 2025 zhanbing · 写作与设计都在不断打磨</p>
+            <p>© 2025 zhanbing · Writing and design are always being refined</p>
             <div className="flex flex-wrap items-center gap-4">
-              <Link href="/about" className="hover:text-[var(--accent)]">关于</Link>
+              <Link href="/about" className="hover:text-[var(--accent)]">About</Link>
               <Link href="/feed.xml" className="hover:text-[var(--accent)]">RSS</Link>
               <a href="https://github.com/Zhanbingli" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent)]">
                 GitHub

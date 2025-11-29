@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -40,8 +41,15 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16 nav-mobile-landscape">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 flex-shrink-0 touch-target" onClick={closeMenus}>
-            <div className="w-9 h-9 bg-[#0f3d91] rounded-lg flex items-center justify-center shadow-sm">
-              <span className="text-white font-semibold text-sm">ZB</span>
+            <div className="relative w-10 h-10 rounded-full border border-slate-200 shadow-sm overflow-hidden">
+              <Image
+                src="/lizhanbing.png"
+                alt="Site avatar"
+                fill
+                sizes="40px"
+                className="object-cover"
+                priority
+              />
             </div>
             <span className="font-bold text-lg text-slate-900 hidden sm:inline">zhanbing</span>
           </Link>
@@ -52,13 +60,13 @@ export default function Navigation() {
               href="/" 
               className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium"
             >
-              首页
+              Home
             </Link>
             <Link 
               href="/about" 
               className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium"
             >
-              关于
+              About
             </Link>
           </div>
 
@@ -67,7 +75,7 @@ export default function Navigation() {
             <div className="relative">
               <input
                 type="text"
-                placeholder="搜索文章..."
+                placeholder="Search posts..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-64 pl-10 pr-4 py-2 border border-slate-200 bg-white rounded-full focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all duration-150 shadow-sm"
@@ -96,7 +104,7 @@ export default function Navigation() {
             <button 
               onClick={toggleSearch}
               className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 p-2 touch-target rounded-lg hover:bg-white/70"
-              aria-label="搜索"
+              aria-label="Search"
             >
               <svg
                 className="h-6 w-6"
@@ -117,7 +125,7 @@ export default function Navigation() {
             <button 
               onClick={toggleMobileMenu}
               className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 p-2 touch-target rounded-lg hover:bg-white/70"
-              aria-label="菜单"
+              aria-label="Menu"
             >
               <svg
                 className={`h-6 w-6 transition-transform duration-200 ${isMobileMenuOpen ? 'rotate-90' : ''}`}
@@ -152,7 +160,7 @@ export default function Navigation() {
               <div className="relative flex-1">
                 <input
                   type="text"
-                  placeholder="搜索文章..."
+                  placeholder="Search posts..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 text-base border border-slate-200 bg-white rounded-xl focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all duration-150 shadow-sm"
@@ -187,14 +195,14 @@ export default function Navigation() {
                 className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium py-3 px-2 rounded-lg hover:bg-white touch-target"
                 onClick={closeMenus}
               >
-                首页
+                Home
               </Link>
               <Link 
                 href="/about" 
                 className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium py-3 px-2 rounded-lg hover:bg-white touch-target"
                 onClick={closeMenus}
               >
-                关于
+                About
               </Link>
             </div>
           </div>
