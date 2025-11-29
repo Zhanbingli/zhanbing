@@ -12,10 +12,10 @@ export default function AboutPage() {
     <div className="min-h-screen">
       <Navigation />
       
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
         {/* Header */}
-        <header className="text-center mb-16">
-          <div className="relative w-32 h-32 mx-auto mb-8 rounded-full ring-4 ring-blue-100 shadow-lg overflow-hidden">
+        <header className="text-center space-y-5">
+          <div className="relative w-28 h-28 mx-auto rounded-full border border-slate-200 shadow-sm overflow-hidden">
             <Image
               src="/lizhanbing.png"
               alt="zhanbing avatar"
@@ -25,217 +25,86 @@ export default function AboutPage() {
               priority
             />
           </div>
-          
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-6">
-            About Me
-          </h1>
-          
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Hi, I’m zhanbing—a developer who loves exploring the web and sharing what I learn along the way.
-          </p>
+
+          <div className="space-y-2">
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">About</p>
+            <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">Hi, I’m zhanbing</h1>
+            <p className="text-base text-slate-600 max-w-2xl mx-auto">
+              Frontend engineer who enjoys lean products, clear writing, and sharing what I learn.
+            </p>
+          </div>
         </header>
 
         {/* Main Content */}
-        <main className="space-y-16">
-          {/* Introduction */}
-          <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Profile</h2>
-            <div className="prose prose-lg max-w-none">
-              <p className="text-gray-600 leading-relaxed mb-4">
-                I’m a frontend-focused engineer with a passion for modern web tech. I love trying new stacks, sharing learning notes, and turning ideas into products with code.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-4">
-                On this blog you’ll find my experiences in frontend development, engineering practices, and study methods. I hope these notes help anyone walking a similar path.
-              </p>
-              <p className="text-gray-600 leading-relaxed">
-                Beyond tech, I occasionally share learning approaches and personal observations—because skills and life feed each other.
-              </p>
-            </div>
-          </section>
-
-          {/* Skills */}
-          <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Tech Stack</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900">Frontend</h3>
-                <div className="flex flex-wrap gap-2">
-                  {['JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue.js', 'HTML5', 'CSS3'].map((skill) => (
-                    <span
-                      key={skill}
-                      className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900">Styling</h3>
-                <div className="flex flex-wrap gap-2">
-                  {['Tailwind CSS', 'Styled Components', 'Sass', 'CSS Modules'].map((skill) => (
-                    <span
-                      key={skill}
-                      className="inline-block bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900">Tooling</h3>
-                <div className="flex flex-wrap gap-2">
-                  {['Git', 'Webpack', 'Vite', 'ESLint', 'Prettier', 'Jest'].map((skill) => (
-                    <span
-                      key={skill}
-                      className="inline-block bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Blog Info */}
-          <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">About this blog</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Stack</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Next.js 15 + TypeScript
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Tailwind CSS styling
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Markdown posts
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Static site generation
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Deployed to GitHub Pages
-                  </li>
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Features</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Responsive design
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Tag system
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Full-text search
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    SEO-friendly metadata
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    RSS feed support
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* Contact */}
-          <section className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center">
-            <h2 className="text-2xl font-bold mb-6">Get in touch</h2>
-            <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
-              Questions, ideas, or just want to talk tech? Reach out anytime.
+        <main className="space-y-8">
+          <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm">
+            <h2 className="text-lg font-semibold text-slate-900 mb-3">What I’m into</h2>
+            <p className="text-slate-600 leading-relaxed">
+              Building clean, maintainable frontends. Exploring better ways to ship static sites,
+              structure content, and keep performance sharp without over-engineering.
             </p>
-            
-            <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-xl border border-slate-200 p-3 bg-white">
+                <p className="text-sm text-slate-500">Currently</p>
+                <ul className="mt-2 space-y-1 text-sm text-slate-700">
+                  <li>• Writing about Next.js and learning workflows</li>
+                  <li>• Tweaking UI polish and accessibility</li>
+                  <li>• Keeping this blog fast and low-friction</li>
+                </ul>
+              </div>
+              <div className="rounded-xl border border-slate-200 p-3 bg-white">
+                <p className="text-sm text-slate-500">Tools I reach for</p>
+                <ul className="mt-2 flex flex-wrap gap-2 text-sm">
+                  {['TypeScript', 'React', 'Next.js', 'Tailwind', 'Vite', 'ESLint', 'Jest'].map((item) => (
+                    <li key={item} className="rounded-full border border-slate-200 px-2.5 py-1 bg-slate-50 text-slate-700">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm">
+            <h2 className="text-lg font-semibold text-slate-900 mb-3">About this blog</h2>
+            <div className="grid gap-3 sm:grid-cols-2 text-sm text-slate-700">
+              <p className="rounded-xl border border-slate-200 p-3 bg-white">
+                Static, export-first. Markdown posts, type-checked, minimal dependencies.
+              </p>
+              <p className="rounded-xl border border-slate-200 p-3 bg-white">
+                Built with Next.js 15, Tailwind, date-fns. Deployed to GitHub Pages.
+              </p>
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm">
+            <h2 className="text-lg font-semibold text-slate-900 mb-3">Say hello</h2>
+            <div className="flex flex-wrap gap-3">
               <a
                 href="https://github.com/Zhanbingli"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors duration-200"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-800 hover:border-[var(--accent)] hover:text-[var(--accent)]"
               >
-                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clipRule="evenodd" />
-                </svg>
                 GitHub
               </a>
-              
               <a
                 href="mailto:contact@zhanbing.site"
-                className="inline-flex items-center px-6 py-3 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors duration-200"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-800 hover:border-[var(--accent)] hover:text-[var(--accent)]"
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
                 Email
               </a>
-              
               <Link
                 href="/feed.xml"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors duration-200"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-800 hover:border-[var(--accent)] hover:text-[var(--accent)]"
               >
-                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M3.429 2.571c0-.952.771-1.714 1.714-1.714.952 0 1.714.762 1.714 1.714 0 .943-.762 1.714-1.714 1.714-.943 0-1.714-.771-1.714-1.714zM3.429 7.429c3.771 0 6.857 3.086 6.857 6.857h2.286c0-5.029-4.114-9.143-9.143-9.143v2.286zM3.429 12.286c1.257 0 2.286 1.029 2.286 2.286H8c0-2.514-2.057-4.571-4.571-4.571v2.285z"/>
-                </svg>
                 RSS feed
               </Link>
             </div>
           </section>
         </main>
-
-        {/* Back to Home */}
-        <div className="text-center mt-16">
-          <Link
-            href="/"
-            className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
-          >
-            <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to home
-          </Link>
-        </div>
       </div>
     </div>
   )

@@ -57,77 +57,38 @@ export default async function TagPage({ params }: TagPageProps) {
       
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-12">
         {/* Header */}
-        <header className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-6">
-            <span className="text-white font-bold text-2xl">
-              {decodedTag.charAt(0).toUpperCase()}
-            </span>
-          </div>
-          
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-6">
-            {decodedTag}
-          </h1>
-          
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-            Found <span className="font-semibold text-blue-600">{taggedPosts.length}</span> post{taggedPosts.length === 1 ? '' : 's'} tagged &ldquo;{decodedTag}&rdquo;
+        <header className="mb-10 space-y-3 text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Tag</p>
+          <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">{decodedTag}</h1>
+          <p className="text-slate-600 text-base">
+            {taggedPosts.length} post{taggedPosts.length === 1 ? '' : 's'} tagged &ldquo;{decodedTag}&rdquo;
           </p>
-
-          {/* Breadcrumb */}
-          <nav className="flex justify-center" aria-label="Breadcrumb">
-            <ol className="inline-flex items-center space-x-1 md:space-x-3">
-              <li className="inline-flex items-center">
-                <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <div className="flex items-center">
-                  <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <Link href="/tags" className="ml-1 text-gray-700 hover:text-blue-600 transition-colors duration-200 md:ml-2">
-                    Tags
-                  </Link>
-                </div>
-              </li>
-              <li aria-current="page">
-                <div className="flex items-center">
-                  <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span className="ml-1 text-gray-500 md:ml-2">{decodedTag}</span>
-                </div>
-              </li>
-            </ol>
-          </nav>
         </header>
 
         {/* Articles */}
         <main className="mb-16">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2">
             {taggedPosts.map(({ id, date, title, excerpt, tags }) => (
               <article
                 key={id}
-                className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+                className="group bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:-translate-y-0.5 hover:shadow-md transition"
               >
                 <div className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <time className="text-sm text-gray-500" dateTime={date}>
-                        {formatDate(date)}
-                      </time>
-                      <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                  <div className="flex items-center justify-between mb-3 text-sm text-slate-500">
+                    <time dateTime={date}>{formatDate(date)}</time>
+                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] text-slate-700">
                       {decodedTag}
-                      </span>
-                    </div>
-                  
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-200">
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-[var(--accent)] transition-colors duration-200">
                     <Link href={`/posts/${id}`}>
                       {title}
                     </Link>
                   </h3>
                   
                   {excerpt && (
-                    <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
+                    <p className="text-slate-600 mb-4 leading-relaxed line-clamp-3">
                       {excerpt}
                     </p>
                   )}
@@ -135,7 +96,7 @@ export default async function TagPage({ params }: TagPageProps) {
                   <div className="flex items-center justify-between">
                     <Link
                       href={`/posts/${id}`}
-                      className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
+                      className="inline-flex items-center text-[var(--accent)] hover:text-[#0c316f] font-medium transition-colors duration-200"
                     >
                       Read more
                       <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,14 +105,14 @@ export default async function TagPage({ params }: TagPageProps) {
                     </Link>
                     
                     {tags && tags.length > 1 && (
-                      <div className="flex space-x-1">
-                        {tags.filter(t => t !== decodedTag).slice(0, 2).map((tag) => (
-                        <Link
-                          key={tag}
-                          href={`/tags/${encodeURIComponent(tag)}`}
-                          className="inline-block bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full transition-colors duration-200"
-                        >
-                          {tag}
+                      <div className="flex flex-wrap gap-1">
+                        {tags.filter(t => t !== decodedTag).slice(0, 3).map((tag) => (
+                          <Link
+                            key={tag}
+                            href={`/tags/${encodeURIComponent(tag)}`}
+                            className="inline-block bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs px-2 py-1 rounded-full transition-colors duration-200"
+                          >
+                            {tag}
                           </Link>
                         ))}
                       </div>
@@ -165,16 +126,16 @@ export default async function TagPage({ params }: TagPageProps) {
 
         {/* Related Tags */}
         {relatedTags.length > 0 && (
-          <section className="mb-16">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Related tags</h2>
-            <div className="flex flex-wrap justify-center gap-3">
+          <section className="mb-12">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Related tags</h2>
+            <div className="flex flex-wrap gap-2">
               {relatedTags.map((relatedTag) => (
                 <Link
                   key={relatedTag}
                   href={`/tags/${encodeURIComponent(relatedTag)}`}
-                  className="inline-flex items-center px-4 py-2 bg-white text-gray-700 rounded-full border border-gray-200 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                  className="inline-flex items-center px-3 py-1.5 bg-white text-gray-700 rounded-full border border-gray-200 hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-150"
                 >
-                  <span className="text-sm font-medium">{relatedTag}</span>
+                  <span className="text-sm">{relatedTag}</span>
                 </Link>
               ))}
             </div>
@@ -183,19 +144,13 @@ export default async function TagPage({ params }: TagPageProps) {
 
         {/* Navigation */}
         <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <Link
-            href="/tags"
-            className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
-          >
+          <Link href="/tags" className="inline-flex items-center px-5 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200">
             <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             All tags
           </Link>
-          <Link
-            href="/"
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
-          >
+          <Link href="/" className="inline-flex items-center px-5 py-2.5 bg-[var(--accent)] text-white font-medium rounded-lg hover:bg-[#0c316f] transition-colors duration-200 shadow-sm">
             Back to home
           </Link>
         </div>
