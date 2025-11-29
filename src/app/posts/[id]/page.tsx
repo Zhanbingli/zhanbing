@@ -7,9 +7,9 @@ import ShareButton from '@/components/ShareButton'
 import type { Metadata } from 'next'
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   try {
-    const { id } = params
+    const { id } = await params
     const postData = await getPostData(id)
     const baseUrl = 'https://zhanbing.site'
     
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 }
 
 export default async function Post({ params }: PostPageProps) {
-  const { id } = params
+  const { id } = await params
   let postData
   
   try {

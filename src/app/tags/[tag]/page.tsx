@@ -5,11 +5,11 @@ import Navigation from '@/components/Navigation'
 import { notFound } from 'next/navigation'
 
 interface TagPageProps {
-  params: { tag: string }
+  params: Promise<{ tag: string }>
 }
 
 export async function generateMetadata({ params }: TagPageProps) {
-  const { tag } = params
+  const { tag } = await params
   const decodedTag = decodeURIComponent(tag)
   
   return {
@@ -31,7 +31,7 @@ export async function generateStaticParams() {
 }
 
 export default async function TagPage({ params }: TagPageProps) {
-  const { tag } = params
+  const { tag } = await params
   const decodedTag = decodeURIComponent(tag)
   const allPostsData = getSortedPostsData()
   
