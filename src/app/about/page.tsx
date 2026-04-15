@@ -3,8 +3,8 @@ import Link from 'next/link'
 import Navigation from '@/components/Navigation'
 
 export const metadata = {
-  title: 'About Me',
-  description: 'Learn more about zhanbing and this tech blog.',
+  title: '关于我',
+  description: '了解展兵，以及这个博客持续写作的方向与初衷。',
 }
 
 export default function AboutPage() {
@@ -28,9 +28,9 @@ export default function AboutPage() {
 
           <div className="space-y-2">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-500">About</p>
-            <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">Hi, I’m zhanbing</h1>
+            <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">你好，我是展兵</h1>
             <p className="text-base text-slate-600 max-w-2xl mx-auto">
-              Frontend engineer who enjoys lean products, clear writing, and sharing what I learn.
+              一个持续练习写作的前端工程师。这里既是我的公开笔记，也是我长期积累作品和思考的地方。
             </p>
           </div>
         </header>
@@ -38,22 +38,21 @@ export default function AboutPage() {
         {/* Main Content */}
         <main className="space-y-8">
           <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900 mb-3">What I’m into</h2>
+            <h2 className="text-lg font-semibold text-slate-900 mb-3">我在关注什么</h2>
             <p className="text-slate-600 leading-relaxed">
-              Building clean, maintainable frontends. Exploring better ways to ship static sites,
-              structure content, and keep performance sharp without over-engineering.
+              我主要关注前端工程、内容系统、学习方法，以及如何用更小的复杂度做出更长期可维护的产品。
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <div className="rounded-xl border border-slate-200 p-3 bg-white">
-                <p className="text-sm text-slate-500">Currently</p>
+                <p className="text-sm text-slate-500">最近在做</p>
                 <ul className="mt-2 space-y-1 text-sm text-slate-700">
-                  <li>• Writing about Next.js and learning workflows</li>
-                  <li>• Tweaking UI polish and accessibility</li>
-                  <li>• Keeping this blog fast and low-friction</li>
+                  <li>• 记录 Next.js、React 和个人项目实践</li>
+                  <li>• 总结学习路径、输入输出和行动方法</li>
+                  <li>• 持续打磨这个博客的结构、速度和可读性</li>
                 </ul>
               </div>
               <div className="rounded-xl border border-slate-200 p-3 bg-white">
-                <p className="text-sm text-slate-500">Tools I reach for</p>
+                <p className="text-sm text-slate-500">常用技术栈</p>
                 <ul className="mt-2 flex flex-wrap gap-2 text-sm">
                   {['TypeScript', 'React', 'Next.js', 'Tailwind', 'Vite', 'ESLint', 'Jest'].map((item) => (
                     <li key={item} className="rounded-full border border-slate-200 px-2.5 py-1 bg-slate-50 text-slate-700">
@@ -66,19 +65,19 @@ export default function AboutPage() {
           </section>
 
           <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900 mb-3">About this blog</h2>
+            <h2 className="text-lg font-semibold text-slate-900 mb-3">这个博客写什么</h2>
             <div className="grid gap-3 sm:grid-cols-2 text-sm text-slate-700">
               <p className="rounded-xl border border-slate-200 p-3 bg-white">
-                Static, export-first. Markdown posts, type-checked, minimal dependencies.
+                不是资讯站，也不是纯教程站。这里更像一个长期更新的个人工作台，记录我正在验证的方法和经验。
               </p>
               <p className="rounded-xl border border-slate-200 p-3 bg-white">
-                Built with Next.js 15, Tailwind, date-fns. Deployed to GitHub Pages.
+                技术上保持克制：Markdown 写作、静态导出、轻依赖，重点始终放在内容本身和稳定体验上。
               </p>
             </div>
           </section>
 
           <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900 mb-3">Say hello</h2>
+            <h2 className="text-lg font-semibold text-slate-900 mb-3">在哪里找到我</h2>
             <div className="flex flex-wrap gap-3">
               <a
                 href="https://github.com/Zhanbingli"
@@ -92,7 +91,7 @@ export default function AboutPage() {
                 href="mailto:contact@zhanbing.site"
                 className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-800 hover:border-[var(--accent)] hover:text-[var(--accent)]"
               >
-                Email
+                邮箱
               </a>
               <Link
                 href="/feed.xml"
@@ -100,7 +99,7 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-800 hover:border-[var(--accent)] hover:text-[var(--accent)]"
               >
-                RSS feed
+                RSS 订阅
               </Link>
             </div>
           </section>

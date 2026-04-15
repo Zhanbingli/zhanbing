@@ -1,7 +1,8 @@
 ---
 title: 'My First Open Source Contribution: Lessons From the Blockchain Module'
 date: '2025-09-26'
-excerpt: "My first project  I try to contribute for beginner."
+excerpt: "A beginner's first open source contribution and the lessons learned from fixing real mistakes."
+tags: ['open source', 'learning', 'Python']
 ---
 
 # My First Open Source Contribution: Lessons From the Blockchain Module
@@ -167,4 +168,3 @@ My first open-source contribution wasn’t smooth — I made syntax mistakes, st
 Now, I have my first PR ready for review. It feels amazing. 🚀
 
 If you’re a beginner: fork a project, pick a small function, add tests, and let the tools guide you. Open source is not about being perfect — it’s about learning in public.
-

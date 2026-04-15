@@ -4,11 +4,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "zhanbing | ZhanBing.site",
-    template: "%s | zhanbing"
+    default: "展兵 | zhanbing.site",
+    template: "%s | 展兵"
   },
-  description: "A personal blog sharing frontend development, learning notes, and programming thoughts.",
-  keywords: ["frontend", "tech blog", "JavaScript", "React", "Next.js", "coding"],
+  description: "展兵的个人博客，分享前端开发、学习方法、项目实践和持续写作中的思考。",
+  keywords: ["展兵", "前端", "技术博客", "学习方法", "React", "Next.js", "写作"],
   authors: [{ name: "zhanbing", url: "https://zhanbing.site" }],
   creator: "zhanbing",
   publisher: "zhanbing",
@@ -21,29 +21,29 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     types: {
-      "application/rss+xml": [{ url: "/feed.xml", title: "RSS Feed" }],
+      "application/rss+xml": [{ url: "/feed.xml", title: "RSS 订阅" }],
     },
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "zh_CN",
     url: "https://zhanbing.site",
-    title: "zhanbing",
-    description: "A personal blog sharing frontend development, learning notes, and programming thoughts.",
-    siteName: "zhanbing",
+    title: "展兵",
+    description: "展兵的个人博客，分享前端开发、学习方法、项目实践和持续写作中的思考。",
+    siteName: "展兵",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "zhanbing",
+        alt: "展兵的个人博客",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "zhanbing",
-    description: "A personal blog sharing frontend development, learning notes, and programming thoughts.",
+    title: "展兵",
+    description: "展兵的个人博客，分享前端开发、学习方法、项目实践和持续写作中的思考。",
     images: ["/og-image.svg"],
   },
   robots: {
@@ -70,7 +70,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en">
+    <html lang="zh-CN">
       <body className="bg-[var(--background)] text-slate-900 antialiased">
         {gaId ? (
           <>

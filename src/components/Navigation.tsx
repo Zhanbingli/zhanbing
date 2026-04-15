@@ -3,13 +3,26 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+
+const navLinks = [
+  { href: '/', label: '首页' },
+  { href: '/posts', label: '文章' },
+  { href: '/tags', label: '标签' },
+  { href: '/about', label: '关于' },
+]
 
 export default function Navigation() {
   const [searchQuery, setSearchQuery] = useState('')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const router = useRouter()
+  const pathname = usePathname()
+
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/'
+    return pathname === href || pathname.startsWith(`${href}/`)
+  }
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,59 +57,56 @@ export default function Navigation() {
             <div className="relative w-10 h-10 rounded-full border border-slate-200 shadow-sm overflow-hidden">
               <Image
                 src="/lizhanbing.png"
-                alt="Site avatar"
+                alt="展兵头像"
                 fill
                 sizes="40px"
                 className="object-cover"
                 priority
               />
             </div>
-            <span className="font-bold text-lg text-slate-900 hidden sm:inline">zhanbing</span>
+            <span className="font-bold text-lg text-slate-900 hidden sm:inline">展兵</span>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-6">
-            <Link 
-              href="/" 
-              className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium"
-            >
-              Home
-            </Link>
-            <Link 
-              href="/about" 
-              className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium"
-            >
-              About
-            </Link>
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <Link 
+                key={link.href}
+                href={link.href} 
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors duration-150 ${
+                  isActive(link.href)
+                    ? 'bg-[var(--accent-soft)] text-[var(--accent)]'
+                    : 'text-slate-700 hover:text-[var(--accent)] hover:bg-white/70'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Desktop Search */}
-          <form onSubmit={handleSearch} className="hidden md:flex items-center">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search posts..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-64 pl-10 pr-4 py-2 border border-slate-200 bg-white rounded-full focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all duration-150 shadow-sm"
+          <Link
+            href="/search"
+            className={`hidden md:inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-150 shadow-sm ${
+              pathname === '/search'
+                ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]'
+                : 'border-slate-200 bg-white text-slate-700 hover:border-[var(--accent)] hover:text-[var(--accent)]'
+            }`}
+          >
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg
-                  className="h-5 w-5 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
-            </div>
-          </form>
+            </svg>
+            搜索
+          </Link>
 
           {/* Mobile buttons */}
           <div className="md:hidden flex items-center space-x-1">
@@ -104,7 +114,7 @@ export default function Navigation() {
             <button 
               onClick={toggleSearch}
               className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 p-2 touch-target rounded-lg hover:bg-white/70"
-              aria-label="Search"
+              aria-label="搜索"
             >
               <svg
                 className="h-6 w-6"
@@ -125,7 +135,7 @@ export default function Navigation() {
             <button 
               onClick={toggleMobileMenu}
               className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 p-2 touch-target rounded-lg hover:bg-white/70"
-              aria-label="Menu"
+              aria-label="菜单"
             >
               <svg
                 className={`h-6 w-6 transition-transform duration-200 ${isMobileMenuOpen ? 'rotate-90' : ''}`}
@@ -160,7 +170,7 @@ export default function Navigation() {
               <div className="relative flex-1">
                 <input
                   type="text"
-                  placeholder="Search posts..."
+                  placeholder="搜索文章标题、标签或关键词"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 text-base border border-slate-200 bg-white rounded-xl focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all duration-150 shadow-sm"
@@ -190,19 +200,30 @@ export default function Navigation() {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-slate-200/80 py-4 mobile-nav-transition bg-white/70 rounded-b-xl shadow-sm">
             <div className="flex flex-col space-y-2">
-              <Link 
-                href="/" 
-                className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium py-3 px-2 rounded-lg hover:bg-white touch-target"
+              {navLinks.map((link) => (
+                <Link 
+                  key={link.href}
+                  href={link.href} 
+                  className={`font-medium py-3 px-2 rounded-lg touch-target transition-colors duration-150 ${
+                    isActive(link.href)
+                      ? 'bg-[var(--accent-soft)] text-[var(--accent)]'
+                      : 'text-slate-700 hover:text-[var(--accent)] hover:bg-white'
+                  }`}
+                  onClick={closeMenus}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="/search"
+                className={`font-medium py-3 px-2 rounded-lg touch-target transition-colors duration-150 ${
+                  pathname === '/search'
+                    ? 'bg-[var(--accent-soft)] text-[var(--accent)]'
+                    : 'text-slate-700 hover:text-[var(--accent)] hover:bg-white'
+                }`}
                 onClick={closeMenus}
               >
-                Home
-              </Link>
-              <Link 
-                href="/about" 
-                className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 font-medium py-3 px-2 rounded-lg hover:bg-white touch-target"
-                onClick={closeMenus}
-              >
-                About
+                搜索
               </Link>
             </div>
           </div>

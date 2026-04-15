@@ -29,7 +29,7 @@ export default function PostsPage() {
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-10 md:py-14 space-y-8">
         <header className="rounded-2xl bg-white/90 border border-slate-200 shadow-sm p-8 md:p-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Archive</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">文章归档</p>
           <h1 className="mt-3 text-3xl sm:text-4xl font-semibold text-slate-900">全部文章</h1>
           <p className="mt-3 text-lg text-slate-600 leading-relaxed max-w-3xl">
             按时间排序的写作档案。保持篇幅克制、语气诚恳，让你能快速浏览并找到感兴趣的内容。

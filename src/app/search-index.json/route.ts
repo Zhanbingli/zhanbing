@@ -1,4 +1,5 @@
 import { getSortedPostsData } from '@/lib/posts'
+import { stripMarkdown } from '@/lib/utils'
 
 export const dynamic = 'force-static'
 
@@ -10,6 +11,7 @@ export async function GET() {
     date: p.date,
     excerpt: p.excerpt || '',
     tags: p.tags || [],
+    content: stripMarkdown(p.content).slice(0, 1800),
   }))
 
   return new Response(JSON.stringify(index), {
@@ -19,4 +21,3 @@ export async function GET() {
     },
   })
 }
-

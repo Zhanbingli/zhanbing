@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostData, getSortedPostsData } from '@/lib/posts'
-import { formatDate } from '@/lib/utils'
+import { detectContentLanguage, formatDate } from '@/lib/utils'
 import Navigation from '@/components/Navigation'
 import ShareButton from '@/components/ShareButton'
 import TableOfContents, { type TocHeading } from '@/components/TableOfContents'
@@ -28,12 +28,12 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     
     return {
       title: postData.title,
-      description: postData.excerpt || `Read ${postData.title} on zhanbing`,
+      description: postData.excerpt || `阅读《${postData.title}》`,
       keywords: postData.tags?.join(', ') || '',
       authors: [{ name: 'zhanbing', url: baseUrl }],
       openGraph: {
         title: postData.title,
-        description: postData.excerpt || `Read ${postData.title} on zhanbing`,
+        description: postData.excerpt || `阅读《${postData.title}》`,
         type: 'article',
         publishedTime: postData.date,
         authors: ['zhanbing'],
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       twitter: {
         card: 'summary_large_image',
         title: postData.title,
-        description: postData.excerpt || `Read ${postData.title} on zhanbing`,
+        description: postData.excerpt || `阅读《${postData.title}》`,
       },
       alternates: {
         canonical: `/posts/${id}`,
@@ -51,8 +51,8 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     }
   } catch {
     return {
-      title: 'Post not found',
-      description: 'The post you are looking for does not exist.',
+      title: '文章不存在',
+      description: '你访问的文章不存在或已被移除。',
     }
   }
 }
@@ -113,6 +113,7 @@ export default async function Post({ params }: PostPageProps) {
       post.tags?.some(tag => postData.tags?.includes(tag))
     )
     .slice(0, 3)
+  const contentLanguage = detectContentLanguage(`${postData.title} ${postData.content}`)
 
   // Structured data (JSON-LD)
   const jsonLd = {
@@ -142,7 +143,7 @@ export default async function Post({ params }: PostPageProps) {
     },
     keywords: postData.tags?.join(', ') || '',
     articleSection: 'Technology',
-    inLanguage: 'en-US',
+    inLanguage: contentLanguage,
   }
 
   return (
@@ -162,9 +163,9 @@ export default async function Post({ params }: PostPageProps) {
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              Back to posts
+              返回文章列表
             </Link>
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Article</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">文章</p>
             <h1 className="text-3xl sm:text-4xl font-semibold text-slate-900 leading-snug">
               {postData.title}
             </h1>
@@ -177,7 +178,7 @@ export default async function Post({ params }: PostPageProps) {
               <time dateTime={postData.date}>{formatDate(postData.date)}</time>
               <span className="inline-flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
-                About {Math.max(1, postData.readingTime ?? 1)} min read
+                约 {Math.max(1, postData.readingTime ?? 1)} 分钟阅读
               </span>
               {postData.tags?.map((tag) => (
                 <Link
@@ -203,7 +204,7 @@ export default async function Post({ params }: PostPageProps) {
               />
 
               <div className="mt-8 flex flex-col gap-4 border-t border-slate-200 pt-6">
-                <p className="text-sm text-slate-600">Enjoyed this post? Share it with a friend.</p>
+                <p className="text-sm text-slate-600">如果这篇文章对你有帮助，可以分享给更多人。</p>
                 <ShareButton
                   title={postData.title}
                   excerpt={postData.excerpt || postData.title}
@@ -222,9 +223,9 @@ export default async function Post({ params }: PostPageProps) {
           {relatedPosts.length > 0 && (
             <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 md:p-7 shadow-sm space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-semibold text-slate-900">Related reading</h2>
+                <h2 className="text-2xl font-semibold text-slate-900">相关文章</h2>
                 <Link href="/posts" className="text-sm font-medium text-[var(--accent)] hover:underline">
-                  All posts
+                  全部文章
                 </Link>
               </div>
               <ul className="space-y-3">
