@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: TagPageProps) {
   const decodedTag = decodeURIComponent(tag)
   
   return {
-    title: `标签：${decodedTag}`,
-    description: `查看所有带有“${decodedTag}”标签的文章。`,
+    title: `Tag: ${decodedTag}`,
+    description: `Browse all posts tagged "${decodedTag}".`,
     alternates: {
       canonical: `/tags/${encodeURIComponent(decodedTag)}`,
     },
@@ -58,10 +58,10 @@ export default async function TagPage({ params }: TagPageProps) {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-12">
         {/* Header */}
         <header className="mb-10 space-y-3 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">标签</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Tag</p>
           <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">{decodedTag}</h1>
           <p className="text-slate-600 text-base">
-            共 {taggedPosts.length} 篇文章带有 &ldquo;{decodedTag}&rdquo; 标签
+            {taggedPosts.length} post{taggedPosts.length === 1 ? '' : 's'} tagged &ldquo;{decodedTag}&rdquo;
           </p>
         </header>
 
@@ -98,7 +98,7 @@ export default async function TagPage({ params }: TagPageProps) {
                       href={`/posts/${id}`}
                       className="inline-flex items-center text-[var(--accent)] hover:text-[#0c316f] font-medium transition-colors duration-200"
                     >
-                      阅读全文
+                      Read more
                       <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -127,7 +127,7 @@ export default async function TagPage({ params }: TagPageProps) {
         {/* Related Tags */}
         {relatedTags.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">相关标签</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Related tags</h2>
             <div className="flex flex-wrap gap-2">
               {relatedTags.map((relatedTag) => (
                 <Link
@@ -148,10 +148,10 @@ export default async function TagPage({ params }: TagPageProps) {
             <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            返回全部标签
+            Back to tags
           </Link>
           <Link href="/" className="inline-flex items-center px-5 py-2.5 bg-[var(--accent)] text-white font-medium rounded-lg hover:bg-[#0c316f] transition-colors duration-200 shadow-sm">
-            返回首页
+            Back home
           </Link>
         </div>
       </div>

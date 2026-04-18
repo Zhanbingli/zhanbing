@@ -4,14 +4,14 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "展兵 | zhanbing.site",
-    template: "%s | 展兵"
+    default: "Zhanbing Li | zhanbing.site",
+    template: "%s | Zhanbing Li"
   },
-  description: "展兵的个人博客，分享前端开发、学习方法、项目实践和持续写作中的思考。",
-  keywords: ["展兵", "前端", "技术博客", "学习方法", "React", "Next.js", "写作"],
-  authors: [{ name: "zhanbing", url: "https://zhanbing.site" }],
-  creator: "zhanbing",
-  publisher: "zhanbing",
+  description: "Personal notes on frontend engineering, learning systems, product building, and writing.",
+  keywords: ["Zhanbing Li", "frontend", "engineering blog", "learning systems", "React", "Next.js", "writing"],
+  authors: [{ name: "Zhanbing Li", url: "https://zhanbing.site" }],
+  creator: "Zhanbing Li",
+  publisher: "Zhanbing Li",
   formatDetection: {
     email: false,
     address: false,
@@ -21,29 +21,29 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     types: {
-      "application/rss+xml": [{ url: "/feed.xml", title: "RSS 订阅" }],
+      "application/rss+xml": [{ url: "/feed.xml", title: "RSS Feed" }],
     },
   },
   openGraph: {
     type: "website",
-    locale: "zh_CN",
+    locale: "en_US",
     url: "https://zhanbing.site",
-    title: "展兵",
-    description: "展兵的个人博客，分享前端开发、学习方法、项目实践和持续写作中的思考。",
-    siteName: "展兵",
+    title: "Zhanbing Li",
+    description: "Personal notes on frontend engineering, learning systems, product building, and writing.",
+    siteName: "Zhanbing Li",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "展兵的个人博客",
+        alt: "Zhanbing Li personal blog",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "展兵",
-    description: "展兵的个人博客，分享前端开发、学习方法、项目实践和持续写作中的思考。",
+    title: "Zhanbing Li",
+    description: "Personal notes on frontend engineering, learning systems, product building, and writing.",
     images: ["/og-image.svg"],
   },
   robots: {
@@ -70,7 +70,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="zh-CN">
+    <html lang="en">
       <body className="bg-[var(--background)] text-slate-900 antialiased">
         {gaId ? (
           <>

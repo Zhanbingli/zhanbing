@@ -4,8 +4,8 @@ import { formatDate } from '@/lib/utils'
 import Navigation from '@/components/Navigation'
 
 export const metadata = {
-  title: '全部文章',
-  description: '浏览我的所有博客文章，包括技术分享、学习笔记和编程心得',
+  title: 'All Posts',
+  description: 'Browse every post on the site, including technical notes, experiments, and essays.',
   alternates: {
     canonical: '/posts',
   },
@@ -29,21 +29,21 @@ export default function PostsPage() {
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-10 md:py-14 space-y-8">
         <header className="rounded-2xl bg-white/90 border border-slate-200 shadow-sm p-8 md:p-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">文章归档</p>
-          <h1 className="mt-3 text-3xl sm:text-4xl font-semibold text-slate-900">全部文章</h1>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Archive</p>
+          <h1 className="mt-3 text-3xl sm:text-4xl font-semibold text-slate-900">All Posts</h1>
           <p className="mt-3 text-lg text-slate-600 leading-relaxed max-w-3xl">
-            按时间排序的写作档案。保持篇幅克制、语气诚恳，让你能快速浏览并找到感兴趣的内容。
+            A chronological archive of writing across engineering, learning, and product work. Built to be easy to scan and easy to return to.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-600">
             <span className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-[var(--accent)] font-medium">
-              {totalPosts} 篇文章
+              {totalPosts} posts
             </span>
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1">
-              {allTags.length} 个标签
+              {allTags.length} tags
             </span>
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1">
-              {thisYearPosts} 篇发表于 {currentYear}
+              {thisYearPosts} published in {currentYear}
             </span>
           </div>
 
@@ -55,7 +55,7 @@ export default function PostsPage() {
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              搜索文章
+              Search posts
             </Link>
             <Link
               href="/tags"
@@ -64,7 +64,7 @@ export default function PostsPage() {
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
               </svg>
-              按标签浏览
+              Browse tags
             </Link>
           </div>
         </header>
@@ -79,7 +79,7 @@ export default function PostsPage() {
                 <time dateTime={date}>{formatDate(date)}</time>
                 <span className="inline-flex items-center gap-2 text-xs sm:text-sm">
                   <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
-                  约 {Math.max(1, (readingTime ?? 1))} 分钟阅读
+                  {Math.max(1, (readingTime ?? 1))} min read
                 </span>
               </div>
 
@@ -109,7 +109,7 @@ export default function PostsPage() {
                   href={`/posts/${id}`}
                   className="inline-flex items-center gap-1 text-sm font-medium text-[var(--accent)] hover:underline"
                 >
-                  阅读全文
+                  Read more
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -120,8 +120,8 @@ export default function PostsPage() {
 
           {sortedPosts.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-xl font-semibold text-slate-800 mb-2">暂无文章</p>
-              <p className="text-slate-600">写作进行中，很快就会有内容和你见面。</p>
+              <p className="text-xl font-semibold text-slate-800 mb-2">No posts yet</p>
+              <p className="text-slate-600">Writing is in progress. New posts will show up here soon.</p>
             </div>
           )}
         </section>
@@ -134,7 +134,7 @@ export default function PostsPage() {
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            返回首页
+            Back home
           </Link>
         </div>
       </main>

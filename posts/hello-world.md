@@ -1,71 +1,71 @@
 ---
-title: '欢迎来到我的技术博客'
+title: 'Welcome to My Technical Blog'
 date: '2025-01-01'
-excerpt: '这是我技术博客的第一篇文章，在这里我将分享前端开发、技术学习和编程实践的心得体会。'
-tags: ['博客', '前端开发', 'JavaScript', 'React', '学习笔记']
+excerpt: 'The first post on this site, covering what I plan to write about across frontend engineering, learning, and practical software work.'
+tags: ['blog', 'frontend', 'JavaScript', 'React', 'learning-notes']
 ---
 
-# 欢迎来到我的技术博客
+# Welcome to My Technical Blog
 
-你好！欢迎来到我的技术博客。我是展兵，一名热爱技术的前端开发者。
+Welcome to the site. I&apos;m Zhanbing Li, a frontend engineer who enjoys building products, learning in public, and turning ideas into durable systems.
 
-## 关于这个博客
+## What this blog covers
 
-在这个博客中，我将分享：
+Here you will find writing about:
 
-- **前端开发技术**：JavaScript、TypeScript、React、Vue.js、Next.js 等
-- **学习心得**：技术学习方法、项目实践经验
-- **工具推荐**：开发工具、效率工具、学习资源
-- **生活感悟**：技术人的成长思考
+- **Frontend engineering**: JavaScript, TypeScript, React, Vue.js, Next.js, and related tooling
+- **Learning systems**: how I study, practice, and improve through real projects
+- **Tooling and workflow**: developer tools, productivity systems, and useful resources
+- **Long-term growth**: reflections on building skills and doing better work over time
 
-## 我的技术栈
+## My stack
 
-目前我主要专注于以下技术领域：
+Most of my work currently revolves around:
 
-### 前端框架
-- **React** - 我最熟悉的前端框架
-- **Next.js** - 用于构建全栈应用
-- **Vue.js** - 渐进式前端框架
+### Frontend frameworks
+- **React** - the framework I use most often
+- **Next.js** - for full-stack web products
+- **Vue.js** - a flexible option for structured frontend work
 
-### 开发工具
-- **TypeScript** - 类型安全的 JavaScript
-- **Tailwind CSS** - 实用优先的 CSS 框架
-- **Git** - 版本控制工具
+### Development tools
+- **TypeScript** - JavaScript with stronger guarantees
+- **Tailwind CSS** - utility-first styling for fast iteration
+- **Git** - version control that keeps work traceable
 
-### 后端技术
-- **Node.js** - JavaScript 运行时
-- **Express** - Web 应用框架
-- **MongoDB** - NoSQL 数据库
+### Backend tools
+- **Node.js** - the runtime behind many of my projects
+- **Express** - a simple way to ship web services
+- **MongoDB** - document storage when the use case fits
 
-## 博客特色
+## What the site is built for
 
-这个博客使用 **Next.js 15** 构建，具有以下特色：
+This blog is built with **Next.js 15** and keeps the experience intentionally simple:
 
-1. **现代化设计** - 简洁美观的用户界面
-2. **响应式布局** - 完美适配各种设备
-3. **搜索功能** - 快速找到你需要的内容
-4. **标签分类** - 按主题浏览文章
-5. **SEO 优化** - 更好的搜索引擎可见性
+1. **Clean design** for focused reading
+2. **Responsive layout** that works across devices
+3. **Search** to find posts quickly
+4. **Tag archives** for topic-based browsing
+5. **Solid SEO defaults** for discoverability
 
-## 联系我
+## Contact
 
-如果你对我的文章有任何问题或建议，欢迎通过以下方式联系我：
+If you have feedback, questions, or just want to say hello:
 
 - **GitHub**: [Zhanbingli](https://github.com/Zhanbingli)
-- **邮箱**: contact@zhanbing.site
-- **RSS 订阅**: [订阅我的博客](/feed.xml)
+- **Email**: contact@zhanbing.site
+- **RSS**: [Subscribe to the feed](/feed.xml)
 
-## 开始探索
+## Start exploring
 
-现在你可以：
+You can begin here:
 
-- [浏览所有文章](/)
-- [查看标签分类](/tags)
-- [搜索感兴趣的内容](/search)
-- [了解更多关于我](/about)
+- [Browse all posts](/)
+- [Explore tags](/tags)
+- [Search the site](/search)
+- [Read more about me](/about)
 
-感谢你的访问，希望我的分享能对你有所帮助！
+Thanks for reading. I hope something here helps you build, learn, or think a little more clearly.
 
 ---
 
-*这篇文章发布于 2025年1月1日，标记着我技术博客的正式开始。* 
+*Published on January 1, 2025, as the first post on this site.*

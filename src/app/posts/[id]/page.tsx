@@ -28,22 +28,22 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     
     return {
       title: postData.title,
-      description: postData.excerpt || `阅读《${postData.title}》`,
+      description: postData.excerpt || `Read "${postData.title}"`,
       keywords: postData.tags?.join(', ') || '',
-      authors: [{ name: 'zhanbing', url: baseUrl }],
+      authors: [{ name: 'Zhanbing Li', url: baseUrl }],
       openGraph: {
         title: postData.title,
-        description: postData.excerpt || `阅读《${postData.title}》`,
+        description: postData.excerpt || `Read "${postData.title}"`,
         type: 'article',
         publishedTime: postData.date,
-        authors: ['zhanbing'],
+        authors: ['Zhanbing Li'],
         tags: postData.tags,
         url: `${baseUrl}/posts/${id}`,
       },
       twitter: {
         card: 'summary_large_image',
         title: postData.title,
-        description: postData.excerpt || `阅读《${postData.title}》`,
+        description: postData.excerpt || `Read "${postData.title}"`,
       },
       alternates: {
         canonical: `/posts/${id}`,
@@ -51,8 +51,8 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     }
   } catch {
     return {
-      title: '文章不存在',
-      description: '你访问的文章不存在或已被移除。',
+      title: 'Post not found',
+      description: 'The post you requested does not exist or has been removed.',
     }
   }
 }
@@ -124,12 +124,12 @@ export default async function Post({ params }: PostPageProps) {
     image: ['https://zhanbing.site/og-image.svg'],
     author: {
       '@type': 'Person',
-      name: 'zhanbing',
+      name: 'Zhanbing Li',
       url: 'https://zhanbing.site',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'zhanbing',
+      name: 'Zhanbing Li',
       logo: {
         '@type': 'ImageObject',
         url: 'https://zhanbing.site/og-image.svg',
@@ -163,9 +163,9 @@ export default async function Post({ params }: PostPageProps) {
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              返回文章列表
+              Back to posts
             </Link>
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">文章</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Post</p>
             <h1 className="text-3xl sm:text-4xl font-semibold text-slate-900 leading-snug">
               {postData.title}
             </h1>
@@ -178,7 +178,7 @@ export default async function Post({ params }: PostPageProps) {
               <time dateTime={postData.date}>{formatDate(postData.date)}</time>
               <span className="inline-flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
-                约 {Math.max(1, postData.readingTime ?? 1)} 分钟阅读
+                {Math.max(1, postData.readingTime ?? 1)} min read
               </span>
               {postData.tags?.map((tag) => (
                 <Link
@@ -204,7 +204,7 @@ export default async function Post({ params }: PostPageProps) {
               />
 
               <div className="mt-8 flex flex-col gap-4 border-t border-slate-200 pt-6">
-                <p className="text-sm text-slate-600">如果这篇文章对你有帮助，可以分享给更多人。</p>
+                <p className="text-sm text-slate-600">If this post was useful, share it with someone who might need it.</p>
                 <ShareButton
                   title={postData.title}
                   excerpt={postData.excerpt || postData.title}
@@ -223,9 +223,9 @@ export default async function Post({ params }: PostPageProps) {
           {relatedPosts.length > 0 && (
             <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 md:p-7 shadow-sm space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-semibold text-slate-900">相关文章</h2>
+                <h2 className="text-2xl font-semibold text-slate-900">Related posts</h2>
                 <Link href="/posts" className="text-sm font-medium text-[var(--accent)] hover:underline">
-                  全部文章
+                  All posts
                 </Link>
               </div>
               <ul className="space-y-3">

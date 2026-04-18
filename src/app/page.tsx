@@ -15,21 +15,21 @@ export default function Home() {
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-10 md:py-14 space-y-10">
         <section className="rounded-2xl bg-white/90 border border-slate-200 shadow-sm p-8 md:p-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">个人博客</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Personal Site</p>
           <h1 className="mt-3 text-3xl sm:text-4xl font-semibold text-slate-900">
-            把前端、学习和思考，认真写下来
+            Writing seriously about frontend work, learning, and long-term thinking
           </h1>
           <p className="mt-3 text-lg text-slate-600 max-w-3xl leading-relaxed">
-            这里记录我在前端开发、工程实践、学习方法和个人成长上的持续探索。希望每篇文章都足够真诚，也足够有用。
+            Notes on frontend engineering, practical systems, learning strategy, and the process of building useful work over time.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-600">
             <span className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-[var(--accent)] font-medium">
-              {allPostsData.length} 篇文章
+              {allPostsData.length} posts
             </span>
             {latestUpdate && (
               <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1">
-                最近更新：{formatDate(latestUpdate)}
+                Latest update: {formatDate(latestUpdate)}
               </span>
             )}
           </div>
@@ -39,7 +39,7 @@ export default function Home() {
               href="/posts"
               className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-white shadow-sm transition hover:translate-y-px hover:bg-[#0c316f]"
             >
-              浏览全部文章
+              Browse all posts
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -50,7 +50,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              RSS 订阅
+              RSS feed
             </Link>
           </div>
         </section>
@@ -58,14 +58,14 @@ export default function Home() {
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">最新内容</p>
-              <h2 className="text-2xl font-semibold text-slate-900">最近更新</h2>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Latest Writing</p>
+              <h2 className="text-2xl font-semibold text-slate-900">Recently updated</h2>
             </div>
             <Link 
               href="/posts" 
               className="text-sm font-medium text-[var(--accent)] hover:underline"
             >
-              查看全部
+              View all
             </Link>
           </div>
 
@@ -78,8 +78,8 @@ export default function Home() {
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-sm text-slate-500">
                   <time dateTime={date}>{formatDate(date)}</time>
                   <span className="inline-flex items-center gap-2 text-xs sm:text-sm">
-                    <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
-                    约 {Math.max(1, readingTime ?? 1)} 分钟阅读
+                  <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
+                    {Math.max(1, readingTime ?? 1)} min read
                   </span>
                 </div>
 
@@ -109,7 +109,7 @@ export default function Home() {
                     href={`/posts/${id}`}
                     className="inline-flex items-center gap-1 text-sm font-medium text-[var(--accent)] hover:underline"
                   >
-                    阅读全文
+                    Read more
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -122,11 +122,11 @@ export default function Home() {
 
         <footer className="border-t border-slate-200/70 pt-6 text-sm text-slate-600">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p>© {currentYear} 展兵 · 持续写作，持续打磨</p>
+            <p>© {currentYear} Zhanbing Li · Writing, shipping, refining.</p>
             <div className="flex flex-wrap items-center gap-4">
-              <Link href="/posts" className="hover:text-[var(--accent)]">文章</Link>
-              <Link href="/tags" className="hover:text-[var(--accent)]">标签</Link>
-              <Link href="/about" className="hover:text-[var(--accent)]">关于</Link>
+              <Link href="/posts" className="hover:text-[var(--accent)]">Posts</Link>
+              <Link href="/tags" className="hover:text-[var(--accent)]">Tags</Link>
+              <Link href="/about" className="hover:text-[var(--accent)]">About</Link>
               <Link href="/feed.xml" className="hover:text-[var(--accent)]">RSS</Link>
               <a href="https://github.com/Zhanbingli" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent)]">
                 GitHub

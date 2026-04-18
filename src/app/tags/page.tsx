@@ -3,8 +3,8 @@ import { getSortedPostsData } from '@/lib/posts'
 import Navigation from '@/components/Navigation'
 
 export const metadata = {
-  title: '标签',
-  description: '按标签浏览博客中的所有文章和主题。',
+  title: 'Tags',
+  description: 'Browse all post topics and tags.',
   alternates: {
     canonical: '/tags',
   },
@@ -27,9 +27,9 @@ export default function TagsPage() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-6 py-10 md:py-14">
         <header className="mb-10 space-y-3 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">标签</p>
-          <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">按标签浏览</h1>
-          <p className="text-slate-600 text-base">从主题切入看文章，目前共有 {sortedTags.length} 个标签。</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Tags</p>
+          <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">Browse by tag</h1>
+          <p className="text-slate-600 text-base">Explore the archive by topic. There are currently {sortedTags.length} tags.</p>
         </header>
 
         <ul className="grid gap-3 sm:grid-cols-2">
@@ -39,13 +39,13 @@ export default function TagsPage() {
                 <Link href={`/tags/${encodeURIComponent(tag)}`} className="text-lg font-semibold text-slate-900 hover:text-[var(--accent)]">
                   {tag}
                 </Link>
-                <p className="text-sm text-slate-600">{count} 篇文章</p>
+                <p className="text-sm text-slate-600">{count} post{count === 1 ? '' : 's'}</p>
               </div>
               <Link
                 href={`/tags/${encodeURIComponent(tag)}`}
                 className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-3 py-1 text-sm text-slate-700 hover:border-[var(--accent)] hover:text-[var(--accent)]"
               >
-                查看
+                View
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>

@@ -6,10 +6,10 @@ import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 const navLinks = [
-  { href: '/', label: '首页' },
-  { href: '/posts', label: '文章' },
-  { href: '/tags', label: '标签' },
-  { href: '/about', label: '关于' },
+  { href: '/', label: 'Home' },
+  { href: '/posts', label: 'Posts' },
+  { href: '/tags', label: 'Tags' },
+  { href: '/about', label: 'About' },
 ]
 
 export default function Navigation() {
@@ -57,14 +57,14 @@ export default function Navigation() {
             <div className="relative w-10 h-10 rounded-full border border-slate-200 shadow-sm overflow-hidden">
               <Image
                 src="/lizhanbing.png"
-                alt="展兵头像"
+                alt="Zhanbing Li avatar"
                 fill
                 sizes="40px"
                 className="object-cover"
                 priority
               />
             </div>
-            <span className="font-bold text-lg text-slate-900 hidden sm:inline">展兵</span>
+            <span className="font-bold text-lg text-slate-900 hidden sm:inline">Zhanbing Li</span>
           </Link>
 
           {/* Desktop Navigation Links */}
@@ -105,7 +105,7 @@ export default function Navigation() {
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-            搜索
+            Search
           </Link>
 
           {/* Mobile buttons */}
@@ -114,7 +114,7 @@ export default function Navigation() {
             <button 
               onClick={toggleSearch}
               className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 p-2 touch-target rounded-lg hover:bg-white/70"
-              aria-label="搜索"
+              aria-label="Search"
             >
               <svg
                 className="h-6 w-6"
@@ -135,7 +135,7 @@ export default function Navigation() {
             <button 
               onClick={toggleMobileMenu}
               className="text-slate-700 hover:text-[var(--accent)] transition-colors duration-150 p-2 touch-target rounded-lg hover:bg-white/70"
-              aria-label="菜单"
+              aria-label="Menu"
             >
               <svg
                 className={`h-6 w-6 transition-transform duration-200 ${isMobileMenuOpen ? 'rotate-90' : ''}`}
@@ -170,7 +170,7 @@ export default function Navigation() {
               <div className="relative flex-1">
                 <input
                   type="text"
-                  placeholder="搜索文章标题、标签或关键词"
+                  placeholder="Search titles, tags, or keywords"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 text-base border border-slate-200 bg-white rounded-xl focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all duration-150 shadow-sm"
@@ -223,7 +223,7 @@ export default function Navigation() {
                 }`}
                 onClick={closeMenus}
               >
-                搜索
+                Search
               </Link>
             </div>
           </div>
