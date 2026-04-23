@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
         description: postData.excerpt || `Read "${postData.title}"`,
         type: 'article',
         publishedTime: postData.date,
+        modifiedTime: postData.updatedAt ?? postData.date,
         authors: ['Zhanbing Li'],
         tags: postData.tags,
         url: `${baseUrl}/posts/${id}`,
@@ -142,7 +143,7 @@ export default async function Post({ params }: PostPageProps) {
       },
     },
     datePublished: postData.date,
-    dateModified: postData.date,
+    dateModified: postData.updatedAt ?? postData.date,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `https://zhanbing.site/posts/${id}`,

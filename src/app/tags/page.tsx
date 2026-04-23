@@ -14,18 +14,6 @@ export const metadata = {
 export default function TagsPage() {
   const allPostsData = getSortedPostsData()
   const trackGroups = groupPostsByTrack(allPostsData)
-  const tagCounts = allPostsData.reduce((acc, post) => {
-    post.tags?.forEach((tag) => {
-      acc[tag] = (acc[tag] || 0) + 1
-    })
-    return acc
-  }, {} as Record<string, number>)
-
-  const sortedTags = Object.entries(tagCounts).sort((a, b) => {
-    if (b[1] !== a[1]) return b[1] - a[1]
-    return a[0].localeCompare(b[0])
-  })
-
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -74,31 +62,6 @@ export default function TagsPage() {
           })}
         </section>
 
-        <section className="mt-14">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-slate-500">All tags</p>
-              <h2 className="mt-2 text-2xl font-semibold text-slate-950">{sortedTags.length} tags in use</h2>
-            </div>
-            <Link href="/search" className="text-sm font-medium text-[var(--accent)] hover:underline">
-              Search all posts
-            </Link>
-          </div>
-
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {sortedTags.map(([tag, count]) => (
-              <li key={tag}>
-                <Link
-                  href={`/tags/${encodeURIComponent(tag)}`}
-                  className="flex items-center justify-between border border-slate-200 bg-white px-4 py-3 text-slate-800 shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                >
-                  <span className="font-medium">{tag}</span>
-                  <span className="text-sm text-slate-500">{count}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
       </main>
     </div>
   )

@@ -35,10 +35,10 @@ export default function Home() {
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
-                href="/posts"
+                href="/start"
                 className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-[#115e59]"
               >
-                Browse the archive
+                Start here
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
@@ -86,8 +86,8 @@ export default function Home() {
               <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Start here</p>
               <h2 className="mt-2 text-2xl font-semibold text-slate-950">Four posts that explain the site</h2>
             </div>
-            <Link href="/posts" className="text-sm font-medium text-[var(--accent)] hover:underline">
-              Full archive
+            <Link href="/start" className="text-sm font-medium text-[var(--accent)] hover:underline">
+              Guided path
             </Link>
           </div>
 
@@ -193,6 +193,9 @@ export default function Home() {
             <div className="mt-6 flex flex-wrap gap-3 text-sm">
               <Link href="/about" className="text-[var(--accent)] hover:underline">
                 About
+              </Link>
+              <Link href="/start" className="text-[var(--accent)] hover:underline">
+                Start
               </Link>
               <Link href="/tags" className="text-[var(--accent)] hover:underline">
                 Tags

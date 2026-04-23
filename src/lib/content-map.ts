@@ -19,6 +19,21 @@ export interface WritingTrack {
   tags: string[]
 }
 
+export interface ReadingPath {
+  id: string
+  title: string
+  description: string
+  postSlugs: string[]
+}
+
+export interface ActiveProject {
+  title: string
+  status: string
+  description: string
+  trackId: WritingTrackId
+  postSlugs: string[]
+}
+
 export const writingTracks: WritingTrack[] = [
   {
     id: 'ai-tools',
@@ -110,11 +125,85 @@ export const featuredPostSlugs = [
   'action-vs-thinking',
 ]
 
+export const readingPaths: ReadingPath[] = [
+  {
+    id: 'why-this-site-exists',
+    title: 'Why this site exists',
+    description:
+      'Start with the pieces that explain why writing, building, and public notes became the operating system for this site.',
+    postSlugs: ['read-and-write', 'blog-buit-thinking', '2026-4-23'],
+  },
+  {
+    id: 'ai-to-action',
+    title: 'From AI tools to action',
+    description:
+      'Read this path if you want the core argument: AI matters most when it reduces the distance between an idea and a working attempt.',
+    postSlugs: ['action-vs-thinking', 'ai-tools-use', '2026-4-18'],
+  },
+  {
+    id: 'learning-loop',
+    title: 'The learning loop',
+    description:
+      'A route through the recurring lesson that skill grows through doing, feedback, and friction rather than passive consumption.',
+    postSlugs: ['how-to-learn', 'learn_way', 'contribute-project-first', 'r-learning-base'],
+  },
+  {
+    id: 'medicine-and-systems',
+    title: 'Medicine as a knowledge system',
+    description:
+      'The medical thread: literature, local knowledge bases, clinical standards, and the attempt to make knowledge usable.',
+    postSlugs: ['qwen_learn', 'medical-tb', 'esp_recorde', '2026-4-23'],
+  },
+]
+
+export const activeProjects: ActiveProject[] = [
+  {
+    title: 'Personal medical knowledge base',
+    status: 'Building',
+    description:
+      'A workflow for turning textbooks, papers, and AI-generated summaries into a searchable local knowledge base.',
+    trackId: 'medical-systems',
+    postSlugs: ['2026-4-23', 'qwen_learn'],
+  },
+  {
+    title: 'OpenCode as a personal assistant',
+    status: 'Iterating',
+    description:
+      'Customizing coding agents so they can work with Zotero, Obsidian, PDFs, and medical reading workflows.',
+    trackId: 'ai-tools',
+    postSlugs: ['2026-4-18', '2026-4-23'],
+  },
+  {
+    title: 'Learning TypeScript through real tools',
+    status: 'Learning',
+    description:
+      'Understanding modern AI applications by reading and modifying TypeScript-heavy agent projects.',
+    trackId: 'learning-by-building',
+    postSlugs: ['2026-4-18', 'blog-buit-thinking'],
+  },
+  {
+    title: 'Writing as a thinking system',
+    status: 'Ongoing',
+    description:
+      'Using public notes to make scattered decisions, anxieties, and experiments visible enough to improve.',
+    trackId: 'writing-action',
+    postSlugs: ['read-and-write', 'plan_vs_action', 'skill_and_konwlage'],
+  },
+]
+
 export function getTrackById(trackId: WritingTrackId): WritingTrack {
   return writingTracks.find((track) => track.id === trackId) ?? fallbackTrack
 }
 
-export function getPostTrack(post: Pick<PostData, 'id' | 'tags' | 'title'>): WritingTrack {
+function isWritingTrackId(value: string | undefined): value is WritingTrackId {
+  return Boolean(value && writingTracks.some((track) => track.id === value))
+}
+
+export function getPostTrack(post: Pick<PostData, 'id' | 'tags' | 'title' | 'track'>): WritingTrack {
+  if (isWritingTrackId(post.track)) {
+    return getTrackById(post.track)
+  }
+
   const explicit = writingTracks.find((track) => track.slugs.includes(post.id))
   if (explicit) return explicit
 
@@ -140,7 +229,18 @@ export function groupPostsByTrack(posts: PostData[]) {
 }
 
 export function getFeaturedPosts(posts: PostData[]) {
+  const frontmatterFeatured = posts.filter((post) => post.featured)
+  if (frontmatterFeatured.length > 0) {
+    return frontmatterFeatured
+  }
+
   return featuredPostSlugs
+    .map((slug) => posts.find((post) => post.id === slug))
+    .filter((post): post is PostData => Boolean(post))
+}
+
+export function getPostsBySlugs(posts: PostData[], slugs: string[]) {
+  return slugs
     .map((slug) => posts.find((post) => post.id === slug))
     .filter((post): post is PostData => Boolean(post))
 }
@@ -148,7 +248,7 @@ export function getFeaturedPosts(posts: PostData[]) {
 export function getLanguageSummary(posts: PostData[]) {
   return posts.reduce(
     (summary, post) => {
-      const language = detectContentLanguage(`${post.title} ${post.excerpt ?? ''} ${post.content}`)
+      const language = post.language ?? detectContentLanguage(`${post.title} ${post.excerpt ?? ''} ${post.content}`)
       if (language === 'zh-CN') {
         summary.zh += 1
       } else {

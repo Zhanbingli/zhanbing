@@ -10,11 +10,27 @@ export interface PostData {
   id: string
   title: string
   date: string
+  updatedAt?: string
   excerpt?: string
   content: string
   tags?: string[]
   draft?: boolean
+  featured?: boolean
+  language?: 'zh-CN' | 'en-US'
+  track?: string
   readingTime?: number
+}
+
+type PostFrontmatter = {
+  title: string
+  date: string
+  updatedAt?: string
+  excerpt?: string
+  tags?: string[]
+  draft?: boolean
+  featured?: boolean
+  language?: 'zh-CN' | 'en-US'
+  track?: string
 }
 
 function estimateReadingTime(text: string): number {
@@ -54,7 +70,7 @@ export function getSortedPostsData(): PostData[] {
         id,
         content,
         readingTime: estimateReadingTime(content),
-        ...(matterResult.data as { title: string; date: string; excerpt?: string; tags?: string[]; draft?: boolean })
+        ...(matterResult.data as PostFrontmatter)
       }
     })
     .filter(Boolean) as PostData[]
@@ -104,6 +120,6 @@ export async function getPostData(id: string): Promise<PostData> {
     id,
     content: contentHtml,
     readingTime: estimateReadingTime(matterResult.content),
-    ...(matterResult.data as { title: string; date: string; excerpt?: string; tags?: string[]; draft?: boolean })
+    ...(matterResult.data as PostFrontmatter)
   }
 }
