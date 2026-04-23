@@ -1,4 +1,5 @@
 import { getSortedPostsData } from '@/lib/posts'
+import { getDisplayTags } from '@/lib/content-map'
 import { remark } from 'remark'
 import html from 'remark-html'
 
@@ -20,7 +21,7 @@ export async function GET() {
       <guid isPermaLink="true">${baseUrl}/posts/${post.id}</guid>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
       <author>Zhanbing Li</author>
-      ${post.tags ? post.tags.map(tag => `<category>${tag}</category>`).join('\n      ') : ''}
+      ${getDisplayTags(post.tags).map(tag => `<category>${tag}</category>`).join('\n      ')}
       <content:encoded><![CDATA[${contentHtml}]]></content:encoded>
     </item>`
   }))

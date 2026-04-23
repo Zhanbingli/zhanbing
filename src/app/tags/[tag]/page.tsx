@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getSortedPostsData } from '@/lib/posts'
 import { formatDate } from '@/lib/utils'
-import { getPostTrack, getTrackClass } from '@/lib/content-map'
+import { getDisplayTags, getPostTrack, getTrackClass } from '@/lib/content-map'
 import Navigation from '@/components/Navigation'
 
 interface TagPageProps {
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: TagPageProps) {
 
 export async function generateStaticParams() {
   const allPostsData = getSortedPostsData()
-  const allTags = Array.from(new Set(allPostsData.flatMap((post) => post.tags || [])))
+  const allTags = Array.from(new Set(allPostsData.flatMap((post) => getDisplayTags(post.tags))))
 
   return allTags.map((tag) => ({
     tag: encodeURIComponent(tag),
@@ -42,7 +42,7 @@ export default async function TagPage({ params }: TagPageProps) {
   }
 
   const relatedTags = Array.from(
-    new Set(taggedPosts.flatMap((post) => post.tags || []).filter((candidate) => candidate !== decodedTag))
+    new Set(taggedPosts.flatMap((post) => getDisplayTags(post.tags)).filter((candidate) => candidate !== decodedTag))
   ).slice(0, 10)
 
   return (

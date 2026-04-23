@@ -51,6 +51,13 @@ export const writingTracks: WritingTrack[] = [
       'action-vs-thinking',
       'how-use-chatgpt-plus',
       'research-about-learn',
+      'ai-tools-misguidance',
+      'conversations-with-gpt',
+      'daily-life-with-gpt',
+      'english-ai-tools-information-channel',
+      'future-role-of-brain',
+      'gpt-sentences',
+      'vibe-coding-app-lessons',
     ],
     tags: ['AI', 'thinking', 'personal growth'],
   },
@@ -75,6 +82,10 @@ export const writingTracks: WritingTrack[] = [
       'learn_way',
       'how-to-learn',
       'The-Art-of-Scaling',
+      'learning-computers-seriously',
+      'learning-action-invisible-barrier',
+      'production-over-consumption',
+      'windows-cloud-server-deploy',
     ],
     tags: ['learning', 'learn', 'open source', 'Python', 'React', 'Next.js'],
   },
@@ -88,7 +99,7 @@ export const writingTracks: WritingTrack[] = [
     thesis:
       'The medical thread is about making knowledge usable: searchable, testable, and close to real work.',
     accent: 'amber',
-    slugs: ['2026-4-23', 'qwen_learn', 'esp_recorde', 'medical-tb'],
+    slugs: ['2026-4-23', 'qwen_learn', 'esp_recorde', 'medical-tb', 'growth-choice-market-medical-student'],
     tags: ['medical', 'research', 'learning'],
   },
   {
@@ -111,10 +122,25 @@ export const writingTracks: WritingTrack[] = [
       'life-thinking-about-market',
       'i-like-reading',
       'my-first-blog',
+      'asking-better-questions',
+      'cognitive-differences',
+      'just-be-yourself',
+      'leaving-a-shares',
+      'liang-yongan-gap-year',
+      'personal-career-development',
+      'pursuit-of-realness',
+      'reading-and-writing-questions',
+      'scarcity-growth-shackles',
+      'thinking-writing-reading-learning',
+      'why-i-still-write-myself',
+      'why-paying-is-a-bargain',
+      'why-read-books',
     ],
     tags: ['thinking', '思考', '个人成长', '博客', '开始'],
   },
 ]
+
+export const sourceTags = ['微信公众号']
 
 export const fallbackTrack = writingTracks.find((track) => track.id === 'writing-action')!
 
@@ -243,6 +269,10 @@ export function getPostsBySlugs(posts: PostData[], slugs: string[]) {
   return slugs
     .map((slug) => posts.find((post) => post.id === slug))
     .filter((post): post is PostData => Boolean(post))
+}
+
+export function getDisplayTags(tags: string[] | undefined) {
+  return (tags ?? []).filter((tag) => !sourceTags.includes(tag))
 }
 
 export function getLanguageSummary(posts: PostData[]) {

@@ -5,7 +5,7 @@ import { detectContentLanguage, formatDate } from '@/lib/utils'
 import Navigation from '@/components/Navigation'
 import ShareButton from '@/components/ShareButton'
 import TableOfContents, { type TocHeading } from '@/components/TableOfContents'
-import { getPostTrack, getTrackClass } from '@/lib/content-map'
+import { getDisplayTags, getPostTrack, getTrackClass } from '@/lib/content-map'
 import type { Metadata } from 'next'
 
 interface PostPageProps {
@@ -112,6 +112,7 @@ export default async function Post({ params }: PostPageProps) {
   const previousPost = currentIndex >= 0 ? allPosts[currentIndex + 1] : undefined
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : undefined
   const track = getPostTrack(postData)
+  const displayTags = getDisplayTags(postData.tags)
 
   const contentLanguage = detectContentLanguage(`${postData.title} ${postData.content}`)
 
@@ -186,7 +187,7 @@ export default async function Post({ params }: PostPageProps) {
                 <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
                 {Math.max(1, postData.readingTime ?? 1)} min read
               </span>
-              {postData.tags?.map((tag) => (
+              {displayTags.map((tag) => (
                 <Link
                   key={tag}
                   href={`/tags/${encodeURIComponent(tag)}`}

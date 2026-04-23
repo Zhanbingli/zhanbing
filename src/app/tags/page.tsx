@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { getSortedPostsData } from '@/lib/posts'
-import { getTrackClass, groupPostsByTrack } from '@/lib/content-map'
+import { getDisplayTags, getTrackClass, groupPostsByTrack } from '@/lib/content-map'
 import Navigation from '@/components/Navigation'
 
 export const metadata = {
@@ -29,7 +29,7 @@ export default function TagsPage() {
 
         <section className="mt-10 grid gap-5 lg:grid-cols-2">
           {trackGroups.map(({ track, posts }) => {
-            const trackTags = Array.from(new Set(posts.flatMap((post) => post.tags || []))).slice(0, 8)
+            const trackTags = Array.from(new Set(posts.flatMap((post) => getDisplayTags(post.tags)))).slice(0, 8)
             return (
               <article key={track.id} className="border border-slate-200 bg-white p-5 shadow-sm">
                 <div className={`mb-4 h-1.5 w-16 ${getTrackClass(track, 'bg')}`} aria-hidden />

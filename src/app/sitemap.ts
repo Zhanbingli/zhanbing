@@ -1,4 +1,5 @@
 import { getSortedPostsData } from '@/lib/posts'
+import { getDisplayTags } from '@/lib/content-map'
 
 export const dynamic = 'force-static'
 
@@ -13,7 +14,7 @@ export default function sitemap() {
     priority: 0.8,
   }))
 
-  const allTags = Array.from(new Set(posts.flatMap(p => p.tags || [])))
+  const allTags = Array.from(new Set(posts.flatMap(p => getDisplayTags(p.tags))))
   const tagUrls = allTags.map((tag) => ({
     url: `${baseUrl}/tags/${encodeURIComponent(tag)}`,
     lastModified: new Date(),

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { getSortedPostsData, type PostData } from '@/lib/posts'
 import { formatDate } from '@/lib/utils'
-import { getLanguageSummary, getTrackClass, groupPostsByTrack } from '@/lib/content-map'
+import { getDisplayTags, getLanguageSummary, getTrackClass, groupPostsByTrack } from '@/lib/content-map'
 import Navigation from '@/components/Navigation'
 
 export const metadata = {
@@ -13,6 +13,8 @@ export const metadata = {
 }
 
 function PostRow({ post }: { post: PostData }) {
+  const displayTags = getDisplayTags(post.tags)
+
   return (
     <article className="grid gap-3 border-t border-slate-200 py-5 sm:grid-cols-[128px_minmax(0,1fr)]">
       <div className="text-sm text-slate-500">
@@ -26,17 +28,19 @@ function PostRow({ post }: { post: PostData }) {
           </Link>
         </h3>
         {post.excerpt && <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">{post.excerpt}</p>}
-        <div className="mt-3 flex flex-wrap gap-2">
-          {post.tags?.slice(0, 4).map((tag) => (
-            <Link
-              key={tag}
-              href={`/tags/${encodeURIComponent(tag)}`}
-              className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-600 hover:border-[var(--accent)] hover:text-[var(--accent)]"
-            >
-              {tag}
-            </Link>
-          ))}
-        </div>
+        {displayTags.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {displayTags.slice(0, 4).map((tag) => (
+              <Link
+                key={tag}
+                href={`/tags/${encodeURIComponent(tag)}`}
+                className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-600 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              >
+                {tag}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </article>
   )
@@ -46,7 +50,7 @@ export default function PostsPage() {
   const allPostsData = getSortedPostsData()
   const trackGroups = groupPostsByTrack(allPostsData)
   const totalPosts = allPostsData.length
-  const allTags = Array.from(new Set(allPostsData.flatMap((post: PostData) => post.tags || [])))
+  const allTags = Array.from(new Set(allPostsData.flatMap((post: PostData) => getDisplayTags(post.tags))))
   const languageSummary = getLanguageSummary(allPostsData)
   const currentYear = new Date().getFullYear()
   const thisYearPosts = allPostsData.filter((post: PostData) => new Date(post.date).getFullYear() === currentYear).length

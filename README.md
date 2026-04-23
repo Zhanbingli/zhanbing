@@ -1,125 +1,128 @@
-# Zhanbing’s personal blog
+# Zhanbing Li Knowledge Site
 
-A modern static blog built with Next.js. Markdown-powered, responsive, and tuned for SEO.
+A personal knowledge site built with Next.js, Markdown, and GitHub Pages.
 
-🌐 **Live site**: [https://zhanbing.site](https://zhanbing.site)
+Live site: https://zhanbing.site
 
-## Blog links
+This is not only a chronological blog. It is a working knowledge base for notes on AI tools, medical knowledge systems, learning by building, and writing as a way to think in public.
 
-- **Current blog (Next.js)**: https://zhanbing.site (this project)
-- **Previous blog (MkDocs)**: https://zhanbingli.github.io/ (still available)
+## Main Sections
 
-## Positioning
+- **Home**: overview, featured notes, writing tracks, and recent updates
+- **Start**: guided reading paths for new readers
+- **Projects**: long-running systems behind the notes
+- **Archive**: all posts grouped by writing track
+- **Explore**: search plus project, path, and topic entry points
+- **Topics**: high-level topic navigation
+- **About**: personal context and site direction
 
-### New blog (zhanbing.site)
-- Focused on in-depth technical articles and project highlights
-- Modern design and better reading experience
-- Markdown writing with static generation
+## Writing Tracks
 
-### Legacy blog (zhanbingli.github.io)
-- Keeps existing tech posts, life notes, and English study entries
-- Continues as a knowledge base and docs site
+The site is organized around four recurring tracks:
 
-## Features
+- **AI as a Working Tool**: LLMs, coding agents, and AI products as practical leverage
+- **Learning by Building**: programming, open source, and project-based learning
+- **Medical Knowledge Systems**: clinical learning, literature workflows, local models, and knowledge bases
+- **Writing, Action, and Self Direction**: writing, attention, decisions, markets, and action
 
-- 📝 **Markdown** writing
-- 🎨 **Modern design** with Tailwind CSS
-- ⚡ **Static generation** for fast loads
-- 🔍 **SEO ready** metadata and Open Graph
-- 📱 **Responsive** layouts
-- 🏷️ **Tags** for categorization
-- 📅 **Date formatting** via date-fns
+Track configuration lives in:
 
-## Getting started
-
-### 1) Install dependencies
-```bash
-npm install
+```text
+src/lib/content-map.ts
 ```
 
-### 2) Start dev server
-```bash
-npm run dev
+## Current Projects
+
+The project layer makes the knowledge base less like a tag cloud and more like an evolving workspace:
+
+- Personal medical knowledge base
+- OpenCode as a personal assistant
+- Learning TypeScript through real tools
+- Writing as a thinking system
+
+See:
+
+```text
+src/app/projects/page.tsx
+src/lib/content-map.ts
 ```
-Visit http://localhost:3000 to view the blog.
 
-## Writing workflow
+## Writing Workflow
 
-### Option 1: helper scripts (recommended)
+Create Markdown posts under `posts/`.
 
-#### Create a new post
-```bash
-npm run new
-# or
-./scripts/new-post.sh
-```
-The script prompts for title, excerpt, and tags, then scaffolds the file.
-
-#### Publish posts
-```bash
-npm run publish
-# or
-./scripts/publish.sh
-```
-Commits changes and pushes to GitHub to trigger deployment.
-
-### Option 2: manual
-
-#### 1. Create a post
-Add a `.md` file under `posts/`:
+Recommended frontmatter:
 
 ```markdown
 ---
 title: 'Post title'
-date: '2024-01-15'
-excerpt: 'Short summary'
-tags: ['tag-1', 'tag-2']
+date: '2026-04-23'
+updatedAt: '2026-04-23'
+excerpt: 'Short summary of the note.'
+tags: ['AI', 'learning']
+track: 'ai-tools'
+language: 'zh-CN'
+featured: false
+draft: false
 ---
 
 # Content
 
-Write your post here...
+Write the note here.
 ```
 
-#### 2. Preview locally
+Supported `track` values:
+
+```text
+ai-tools
+learning-by-building
+medical-systems
+writing-action
+```
+
+Useful fields:
+
+- `title`: post title
+- `date`: publish date
+- `updatedAt`: optional update date
+- `excerpt`: short summary used in lists and metadata
+- `tags`: secondary index terms
+- `track`: primary knowledge track
+- `language`: `zh-CN` or `en-US`
+- `featured`: whether to feature the post
+- `draft`: hidden from production when `true`
+
+## Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the local dev server:
+
 ```bash
 npm run dev
 ```
 
-#### 3. Publish to the site
+Visit:
+
+```text
+http://localhost:3000
+```
+
+Build static output:
+
 ```bash
-git add .
-git commit -m "Add new blog post: Post title"
-git push
+npm run build
 ```
 
-## Project structure
+Preview production output locally:
 
+```bash
+npm run preview
 ```
-my_blog/
-├── posts/                 # Markdown posts
-├── scripts/               # Helper scripts
-├── src/
-│   ├── app/               # Next.js App Router
-│   │   ├── posts/[id]/    # Post detail pages
-│   │   ├── layout.tsx     # Root layout
-│   │   ├── page.tsx       # Home
-│   │   └── globals.css    # Global styles
-│   ├── components/        # React components
-│   └── lib/               # Utilities
-│       ├── posts.ts
-│       └── utils.ts
-├── public/                # Static assets
-└── package.json
-```
-
-## Stack
-
-- **Next.js 15** (React)
-- **TypeScript**
-- **Tailwind CSS** + **Tailwind Typography**
-- **Gray Matter** / **Remark** for Markdown
-- **date-fns** for dates
 
 ## Commands
 
@@ -130,10 +133,10 @@ npm run dev
 # Create a post
 npm run new
 
-# Publish (scripted)
+# Publish with helper script
 npm run publish
 
-# Production build
+# Production build / static export
 npm run build
 
 # Start production server
@@ -142,61 +145,78 @@ npm start
 # Lint
 npm run lint
 
-# Preview the build locally
+# Preview static export
 npm run preview
 ```
 
+## Project Structure
+
+```text
+my_blog/
+├── posts/                     # Markdown notes
+├── public/                    # Static assets and CNAME
+├── scripts/                   # Helper scripts
+├── src/
+│   ├── app/
+│   │   ├── page.tsx           # Home
+│   │   ├── start/             # Guided reading paths
+│   │   ├── projects/          # Long-running projects
+│   │   ├── posts/             # Archive and post detail pages
+│   │   ├── search/            # Explore/search page
+│   │   ├── tags/              # Topic/tag pages
+│   │   ├── feed.xml/          # RSS feed route
+│   │   ├── sitemap.ts         # Sitemap
+│   │   ├── robots.ts          # Robots.txt
+│   │   ├── layout.tsx         # Root metadata/layout
+│   │   └── globals.css        # Global styles
+│   ├── components/            # Shared UI components
+│   └── lib/
+│       ├── content-map.ts     # Tracks, projects, reading paths
+│       ├── posts.ts           # Markdown loading/parsing
+│       └── utils.ts           # Formatting helpers
+└── package.json
+```
+
+## Stack
+
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+- Tailwind Typography
+- Gray Matter
+- Remark
+- date-fns
+
 ## Deployment
 
-GitHub Actions deploys to GitHub Pages:
+The site is statically exported and deployed to GitHub Pages through GitHub Actions.
+
+Deployment flow:
 
 1. Push to `main`
-2. Actions builds automatically
-3. The site deploys to https://zhanbing.site
+2. GitHub Actions runs `npm ci` and `npm run build`
+3. The generated `out/` directory is deployed to GitHub Pages
+4. The site is served at https://zhanbing.site
 
-Builds usually finish within a few minutes.
+The custom domain is defined in:
 
-## Writing tips
+```text
+public/CNAME
+```
 
-### File names
-- Use descriptive names like `react-hooks-guide.md`
-- Avoid non-ASCII file names
-- Separate words with hyphens
+DNS and Pages troubleshooting:
 
-### Tags
-- Keep tags concise and consistent
-- Examples: `tech`, `tutorial`, `React`, `JavaScript`, `life`
-
-### Images
-- Place images in `public/images/`
-- Reference them with relative paths: `![alt text](/images/example.jpg)`
-
-## Contributing
-
-Issues and PRs are welcome!
-
-## License
-
-MIT License
-
----
-
-If this blog helps you, consider leaving a ⭐ star!
+- [DNS_SETUP.md](./DNS_SETUP.md)
+- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)
 
 ## Links
 
-- **New blog**: https://zhanbing.site
-- **Legacy blog**: https://zhanbingli.github.io/
-- **GitHub repo**: https://github.com/Zhanbingli/zhanbing
-- **Deployment guide**: [DEPLOYMENT.md](./DEPLOYMENT.md)
-- **DNS setup**: [DNS_SETUP.md](./DNS_SETUP.md)
-- **Troubleshooting**: [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)
+- Site: https://zhanbing.site
+- Legacy blog: https://zhanbingli.github.io/
+- GitHub: https://github.com/Zhanbingli
+- Repository: https://github.com/Zhanbingli/zhanbing
 
-## Contact
+## License
 
-- **GitHub**: [@Zhanbingli](https://github.com/Zhanbingli)
-- **Blog**: https://zhanbing.site
-
----
-
-Note: The MkDocs blog (zhanbingli.github.io) remains available alongside this Next.js version.
+MIT
