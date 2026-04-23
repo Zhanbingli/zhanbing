@@ -41,6 +41,57 @@ const skippedAsDuplicate = new Map([
   [46, '与 45/research-about-learn.md 主题高度重合'],
 ])
 
+const slugMetadata = new Map([
+  ['vibe-coding-app-lessons', { track: 'ai-tools', tags: ['AI', 'learning', 'building'] }],
+  ['learning-computers-seriously', { track: 'learning-by-building', tags: ['learning', 'computer literacy'] }],
+  ['growth-choice-market-medical-student', { track: 'medical-systems', tags: ['personal growth', 'market', 'medical'] }],
+  ['production-over-consumption', { track: 'learning-by-building', tags: ['output', 'learning', 'thinking'] }],
+  ['conversations-with-gpt', { track: 'ai-tools', tags: ['AI', 'GPT', 'thinking'] }],
+  ['pursuit-of-realness', { track: 'writing-action', tags: ['thinking', 'self direction'] }],
+  ['why-paying-is-a-bargain', { track: 'writing-action', tags: ['thinking', 'market'] }],
+  ['scarcity-growth-shackles', { track: 'writing-action', tags: ['personal growth', 'thinking'] }],
+  ['daily-life-with-gpt', { track: 'ai-tools', tags: ['AI', 'GPT', 'daily practice'] }],
+  ['english-ai-tools-information-channel', { track: 'ai-tools', tags: ['AI', 'English', 'information'] }],
+  ['leaving-a-shares', { track: 'writing-action', tags: ['market', 'thinking'] }],
+  ['learning-action-invisible-barrier', { track: 'learning-by-building', tags: ['learning', 'action'] }],
+  ['thinking-writing-reading-learning', { track: 'writing-action', tags: ['writing', 'reading', 'learning'] }],
+  ['just-be-yourself', { track: 'writing-action', tags: ['self direction', 'thinking'] }],
+  ['why-read-books', { track: 'writing-action', tags: ['reading', 'thinking'] }],
+  ['ai-tools-misguidance', { track: 'ai-tools', tags: ['AI', 'tools', 'thinking'] }],
+  ['why-i-still-write-myself', { track: 'writing-action', tags: ['writing', 'AI', 'thinking'] }],
+  ['personal-career-development', { track: 'writing-action', tags: ['career', 'personal growth'] }],
+  ['future-role-of-brain', { track: 'ai-tools', tags: ['AI', 'thinking'] }],
+  ['asking-better-questions', { track: 'writing-action', tags: ['questions', 'thinking'] }],
+  ['reading-and-writing-questions', { track: 'writing-action', tags: ['reading', 'writing'] }],
+  ['gpt-sentences', { track: 'ai-tools', tags: ['GPT', 'writing'] }],
+  ['cognitive-differences', { track: 'writing-action', tags: ['cognition', 'thinking'] }],
+  ['liang-yongan-gap-year', { track: 'writing-action', tags: ['life choice', 'thinking'] }],
+  ['windows-cloud-server-deploy', { track: 'learning-by-building', tags: ['Windows', 'deployment', 'tutorial'] }],
+])
+
+const inferenceRules = [
+  {
+    track: 'ai-tools',
+    tags: ['AI', 'tools'],
+    keywords: ['AI', 'ai', 'GPT', 'gpt', 'ChatGPT', 'vibe coding', '工具', '大模型'],
+  },
+  {
+    track: 'learning-by-building',
+    tags: ['learning', 'building'],
+    keywords: ['学习', '计算机', 'coding', '编程', '教程', '部署', '行动', '生产'],
+  },
+  {
+    track: 'medical-systems',
+    tags: ['medical', 'personal growth'],
+    keywords: ['医学生', '医学', '临床', '医院', '医疗'],
+  },
+  {
+    track: 'writing-action',
+    tags: ['thinking', 'writing'],
+    keywords: ['写作', '阅读', '读书', '认知', '成长', '选择', '真实', '提问', '职业', '人生'],
+  },
+]
+
 function decodeHtmlEntities(value) {
   return value
     .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
@@ -236,9 +287,26 @@ function yamlString(value) {
   return JSON.stringify(value || '')
 }
 
+function yamlArray(values) {
+  const uniqueValues = Array.from(new Set(values.filter(Boolean)))
+  return `[${uniqueValues.map((value) => yamlString(value)).join(', ')}]`
+}
+
 function unixDate(value) {
   if (!value) return new Date().toISOString().slice(0, 10)
   return new Date(Number(value) * 1000).toISOString().slice(0, 10)
+}
+
+function inferMetadata({ slug, title, digest, contentText }) {
+  const explicit = slugMetadata.get(slug)
+  if (explicit) return explicit
+
+  const haystack = `${title} ${digest || ''} ${contentText.slice(0, 600)}`
+  const matched = inferenceRules.find((rule) => rule.keywords.some((keyword) => haystack.includes(keyword)))
+
+  return matched
+    ? { track: matched.track, tags: matched.tags }
+    : { track: 'writing-action', tags: ['thinking'] }
 }
 
 async function main() {
@@ -284,7 +352,13 @@ async function main() {
     const markdown = await convertHtmlToMarkdown(article.content, item.slug)
     const date = unixDate(article.create_time || article.update_time)
     const updatedAt = unixDate(article.update_time || article.create_time)
-    const body = `---\ntitle: ${yamlString(title)}\ndate: ${yamlString(date)}\nupdatedAt: ${yamlString(updatedAt)}\nexcerpt: ${yamlString(article.digest || title)}\ntags: ["微信公众号"]\ndraft: false\nauthor: ${yamlString(article.author || '')}\n---\n\n${markdown}\n`
+    const metadata = inferMetadata({
+      slug: item.slug,
+      title,
+      digest: article.digest || '',
+      contentText,
+    })
+    const body = `---\ntitle: ${yamlString(title)}\ndate: ${yamlString(date)}\nupdatedAt: ${yamlString(updatedAt)}\nexcerpt: ${yamlString(article.digest || title)}\ntags: ${yamlArray(metadata.tags)}\ntrack: ${yamlString(metadata.track)}\nlanguage: "zh-CN"\nsource: "wechat"\ndraft: false\nauthor: ${yamlString(article.author || '')}\n---\n\n${markdown}\n`
 
     await fs.writeFile(filePath, body, 'utf8')
     existingPosts.push({ file: `${item.slug}.md`, title, normalizedTitle })

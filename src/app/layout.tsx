@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   authors: [{ name: "Zhanbing Li", url: "https://zhanbing.site" }],
   creator: "Zhanbing Li",
   publisher: "Zhanbing Li",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    shortcut: "/favicon.svg",
+  },
   formatDetection: {
     email: false,
     address: false,

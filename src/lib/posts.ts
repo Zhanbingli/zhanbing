@@ -18,6 +18,9 @@ export interface PostData {
   featured?: boolean
   language?: 'zh-CN' | 'en-US'
   track?: string
+  source?: string
+  sourceUrl?: string
+  author?: string
   readingTime?: number
 }
 
@@ -31,6 +34,9 @@ type PostFrontmatter = {
   featured?: boolean
   language?: 'zh-CN' | 'en-US'
   track?: string
+  source?: string
+  sourceUrl?: string
+  author?: string
 }
 
 function estimateReadingTime(text: string): number {

@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation'
 import { getSortedPostsData } from '@/lib/posts'
 import {
   activeProjects,
+  githubProjects,
   getPostsBySlugs,
   getTrackById,
   getTrackClass,
@@ -12,7 +13,8 @@ import { formatDate } from '@/lib/utils'
 
 export const metadata = {
   title: 'Projects',
-  description: 'Long-running projects behind the notes: AI tools, medical knowledge systems, and learning workflows.',
+  description:
+    'Long-running projects and GitHub repositories behind the notes: AI tools, medical knowledge systems, and learning workflows.',
   alternates: {
     canonical: '/projects',
   },
@@ -70,6 +72,80 @@ export default function ProjectsPage() {
               </article>
             )
           })}
+        </section>
+
+        <section className="mt-16 border-t border-slate-200 pt-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-3xl">
+              <p className="text-xs uppercase tracking-[0.24em] text-slate-500">GitHub projects</p>
+              <h2 className="mt-2 text-2xl font-semibold text-slate-950">Public work that shows the direction.</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-600">
+                A selected map of repositories that connect the writing here to actual code: medical AI systems, local-first health tools, clinical data workflows, and research experiments.
+              </p>
+            </div>
+            <a
+              href="https://github.com/Zhanbingli"
+              target="_blank"
+              rel="noreferrer"
+              className="text-sm font-medium text-[var(--accent)] hover:underline"
+            >
+              View GitHub profile
+            </a>
+          </div>
+
+          <div className="mt-6 grid gap-5 lg:grid-cols-2">
+            {githubProjects.map((project) => {
+              const track = getTrackById(project.trackId)
+
+              return (
+                <article key={project.repository} className="border border-slate-200 bg-white p-6 shadow-sm">
+                  <div className={`mb-5 h-1.5 w-16 ${getTrackClass(track, 'bg')}`} aria-hidden />
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className={`rounded-full border px-2.5 py-1 text-xs ${getTrackClass(track, 'soft')}`}>
+                      {project.status}
+                    </span>
+                    <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs text-slate-600">
+                      {project.repository}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 text-2xl font-semibold leading-snug text-slate-950">{project.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">{project.description}</p>
+
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.stack.map((item) => (
+                      <span key={item} className="rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+
+                  <ul className="mt-5 space-y-2 text-sm leading-6 text-slate-600">
+                    {project.highlights.map((highlight) => (
+                      <li key={highlight} className="flex gap-2">
+                        <span className={`mt-2 h-1.5 w-1.5 flex-none rounded-full ${getTrackClass(track, 'bg')}`} aria-hidden />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-4">
+                    <Link href={`/posts#${track.id}`} className="text-xs font-medium text-slate-500 hover:text-[var(--accent)]">
+                      {track.title}
+                    </Link>
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-sm font-medium text-[var(--accent)] hover:underline"
+                    >
+                      Open repository
+                    </a>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
         </section>
 
         <section className="mt-16 border-t border-slate-200 pt-8">

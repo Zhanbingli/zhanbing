@@ -9,6 +9,29 @@ if (!inputUrl) {
   process.exit(1)
 }
 
+const inferenceRules = [
+  {
+    track: 'ai-tools',
+    tags: ['AI', 'tools'],
+    keywords: ['AI', 'ai', 'GPT', 'gpt', 'ChatGPT', 'vibe coding', '工具', '大模型'],
+  },
+  {
+    track: 'learning-by-building',
+    tags: ['learning', 'building'],
+    keywords: ['学习', '计算机', 'coding', '编程', '教程', '部署', '行动', '生产'],
+  },
+  {
+    track: 'medical-systems',
+    tags: ['medical', 'personal growth'],
+    keywords: ['医学生', '医学', '临床', '医院', '医疗'],
+  },
+  {
+    track: 'writing-action',
+    tags: ['thinking', 'writing'],
+    keywords: ['写作', '阅读', '读书', '认知', '成长', '选择', '真实', '提问', '职业', '人生'],
+  },
+]
+
 function decodeJsString(value) {
   return value
     .replace(/\\x([0-9a-fA-F]{2})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
@@ -179,6 +202,20 @@ function yamlString(value) {
   return JSON.stringify(value || '')
 }
 
+function yamlArray(values) {
+  const uniqueValues = Array.from(new Set(values.filter(Boolean)))
+  return `[${uniqueValues.map((value) => yamlString(value)).join(', ')}]`
+}
+
+function inferMetadata({ title, excerpt, markdown }) {
+  const haystack = `${title} ${excerpt || ''} ${markdown.slice(0, 600)}`
+  const matched = inferenceRules.find((rule) => rule.keywords.some((keyword) => haystack.includes(keyword)))
+
+  return matched
+    ? { track: matched.track, tags: matched.tags }
+    : { track: 'writing-action', tags: ['thinking'] }
+}
+
 async function downloadImages(images) {
   for (const image of images) {
     await fs.mkdir(path.dirname(image.filePath), { recursive: true })
@@ -228,7 +265,8 @@ async function main() {
   const slug = slugify(title)
   const filePath = path.join('posts', `${slug}.md`)
   const { markdown, images } = convertHtmlToMarkdown(contentHtml, slug)
-  const body = `---\ntitle: ${yamlString(title)}\ndate: ${yamlString(date)}\nexcerpt: ${yamlString(excerpt || title)}\ntags: ["微信公众号"]\ndraft: false\nsource: ${yamlString(inputUrl)}\nauthor: ${yamlString(author)}\n---\n\n${markdown}\n`
+  const metadata = inferMetadata({ title, excerpt, markdown })
+  const body = `---\ntitle: ${yamlString(title)}\ndate: ${yamlString(date)}\nupdatedAt: ${yamlString(date)}\nexcerpt: ${yamlString(excerpt || title)}\ntags: ${yamlArray(metadata.tags)}\ntrack: ${yamlString(metadata.track)}\nlanguage: "zh-CN"\nsource: "wechat"\nsourceUrl: ${yamlString(inputUrl)}\ndraft: false\nauthor: ${yamlString(author)}\n---\n\n${markdown}\n`
 
   await downloadImages(images)
   await fs.writeFile(filePath, body, 'utf8')

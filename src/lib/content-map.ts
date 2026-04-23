@@ -34,6 +34,17 @@ export interface ActiveProject {
   postSlugs: string[]
 }
 
+export interface GitHubProject {
+  title: string
+  repository: string
+  url: string
+  status: string
+  description: string
+  trackId: WritingTrackId
+  stack: string[]
+  highlights: string[]
+}
+
 export const writingTracks: WritingTrack[] = [
   {
     id: 'ai-tools',
@@ -214,6 +225,75 @@ export const activeProjects: ActiveProject[] = [
       'Using public notes to make scattered decisions, anxieties, and experiments visible enough to improve.',
     trackId: 'writing-action',
     postSlugs: ['read-and-write', 'plan_vs_action', 'skill_and_konwlage'],
+  },
+]
+
+export const githubProjects: GitHubProject[] = [
+  {
+    title: 'AI Medical Knowledge Base Assistant',
+    repository: 'medical_assistant',
+    url: 'https://github.com/Zhanbingli/medical_assistant',
+    status: 'RAG prototype',
+    description:
+      'Evidence-based medical Q&A system that combines local medical textbooks, ChromaDB retrieval, PubMed search, and MedGemma answer generation.',
+    trackId: 'medical-systems',
+    stack: ['Python', 'Streamlit', 'ChromaDB', 'Ollama', 'MedGemma'],
+    highlights: ['Parallel retrieval from knowledge base, PubMed, and model knowledge', 'Chinese medical terminology optimization'],
+  },
+  {
+    title: 'ChronicCare',
+    repository: 'Ccare-app',
+    url: 'https://github.com/Zhanbingli/Ccare-app',
+    status: 'iOS product prototype',
+    description:
+      'Privacy-first chronic medication management app for reminders, adherence tracking, health measurements, refill alerts, and local backup.',
+    trackId: 'medical-systems',
+    stack: ['SwiftUI', 'Swift Charts', 'HealthKit', 'Local storage'],
+    highlights: ['Adaptive medication reminders and snooze flow', 'Local-first design with no required account'],
+  },
+  {
+    title: 'Sleep Assistant',
+    repository: 'sleep-app',
+    url: 'https://github.com/Zhanbingli/sleep-app',
+    status: 'iOS prototype',
+    description:
+      'A lightweight bedtime companion focused on one nightly path: tonight plan, breathing, soundscape, phone down, and morning review.',
+    trackId: 'learning-by-building',
+    stack: ['SwiftUI', 'AVAudioEngine', 'UserDefaults'],
+    highlights: ['Low-friction bedtime flow instead of a complex dashboard', 'Offline, local-data product direction'],
+  },
+  {
+    title: 'Bio Clean Agent',
+    repository: 'bio-clean-agent',
+    url: 'https://github.com/Zhanbingli/bio-clean-agent',
+    status: 'Data tooling',
+    description:
+      'TypeScript clinical data cleaning system with quality scoring, duplicate handling, missing-value strategies, audit trails, API, dashboard, and CLI.',
+    trackId: 'ai-tools',
+    stack: ['TypeScript', 'NestJS', 'Next.js', 'Vercel AI SDK', 'Turborepo'],
+    highlights: ['ISO 8000-style data quality assessment', 'LLM-powered interactive cleaning workflow'],
+  },
+  {
+    title: 'Medical AutoML Research',
+    repository: 'medical-automl',
+    url: 'https://github.com/Zhanbingli/medical-automl',
+    status: 'Research code',
+    description:
+      'Clinical cardiovascular prediction experiments comparing tabular-to-text Transformers, LLM in-context learning, and traditional ML baselines.',
+    trackId: 'medical-systems',
+    stack: ['Python', 'uv', 'Ollama', 'scikit-learn', 'PyTorch'],
+    highlights: ['External validation and calibration analysis', 'Publication-oriented figures, results, and statistical tests'],
+  },
+  {
+    title: 'CardioVoice',
+    repository: 'med-decoder',
+    url: 'https://github.com/Zhanbingli/med-decoder',
+    status: 'Clinical workflow prototype',
+    description:
+      'Real-time cardiology outpatient documentation system connecting ESP32-S3 audio capture, medical speech recognition, MedGemma reports, and physician review.',
+    trackId: 'medical-systems',
+    stack: ['Python', 'FastAPI', 'Streamlit', 'PostgreSQL', 'ESP32-S3'],
+    highlights: ['Local-first clinical documentation pipeline', 'Hardware plus AI workflow experiment'],
   },
 ]
 
