@@ -113,13 +113,6 @@ export default async function Post({ params }: PostPageProps) {
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : undefined
   const track = getPostTrack(postData)
 
-  // Fetch related posts (shared tags)
-  const relatedPosts = allPosts
-    .filter(post => 
-      post.id !== id && 
-      post.tags?.some(tag => postData.tags?.includes(tag))
-    )
-    .slice(0, 3)
   const contentLanguage = detectContentLanguage(`${postData.title} ${postData.content}`)
 
   // Structured data (JSON-LD)
@@ -252,30 +245,6 @@ export default async function Post({ params }: PostPageProps) {
             </nav>
           )}
 
-          {relatedPosts.length > 0 && (
-            <section className="mt-12 space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-semibold text-slate-900">Related posts</h2>
-                <Link href="/posts" className="text-sm font-medium text-[var(--accent)] hover:underline">
-                  All posts
-                </Link>
-              </div>
-              <ul className="grid gap-4 md:grid-cols-3">
-                {relatedPosts.map(({ id: relatedId, title, excerpt, date }) => (
-                  <li key={relatedId} className="border border-slate-200 bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm">
-                    <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-slate-500">
-                      <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
-                      <time dateTime={date}>{formatDate(date)}</time>
-                    </div>
-                    <Link href={`/posts/${relatedId}`} className="mt-2 block text-lg font-semibold text-slate-900 hover:text-[var(--accent)]">
-                      {title}
-                    </Link>
-                    {excerpt && <p className="mt-1 text-sm text-slate-600 leading-relaxed">{excerpt}</p>}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
         </main>
       </div>
     </>

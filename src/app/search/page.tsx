@@ -2,8 +2,8 @@ import { Suspense } from 'react'
 import SearchPageClient from './SearchPageClient'
 
 export const metadata = {
-  title: 'Search',
-  description: 'Search posts, tags, and keywords across the site.',
+  title: 'Explore',
+  description: 'Explore projects, reading paths, topics, and search across the knowledge base.',
   alternates: {
     canonical: '/search',
   },

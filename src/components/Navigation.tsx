@@ -8,8 +8,8 @@ import { usePathname, useRouter } from 'next/navigation'
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/start', label: 'Start' },
-  { href: '/posts', label: 'Posts' },
-  { href: '/tags', label: 'Tags' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/posts', label: 'Archive' },
   { href: '/about', label: 'About' },
 ]
 
@@ -106,7 +106,7 @@ export default function Navigation() {
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-            Search
+            Explore
           </Link>
 
           {/* Mobile buttons */}
@@ -224,7 +224,7 @@ export default function Navigation() {
                 }`}
                 onClick={closeMenus}
               >
-                Search
+                Explore
               </Link>
             </div>
           </div>

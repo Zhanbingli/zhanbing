@@ -5,6 +5,13 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { escapeRegExp, formatDate } from '@/lib/utils'
 import Navigation from '@/components/Navigation'
+import {
+  activeProjects,
+  getTrackById,
+  getTrackClass,
+  readingPaths,
+  writingTracks,
+} from '@/lib/content-map'
 
 interface SearchResult {
   id: string
@@ -17,6 +24,8 @@ interface SearchResult {
 }
 
 type SearchIndexItem = Omit<SearchResult, 'score'>
+
+const suggestedQueries = ['OpenCode', 'Zotero', 'TypeScript', '行动', 'medical', 'AI tools']
 
 export default function SearchPageClient() {
   const searchParams = useSearchParams()
@@ -153,11 +162,11 @@ export default function SearchPageClient() {
       
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-10 md:py-14">
         <header className="space-y-6 mb-10">
-          <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Site Search</p>
+          <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Explore</p>
           <div>
-            <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">Search posts</h1>
+            <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">Explore the knowledge base</h1>
             <p className="mt-2 text-lg text-slate-600 max-w-3xl leading-relaxed">
-              Search by title, excerpt, tag, or keywords from the post body. Type a term and jump straight to what matters.
+              Search directly, or start from projects, reading paths, and the main writing tracks.
             </p>
           </div>
 
@@ -314,30 +323,82 @@ export default function SearchPageClient() {
           )}
 
           {!initialQuery && (
-            <div className="text-center py-16">
-              <div className="w-24 h-24 mx-auto mb-6 bg-white rounded-full flex items-center justify-center border border-slate-200">
-                <svg className="w-12 h-12 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-2">Start searching</h3>
-              <p className="text-slate-600 mb-6">
-                Search across titles, excerpts, tags, and post content.
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <Link
-                  href="/posts"
-                  className="inline-flex items-center rounded-lg bg-[var(--accent)] px-6 py-3 font-medium text-white shadow-sm transition-colors duration-150 hover:bg-[#115e59]"
-                >
-                  Browse all posts
-                </Link>
-                <Link
-                  href="/tags"
-                  className="inline-flex items-center rounded-lg border border-slate-200 px-6 py-3 font-medium text-slate-700 transition-colors duration-150 hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                >
-                  Browse tags
-                </Link>
-              </div>
+            <div className="space-y-12">
+              <section>
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Suggested searches</p>
+                    <h2 className="mt-2 text-2xl font-semibold text-slate-950">Try a keyword</h2>
+                  </div>
+                  <Link href="/start" className="text-sm font-medium text-[var(--accent)] hover:underline">
+                    Guided start
+                  </Link>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {suggestedQueries.map((query) => (
+                    <Link
+                      key={query}
+                      href={`/search?q=${encodeURIComponent(query)}`}
+                      className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                    >
+                      {query}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
+              <section>
+                <div className="flex items-end justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Projects</p>
+                    <h2 className="mt-2 text-2xl font-semibold text-slate-950">What the notes are building toward</h2>
+                  </div>
+                  <Link href="/projects" className="text-sm font-medium text-[var(--accent)] hover:underline">
+                    All projects
+                  </Link>
+                </div>
+                <div className="mt-6 grid gap-4 md:grid-cols-2">
+                  {activeProjects.map((project) => {
+                    const track = getTrackById(project.trackId)
+                    return (
+                      <Link key={project.title} href="/projects" className="border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                        <span className={`rounded-full border px-2.5 py-1 text-xs ${getTrackClass(track, 'soft')}`}>
+                          {project.status}
+                        </span>
+                        <h3 className="mt-4 text-lg font-semibold leading-snug text-slate-950">{project.title}</h3>
+                        <p className="mt-2 text-sm leading-6 text-slate-600">{project.description}</p>
+                      </Link>
+                    )
+                  })}
+                </div>
+              </section>
+
+              <section>
+                <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Reading paths</p>
+                <h2 className="mt-2 text-2xl font-semibold text-slate-950">Start by intent</h2>
+                <div className="mt-6 grid gap-4 md:grid-cols-2">
+                  {readingPaths.map((path) => (
+                    <Link key={path.id} href="/start" className="border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                      <h3 className="text-lg font-semibold leading-snug text-slate-950">{path.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">{path.description}</p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
+              <section>
+                <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Tracks</p>
+                <h2 className="mt-2 text-2xl font-semibold text-slate-950">Browse by knowledge area</h2>
+                <div className="mt-6 grid gap-4 lg:grid-cols-4">
+                  {writingTracks.map((track) => (
+                    <Link key={track.id} href={`/posts#${track.id}`} className="border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                      <div className={`mb-4 h-1.5 w-14 ${getTrackClass(track, 'bg')}`} aria-hidden />
+                      <h3 className="font-semibold leading-snug text-slate-950">{track.shortTitle}</h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">{track.description}</p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
             </div>
           )}
         </main>

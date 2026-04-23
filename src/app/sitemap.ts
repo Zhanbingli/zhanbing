@@ -35,7 +35,19 @@ export default function sitemap() {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/projects`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/posts`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/search`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.8,
