@@ -80,7 +80,7 @@ export default function TableOfContents({
 
   return (
     <div className={cls(className, sticky && 'lg:sticky lg:top-28')}>
-      <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white/95 via-slate-50 to-white shadow-sm">
+      <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
         <div className="flex items-center justify-between px-4 pt-4">
           <div>
             <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">{title}</p>
@@ -91,7 +91,7 @@ export default function TableOfContents({
           {collapsible && (
             <button
               type="button"
-              className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
               onClick={() => setOpen((prev) => !prev)}
               aria-expanded={open}
             >
@@ -115,7 +115,7 @@ export default function TableOfContents({
                   href={`#${heading.id}`}
                   onClick={(event) => handleClick(heading.id, event)}
                   className={cls(
-                    'group flex items-start gap-3 rounded-xl px-3 py-2 transition-colors',
+                    'group flex items-start gap-3 rounded-lg px-3 py-2 transition-colors',
                     isActive
                       ? 'bg-[var(--accent-soft)] text-[var(--accent)] shadow-sm'
                       : 'hover:bg-slate-100 hover:text-slate-900',

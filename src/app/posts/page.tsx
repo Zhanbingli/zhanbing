@@ -1,25 +1,53 @@
 import Link from 'next/link'
 import { getSortedPostsData, type PostData } from '@/lib/posts'
 import { formatDate } from '@/lib/utils'
+import { getLanguageSummary, getTrackClass, groupPostsByTrack } from '@/lib/content-map'
 import Navigation from '@/components/Navigation'
 
 export const metadata = {
-  title: 'All Posts',
-  description: 'Browse every post on the site, including technical notes, experiments, and essays.',
+  title: 'Archive',
+  description: 'Browse the full writing archive by theme and date.',
   alternates: {
     canonical: '/posts',
   },
 }
 
+function PostRow({ post }: { post: PostData }) {
+  return (
+    <article className="grid gap-3 border-t border-slate-200 py-5 sm:grid-cols-[128px_minmax(0,1fr)]">
+      <div className="text-sm text-slate-500">
+        <time dateTime={post.date}>{formatDate(post.date)}</time>
+        <p className="mt-1">{Math.max(1, post.readingTime ?? 1)} min read</p>
+      </div>
+      <div>
+        <h3 className="text-xl font-semibold leading-snug text-slate-950">
+          <Link href={`/posts/${post.id}`} className="hover:text-[var(--accent)]">
+            {post.title}
+          </Link>
+        </h3>
+        {post.excerpt && <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">{post.excerpt}</p>}
+        <div className="mt-3 flex flex-wrap gap-2">
+          {post.tags?.slice(0, 4).map((tag) => (
+            <Link
+              key={tag}
+              href={`/tags/${encodeURIComponent(tag)}`}
+              className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-600 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              {tag}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </article>
+  )
+}
+
 export default function PostsPage() {
   const allPostsData = getSortedPostsData()
-
-  // 按日期排序（最新在前）
-  const sortedPosts = allPostsData.sort((a: PostData, b: PostData) => new Date(b.date).getTime() - new Date(a.date).getTime())
-
-  // 统计信息
+  const trackGroups = groupPostsByTrack(allPostsData)
   const totalPosts = allPostsData.length
   const allTags = Array.from(new Set(allPostsData.flatMap((post: PostData) => post.tags || [])))
+  const languageSummary = getLanguageSummary(allPostsData)
   const currentYear = new Date().getFullYear()
   const thisYearPosts = allPostsData.filter((post: PostData) => new Date(post.date).getFullYear() === currentYear).length
 
@@ -27,115 +55,74 @@ export default function PostsPage() {
     <div className="min-h-screen">
       <Navigation />
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-10 md:py-14 space-y-8">
-        <header className="rounded-2xl bg-white/90 border border-slate-200 shadow-sm p-8 md:p-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Archive</p>
-          <h1 className="mt-3 text-3xl sm:text-4xl font-semibold text-slate-900">All Posts</h1>
-          <p className="mt-3 text-lg text-slate-600 leading-relaxed max-w-3xl">
-            A chronological archive of writing across engineering, learning, and product work. Built to be easy to scan and easy to return to.
+      <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 md:py-14">
+        <header className="max-w-3xl">
+          <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Archive</p>
+          <h1 className="mt-3 text-4xl font-semibold text-slate-950">A map of the work so far</h1>
+          <p className="mt-4 text-lg leading-8 text-slate-600">
+            The archive is organized by the problems that keep returning: AI as a working tool, learning through projects, medical knowledge systems, and writing as a way to act.
           </p>
-
-          <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-600">
-            <span className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-[var(--accent)] font-medium">
-              {totalPosts} posts
-            </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1">
-              {allTags.length} tags
-            </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1">
-              {thisYearPosts} published in {currentYear}
-            </span>
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href="/search"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-white shadow-sm transition hover:translate-y-px hover:bg-[#0c316f]"
-            >
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              Search posts
-            </Link>
-            <Link
-              href="/tags"
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-slate-700 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-            >
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-              </svg>
-              Browse tags
-            </Link>
-          </div>
         </header>
 
-        <section className="space-y-4">
-          {sortedPosts.map(({ id, date, title, excerpt, tags, readingTime }: PostData) => (
-            <article
-              key={id}
-              className="group rounded-xl border border-slate-200 bg-white/90 p-5 sm:p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-            >
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-sm text-slate-500">
-                <time dateTime={date}>{formatDate(date)}</time>
-                <span className="inline-flex items-center gap-2 text-xs sm:text-sm">
-                  <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
-                  {Math.max(1, (readingTime ?? 1))} min read
-                </span>
-              </div>
-
-              <h2 className="mt-2 text-xl sm:text-2xl font-semibold text-slate-900 leading-snug">
-                <Link href={`/posts/${id}`} className="hover:text-[var(--accent)]">
-                  {title}
-                </Link>
-              </h2>
-
-              {excerpt && (
-                <p className="mt-2 text-slate-600 leading-relaxed line-clamp-2">
-                  {excerpt}
-                </p>
-              )}
-
-              <div className="mt-3 flex flex-wrap items-center gap-2">
-                {tags?.slice(0, 4).map((tag) => (
-                  <Link
-                    key={tag}
-                    href={`/tags/${encodeURIComponent(tag)}`}
-                    className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 hover:bg-slate-200"
-                  >
-                    {tag}
-                  </Link>
-                ))}
-                <Link
-                  href={`/posts/${id}`}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-[var(--accent)] hover:underline"
-                >
-                  Read more
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </article>
-          ))}
-
-          {sortedPosts.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-xl font-semibold text-slate-800 mb-2">No posts yet</p>
-              <p className="text-slate-600">Writing is in progress. New posts will show up here soon.</p>
+        <section className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ['Posts', totalPosts],
+            ['Tags', allTags.length],
+            [`Published in ${currentYear}`, thisYearPosts],
+            ['ZH / EN', `${languageSummary.zh} / ${languageSummary.en}`],
+          ].map(([label, value]) => (
+            <div key={label} className="border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-[0.18em] text-slate-500">{label}</p>
+              <p className="mt-2 text-2xl font-semibold text-slate-950">{value}</p>
             </div>
-          )}
+          ))}
         </section>
 
-        <div className="text-center pt-6 border-t border-slate-200/70">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-5 py-2 text-slate-700 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-          >
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back home
-          </Link>
+        <div className="mt-12 grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)]">
+          <aside className="hidden lg:block">
+            <div className="sticky top-28 border-l border-slate-200 pl-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Tracks</p>
+              <nav className="mt-4 space-y-2 text-sm">
+                {trackGroups.map(({ track, posts }) => (
+                  <a key={track.id} href={`#${track.id}`} className="block text-slate-600 hover:text-[var(--accent)]">
+                    {track.shortTitle} <span className="text-slate-400">({posts.length})</span>
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </aside>
+
+          <div className="space-y-14">
+            {trackGroups.map(({ track, posts }) => (
+              <section key={track.id} id={track.id} className="scroll-mt-28">
+                <div className="flex flex-col gap-3 border-b border-slate-300 pb-5 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className={`text-xs uppercase tracking-[0.2em] ${getTrackClass(track, 'text')}`}>
+                      {track.eyebrow}
+                    </p>
+                    <h2 className="mt-2 text-2xl font-semibold text-slate-950">{track.title}</h2>
+                    <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{track.description}</p>
+                  </div>
+                  <span className={`w-fit rounded-full border px-3 py-1 text-xs ${getTrackClass(track, 'soft')}`}>
+                    {posts.length} posts
+                  </span>
+                </div>
+
+                <div>
+                  {posts.map((post) => (
+                    <PostRow key={post.id} post={post} />
+                  ))}
+                </div>
+              </section>
+            ))}
+
+            {totalPosts === 0 && (
+              <div className="border border-slate-200 bg-white p-8 text-center">
+                <p className="text-xl font-semibold text-slate-900">No posts yet</p>
+                <p className="mt-2 text-slate-600">Writing is in progress. New posts will show up here soon.</p>
+              </div>
+            )}
+          </div>
         </div>
       </main>
     </div>

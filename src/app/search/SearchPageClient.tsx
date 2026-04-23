@@ -153,7 +153,7 @@ export default function SearchPageClient() {
       
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-10 md:py-14">
         <header className="space-y-6 mb-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Site Search</p>
+          <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Site Search</p>
           <div>
             <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">Search posts</h1>
             <p className="mt-2 text-lg text-slate-600 max-w-3xl leading-relaxed">
@@ -187,7 +187,7 @@ export default function SearchPageClient() {
               </div>
               <button
                 type="submit"
-                className="absolute right-1.5 top-1.5 bottom-1.5 px-5 bg-[var(--accent)] text-white text-sm font-medium rounded-full shadow-sm hover:bg-[#0c316f] transition-colors duration-150"
+                className="absolute right-1.5 top-1.5 bottom-1.5 rounded-lg bg-[var(--accent)] px-5 text-sm font-medium text-white shadow-sm transition-colors duration-150 hover:bg-[#115e59]"
               >
                 Search
               </button>
@@ -198,7 +198,7 @@ export default function SearchPageClient() {
         {/* Search Results */}
         <main className="space-y-6">
           {initialQuery && (
-            <div className="rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm">
+            <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-slate-900">
                   Results
@@ -238,13 +238,13 @@ export default function SearchPageClient() {
               <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <Link
                   href="/posts"
-                  className="inline-flex items-center px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-full shadow-sm hover:bg-[#0c316f] transition-colors duration-150"
+                  className="inline-flex items-center rounded-lg bg-[var(--accent)] px-6 py-3 font-medium text-white shadow-sm transition-colors duration-150 hover:bg-[#115e59]"
                 >
                   Browse all posts
                 </Link>
                 <Link
                   href="/tags"
-                  className="inline-flex items-center px-6 py-3 border border-slate-200 text-slate-700 font-medium rounded-full hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-150"
+                  className="inline-flex items-center rounded-lg border border-slate-200 px-6 py-3 font-medium text-slate-700 transition-colors duration-150 hover:border-[var(--accent)] hover:text-[var(--accent)]"
                 >
                   Browse tags
                 </Link>
@@ -257,7 +257,7 @@ export default function SearchPageClient() {
               {searchResults.map(({ id, date, title, excerpt, content, tags, score }) => (
                 <article
                   key={id}
-                  className="group rounded-xl border border-slate-200 bg-white/90 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                  className="group rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                 >
                   <div className="flex items-center justify-between mb-3 text-sm text-slate-500">
                     <time dateTime={date}>{formatDate(date)}</time>
@@ -327,13 +327,13 @@ export default function SearchPageClient() {
               <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <Link
                   href="/posts"
-                  className="inline-flex items-center px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-full shadow-sm hover:bg-[#0c316f] transition-colors duration-150"
+                  className="inline-flex items-center rounded-lg bg-[var(--accent)] px-6 py-3 font-medium text-white shadow-sm transition-colors duration-150 hover:bg-[#115e59]"
                 >
                   Browse all posts
                 </Link>
                 <Link
                   href="/tags"
-                  className="inline-flex items-center px-6 py-3 border border-slate-200 text-slate-700 font-medium rounded-full hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-150"
+                  className="inline-flex items-center rounded-lg border border-slate-200 px-6 py-3 font-medium text-slate-700 transition-colors duration-150 hover:border-[var(--accent)] hover:text-[var(--accent)]"
                 >
                   Browse tags
                 </Link>

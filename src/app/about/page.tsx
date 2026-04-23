@@ -27,31 +27,31 @@ export default function AboutPage() {
           </div>
 
           <div className="space-y-2">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">About</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-slate-500">About</p>
             <h1 className="text-3xl md:text-4xl font-semibold text-slate-900">Hi, I&apos;m Zhanbing Li</h1>
             <p className="text-base text-slate-600 max-w-2xl mx-auto">
-              A frontend engineer who treats writing as ongoing practice. This site is both a public notebook and a place to collect long-term work and ideas.
+              A medical student and builder using writing to understand AI tools, personal knowledge systems, programming practice, and the discipline of taking action.
             </p>
           </div>
         </header>
 
         {/* Main Content */}
         <main className="space-y-8">
-          <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm">
+          <section className="border-t border-slate-200 pt-6">
             <h2 className="text-lg font-semibold text-slate-900 mb-3">What I care about</h2>
             <p className="text-slate-600 leading-relaxed">
-              I care about frontend engineering, content systems, learning design, and building products that stay maintainable without unnecessary complexity.
+              I care about practical systems: AI agents that help with real work, medical knowledge that can be searched and reused, and learning methods that survive contact with actual projects.
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-slate-200 p-3 bg-white">
+              <div className="rounded-lg border border-slate-200 p-3 bg-white">
                 <p className="text-sm text-slate-500">Current focus</p>
                 <ul className="mt-2 space-y-1 text-sm text-slate-700">
-                  <li>• Writing about Next.js, React, and personal product work</li>
-                  <li>• Refining how I learn, practice, and turn inputs into output</li>
-                  <li>• Improving this blog&apos;s structure, speed, and readability</li>
+                  <li>• Building personal workflows with Obsidian, Zotero, OpenCode, and LLMs</li>
+                  <li>• Learning TypeScript, Python, R, and frontend systems through projects</li>
+                  <li>• Turning scattered reading and clinical knowledge into durable notes</li>
                 </ul>
               </div>
-              <div className="rounded-xl border border-slate-200 p-3 bg-white">
+              <div className="rounded-lg border border-slate-200 p-3 bg-white">
                 <p className="text-sm text-slate-500">Typical stack</p>
                 <ul className="mt-2 flex flex-wrap gap-2 text-sm">
                   {['TypeScript', 'React', 'Next.js', 'Tailwind', 'Vite', 'ESLint', 'Jest'].map((item) => (
@@ -64,19 +64,19 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm">
+          <section className="border-t border-slate-200 pt-6">
             <h2 className="text-lg font-semibold text-slate-900 mb-3">What this blog is for</h2>
             <div className="grid gap-3 sm:grid-cols-2 text-sm text-slate-700">
-              <p className="rounded-xl border border-slate-200 p-3 bg-white">
-                This is not a news site and not a pure tutorial hub. It is closer to a long-running working notebook for methods and ideas I am actively testing.
+              <p className="rounded-lg border border-slate-200 p-3 bg-white">
+                This is not a polished tutorial site. It is a long-running record of experiments: what I tried, where I got stuck, and how tools changed my next action.
               </p>
-              <p className="rounded-xl border border-slate-200 p-3 bg-white">
-                The technical setup stays intentionally simple: Markdown, static output, and light dependencies so the focus stays on content and a stable reading experience.
+              <p className="rounded-lg border border-slate-200 p-3 bg-white">
+                The technical setup stays intentionally simple: Markdown, static output, RSS, search, and a theme map that keeps the archive connected as it grows.
               </p>
             </div>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm">
+          <section className="border-t border-slate-200 pt-6">
             <h2 className="text-lg font-semibold text-slate-900 mb-3">Find me here</h2>
             <div className="flex flex-wrap gap-3">
               <a

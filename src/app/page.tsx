@@ -1,138 +1,211 @@
 import Link from 'next/link'
 import { getSortedPostsData } from '@/lib/posts'
 import { formatDate } from '@/lib/utils'
+import {
+  getFeaturedPosts,
+  getLanguageSummary,
+  getPostTrack,
+  getTrackClass,
+  groupPostsByTrack,
+} from '@/lib/content-map'
 import Navigation from '@/components/Navigation'
 
 export default function Home() {
   const allPostsData = getSortedPostsData()
   const latestUpdate = allPostsData[0]?.date
-  const featuredPosts = allPostsData.slice(0, 6)
+  const featuredPosts = getFeaturedPosts(allPostsData)
+  const trackGroups = groupPostsByTrack(allPostsData)
+  const recentPosts = allPostsData.slice(0, 8)
+  const languageSummary = getLanguageSummary(allPostsData)
   const currentYear = new Date().getFullYear()
 
   return (
     <div className="min-h-screen">
       <Navigation />
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-6 py-10 md:py-14 space-y-10">
-        <section className="rounded-2xl bg-white/90 border border-slate-200 shadow-sm p-8 md:p-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Personal Site</p>
-          <h1 className="mt-3 text-3xl sm:text-4xl font-semibold text-slate-900">
-            Writing seriously about frontend work, learning, and long-term thinking
-          </h1>
-          <p className="mt-3 text-lg text-slate-600 max-w-3xl leading-relaxed">
-            Notes on frontend engineering, practical systems, learning strategy, and the process of building useful work over time.
-          </p>
-
-          <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-600">
-            <span className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-[var(--accent)] font-medium">
-              {allPostsData.length} posts
-            </span>
-            {latestUpdate && (
-              <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1">
-                Latest update: {formatDate(latestUpdate)}
-              </span>
-            )}
+      <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 md:py-14">
+        <section className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+          <div className="max-w-3xl">
+            <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Personal knowledge site</p>
+            <h1 className="mt-4 text-4xl font-semibold leading-tight text-slate-950 sm:text-5xl">
+              Learning in public through AI tools, medical knowledge, and writing practice.
+            </h1>
+            <p className="mt-5 text-lg leading-8 text-slate-600">
+              This blog is a working notebook about turning curiosity into systems: using AI to build, using writing to think, and using medical context to keep the work grounded.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href="/posts"
+                className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-[#115e59]"
+              >
+                Browse the archive
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link
+                href="/search"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-800 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              >
+                Search notes
+              </Link>
+            </div>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/posts"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-white shadow-sm transition hover:translate-y-px hover:bg-[#0c316f]"
-            >
-              Browse all posts
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+          <aside className="border-l-4 border-[var(--accent)] bg-white p-5 shadow-sm">
+            <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Current shape</p>
+            <dl className="mt-4 grid grid-cols-2 gap-4">
+              <div>
+                <dt className="text-sm text-slate-500">Posts</dt>
+                <dd className="mt-1 text-3xl font-semibold text-slate-950">{allPostsData.length}</dd>
+              </div>
+              <div>
+                <dt className="text-sm text-slate-500">Tracks</dt>
+                <dd className="mt-1 text-3xl font-semibold text-slate-950">{trackGroups.length}</dd>
+              </div>
+              <div>
+                <dt className="text-sm text-slate-500">Chinese</dt>
+                <dd className="mt-1 text-2xl font-semibold text-slate-950">{languageSummary.zh}</dd>
+              </div>
+              <div>
+                <dt className="text-sm text-slate-500">English</dt>
+                <dd className="mt-1 text-2xl font-semibold text-slate-950">{languageSummary.en}</dd>
+              </div>
+            </dl>
+            {latestUpdate && (
+              <p className="mt-5 border-t border-slate-200 pt-4 text-sm text-slate-600">
+                Latest update: <span className="font-medium text-slate-900">{formatDate(latestUpdate)}</span>
+              </p>
+            )}
+          </aside>
+        </section>
+
+        <section className="mt-14">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Start here</p>
+              <h2 className="mt-2 text-2xl font-semibold text-slate-950">Four posts that explain the site</h2>
+            </div>
+            <Link href="/posts" className="text-sm font-medium text-[var(--accent)] hover:underline">
+              Full archive
             </Link>
-            <Link
-              href="/feed.xml"
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-5 py-2 text-slate-700 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              RSS feed
-            </Link>
+          </div>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {featuredPosts.map((post) => {
+              const track = getPostTrack(post)
+              return (
+                <article key={post.id} className="border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
+                    <span className={`rounded-full border px-2.5 py-1 ${getTrackClass(track, 'soft')}`}>
+                      {track.shortTitle}
+                    </span>
+                    <time dateTime={post.date}>{formatDate(post.date)}</time>
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold leading-snug text-slate-950">
+                    <Link href={`/posts/${post.id}`} className="hover:text-[var(--accent)]">
+                      {post.title}
+                    </Link>
+                  </h3>
+                  {post.excerpt && (
+                    <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-600">{post.excerpt}</p>
+                  )}
+                </article>
+              )
+            })}
           </div>
         </section>
 
-        <section className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Latest Writing</p>
-              <h2 className="text-2xl font-semibold text-slate-900">Recently updated</h2>
-            </div>
-            <Link 
-              href="/posts" 
-              className="text-sm font-medium text-[var(--accent)] hover:underline"
-            >
-              View all
-            </Link>
-          </div>
+        <section className="mt-16">
+          <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Writing map</p>
+          <h2 className="mt-2 text-2xl font-semibold text-slate-950">The recurring questions</h2>
 
-          <ul className="space-y-4">
-            {featuredPosts.map(({ id, date, title, excerpt, tags, readingTime }) => (
-              <li
-                key={id}
-                className="group rounded-xl border border-slate-200 bg-white/90 p-5 sm:p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              >
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-sm text-slate-500">
-                  <time dateTime={date}>{formatDate(date)}</time>
-                  <span className="inline-flex items-center gap-2 text-xs sm:text-sm">
-                  <span className="h-1.5 w-1.5 rounded-full bg-slate-300" aria-hidden />
-                    {Math.max(1, readingTime ?? 1)} min read
+          <div className="mt-6 grid gap-5 lg:grid-cols-2">
+            {trackGroups.map(({ track, posts }) => (
+              <section key={track.id} id={track.id} className="border border-slate-200 bg-white p-5 shadow-sm">
+                <div className={`mb-4 h-1.5 w-16 ${getTrackClass(track, 'bg')}`} aria-hidden />
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-slate-500">{track.eyebrow}</p>
+                    <h3 className="mt-2 text-xl font-semibold text-slate-950">{track.title}</h3>
+                  </div>
+                  <span className="rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600">
+                    {posts.length} posts
                   </span>
                 </div>
-
-                <h3 className="mt-2 text-xl font-semibold text-slate-900 leading-snug">
-                  <Link href={`/posts/${id}`} className="hover:text-[var(--accent)]">
-                    {title}
-                  </Link>
-                </h3>
-
-                {excerpt && (
-                  <p className="mt-2 text-slate-600 leading-relaxed line-clamp-2">
-                    {excerpt}
-                  </p>
-                )}
-
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                  {tags?.slice(0, 3).map((tag) => (
-                    <Link
-                      key={tag}
-                      href={`/tags/${encodeURIComponent(tag)}`}
-                      className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 hover:bg-slate-200"
-                    >
-                      {tag}
-                    </Link>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{track.thesis}</p>
+                <ul className="mt-5 space-y-3">
+                  {posts.slice(0, 3).map((post) => (
+                    <li key={post.id} className="border-t border-slate-100 pt-3">
+                      <Link href={`/posts/${post.id}`} className="font-medium leading-snug text-slate-900 hover:text-[var(--accent)]">
+                        {post.title}
+                      </Link>
+                      <p className="mt-1 text-xs text-slate-500">{formatDate(post.date)}</p>
+                    </li>
                   ))}
-                  <Link
-                    href={`/posts/${id}`}
-                    className="inline-flex items-center gap-1 text-sm font-medium text-[var(--accent)] hover:underline"
-                  >
-                    Read more
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              </li>
+                </ul>
+              </section>
             ))}
-          </ul>
+          </div>
         </section>
 
-        <footer className="border-t border-slate-200/70 pt-6 text-sm text-slate-600">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p>© {currentYear} Zhanbing Li · Writing, shipping, refining.</p>
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="/posts" className="hover:text-[var(--accent)]">Posts</Link>
-              <Link href="/tags" className="hover:text-[var(--accent)]">Tags</Link>
-              <Link href="/about" className="hover:text-[var(--accent)]">About</Link>
-              <Link href="/feed.xml" className="hover:text-[var(--accent)]">RSS</Link>
-              <a href="https://github.com/Zhanbingli" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent)]">
+        <section className="mt-16 grid gap-10 lg:grid-cols-[minmax(0,1fr)_280px]">
+          <div>
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Latest log</p>
+                <h2 className="mt-2 text-2xl font-semibold text-slate-950">Recent notes</h2>
+              </div>
+              <Link href="/feed.xml" className="text-sm font-medium text-[var(--accent)] hover:underline">
+                RSS
+              </Link>
+            </div>
+            <ol className="mt-6 divide-y divide-slate-200 border-y border-slate-200">
+              {recentPosts.map((post) => {
+                const track = getPostTrack(post)
+                return (
+                  <li key={post.id} className="grid gap-3 py-4 sm:grid-cols-[120px_minmax(0,1fr)]">
+                    <time dateTime={post.date} className="text-sm text-slate-500">
+                      {formatDate(post.date)}
+                    </time>
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Link href={`/posts/${post.id}`} className="font-semibold leading-snug text-slate-950 hover:text-[var(--accent)]">
+                          {post.title}
+                        </Link>
+                        <span className={`rounded-full border px-2 py-0.5 text-[11px] ${getTrackClass(track, 'soft')}`}>
+                          {track.shortTitle}
+                        </span>
+                      </div>
+                      {post.excerpt && <p className="mt-1 line-clamp-2 text-sm leading-6 text-slate-600">{post.excerpt}</p>}
+                    </div>
+                  </li>
+                )
+              })}
+            </ol>
+          </div>
+
+          <aside className="border-t border-slate-200 pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+            <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Site promise</p>
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              Notes stay close to actual practice: tools tried, projects built, mistakes made, and thoughts revised in public.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3 text-sm">
+              <Link href="/about" className="text-[var(--accent)] hover:underline">
+                About
+              </Link>
+              <Link href="/tags" className="text-[var(--accent)] hover:underline">
+                Tags
+              </Link>
+              <a href="https://github.com/Zhanbingli" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">
                 GitHub
               </a>
             </div>
-          </div>
+          </aside>
+        </section>
+
+        <footer className="mt-14 border-t border-slate-200 pt-6 text-sm text-slate-500">
+          <p>© {currentYear} Zhanbing Li. Writing, building, and revising in public.</p>
         </footer>
       </main>
     </div>

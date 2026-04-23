@@ -2,13 +2,13 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #f6f3ec;
+  --background: #f7f8fb;
   --foreground: #0f172a;
   --muted: #475569;
   --card: #ffffff;
   --border: #e2e8f0;
-  --accent: #0f3d91;
-  --accent-soft: #dfe8ff;
+  --accent: #0f766e;
+  --accent-soft: #ccfbf1;
 }
 
 @theme inline {
@@ -24,7 +24,7 @@ body {
   font-family: "Inter", "SF Pro Display", "Helvetica Neue", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.75;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -64,8 +64,8 @@ body {
 
 /* Selection */
 ::selection {
-  background-color: #dbeafe;
-  color: #1e40af;
+  background-color: #ccfbf1;
+  color: #134e4a;
 }
 
 /* Focus */
@@ -154,7 +154,7 @@ html {
   color: #f8fafc;
   overflow-x: auto;
   padding: 1.15rem 1rem;
-  border-radius: 0.85rem;
+  border-radius: 0.5rem;
   margin-top: 1.35rem;
   margin-bottom: 1.35rem;
   max-width: 100%;
@@ -170,10 +170,10 @@ html {
 
 .prose blockquote {
   border-left: 4px solid var(--accent);
-  background-color: #eef2ff;
+  background-color: #ecfdf5;
   padding: 1rem 1.5rem;
   margin: 1.5rem 0;
-  border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: 0 0.375rem 0.375rem 0;
   font-style: italic;
 }
 
@@ -190,7 +190,7 @@ html {
 }
 
 .prose img {
-  border-radius: 0.5rem;
+  border-radius: 0.375rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;

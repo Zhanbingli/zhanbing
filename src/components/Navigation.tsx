@@ -73,7 +73,7 @@ export default function Navigation() {
               <Link 
                 key={link.href}
                 href={link.href} 
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors duration-150 ${
+                className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-150 ${
                   isActive(link.href)
                     ? 'bg-[var(--accent-soft)] text-[var(--accent)]'
                     : 'text-slate-700 hover:text-[var(--accent)] hover:bg-white/70'
@@ -86,7 +86,7 @@ export default function Navigation() {
 
           <Link
             href="/search"
-            className={`hidden md:inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-150 shadow-sm ${
+            className={`hidden md:inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-colors duration-150 shadow-sm ${
               pathname === '/search'
                 ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]'
                 : 'border-slate-200 bg-white text-slate-700 hover:border-[var(--accent)] hover:text-[var(--accent)]'
@@ -173,7 +173,7 @@ export default function Navigation() {
                   placeholder="Search titles, tags, or keywords"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 text-base border border-slate-200 bg-white rounded-xl focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all duration-150 shadow-sm"
+                  className="w-full rounded-lg border border-slate-200 bg-white py-3 pl-10 pr-4 text-base shadow-sm outline-none transition-all duration-150 focus:border-transparent focus:ring-2 focus:ring-[var(--accent)]"
                   autoFocus
                 />
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
