@@ -1,143 +1,121 @@
 # DNS 配置指南 - zhanbing.site
 
-## 🚨 当前问题
+最后检查时间：2026-04-23
 
-你的域名 `zhanbing.site` 目前指向错误的 IP 地址：
-- 当前 IP：`82.25.95.145` 和 `84.32.84.32` ❌
-- 正确 IP：GitHub Pages 的 IP 地址 ✅
+## 当前结论
 
-## 📋 需要修改的 DNS 记录
+`zhanbing.site` 的 GitHub Pages 部署本身是可访问的：
 
-### 删除现有的错误记录
-删除所有指向以下 IP 的 A 记录：
-- `82.25.95.145`
-- `84.32.84.32`
+- `https://zhanbing.site/` 返回 `HTTP 200`
+- `http://zhanbing.site/` 会跳转到 `https://zhanbing.site/`
+- `https://zhanbing.site/feed.xml` 返回 `HTTP 200`
+- `https://zhanbing.site/sitemap.xml` 返回 `HTTP 200`
 
-### 添加正确的 GitHub Pages A 记录
+公共 DNS over HTTPS 查询显示根域名已经指向 GitHub Pages：
 
-在你的域名注册商（购买 zhanbing.site 的地方）添加以下 A 记录：
-
-```
-记录类型: A
-主机记录: @
-记录值: 185.199.108.153
-TTL: 3600
-
-记录类型: A
-主机记录: @
-记录值: 185.199.109.153
-TTL: 3600
-
-记录类型: A
-主机记录: @
-记录值: 185.199.110.153
-TTL: 3600
-
-记录类型: A
-主机记录: @
-记录值: 185.199.111.153
-TTL: 3600
+```text
+zhanbing.site A 185.199.108.153
+zhanbing.site A 185.199.109.153
+zhanbing.site A 185.199.110.153
+zhanbing.site A 185.199.111.153
 ```
 
-## 🌐 常见域名注册商配置方法
+当前还需要处理的是 `www.zhanbing.site`：它会跳转到根域名，但 HTTPS 证书可能不包含 `www.zhanbing.site`。这通常是因为 `www` 没有按 GitHub Pages 推荐方式直接 CNAME 到 GitHub Pages 默认域名。
 
-### 阿里云（万网）
-1. 登录阿里云控制台
-2. 进入"域名"管理
-3. 点击"解析"
-4. 删除现有的 A 记录
-5. 添加上述 4 条 A 记录
+## Hostinger DNS 应保持的记录
 
-### 腾讯云
-1. 登录腾讯云控制台
-2. 进入"域名注册"
-3. 点击"解析"
-4. 删除现有的 A 记录
-5. 添加上述 4 条 A 记录
+在 Hostinger 的 DNS Zone 中，根域名 `@` 保留下面 4 条 A 记录：
 
-### Cloudflare
-1. 登录 Cloudflare 控制台
-2. 选择你的域名
-3. 进入 DNS 管理
-4. 删除现有的 A 记录
-5. 添加上述 4 条 A 记录
-6. 确保代理状态为"仅 DNS"（灰色云朵）
+```text
+类型: A
+名称: @
+值: 185.199.108.153
+TTL: 3600
 
-### GoDaddy
-1. 登录 GoDaddy 账户
-2. 进入"我的产品"
-3. 点击域名旁的"DNS"
-4. 删除现有的 A 记录
-5. 添加上述 4 条 A 记录
+类型: A
+名称: @
+值: 185.199.109.153
+TTL: 3600
 
-## ✅ 验证步骤
+类型: A
+名称: @
+值: 185.199.110.153
+TTL: 3600
 
-### 1. 等待 DNS 传播
-DNS 更改通常需要 1-24 小时生效，有时可能需要 48 小时。
+类型: A
+名称: @
+值: 185.199.111.153
+TTL: 3600
+```
 
-### 2. 检查 DNS 传播状态
-使用以下工具检查全球 DNS 传播状态：
-- https://www.whatsmydns.net/
-- https://dnschecker.org/
-- https://dns.google/
+`www` 子域名应改成下面这条 CNAME：
 
-### 3. 命令行验证
+```text
+类型: CNAME
+名称: www
+值: zhanbingli.github.io
+TTL: 300 或 3600
+```
+
+不要把 `www` CNAME 指向 `zhanbing.site`。GitHub 官方文档明确建议 `www` 子域名直接指向 `<user>.github.io`，否则 HTTPS 可能出问题。
+
+## GitHub Pages 设置
+
+仓库：`Zhanbingli/zhanbing`
+
+Pages 设置应为：
+
+- Source: GitHub Actions
+- Custom domain: `zhanbing.site`
+- Enforce HTTPS: enabled
+
+本仓库的 `public/CNAME` 也应只包含：
+
+```text
+zhanbing.site
+```
+
+## 验证命令
+
+优先使用公共 DNS over HTTPS 验证，避免本地网络或运营商 DNS 缓存干扰：
+
 ```bash
-# 检查 A 记录
-nslookup zhanbing.site
-
-# 或使用 dig
-dig zhanbing.site
-
-# 期望看到的结果：
-# 185.199.108.153
-# 185.199.109.153  
-# 185.199.110.153
-# 185.199.111.153
+curl -s 'https://dns.google/resolve?name=zhanbing.site&type=A'
+curl -s 'https://cloudflare-dns.com/dns-query?name=zhanbing.site&type=A' -H 'accept: application/dns-json'
+curl -s 'https://dns.google/resolve?name=www.zhanbing.site&type=CNAME'
 ```
 
-## 🔒 HTTPS 配置
+访问状态检查：
 
-### DNS 配置完成后：
-1. 等待 DNS 完全传播（可能需要几小时）
-2. 访问 GitHub 仓库设置：https://github.com/Zhanbingli/zhanbing/settings/pages
-3. 确认自定义域名显示为 `zhanbing.site`
-4. 等待 GitHub 自动生成 SSL 证书（可能需要几分钟到几小时）
-5. 勾选 "Enforce HTTPS" 选项
+```bash
+curl -I https://zhanbing.site
+curl -I http://zhanbing.site
+curl -I https://zhanbing.site/feed.xml
+curl -I https://zhanbing.site/sitemap.xml
+curl -I https://www.zhanbing.site
+```
 
-### 如果 HTTPS 仍然不可用：
-- 等待更长时间（最多 24 小时）
-- 尝试删除并重新添加自定义域名
-- 检查域名是否有其他 DNS 记录冲突
+预期结果：
 
-## 🕐 时间线预期
+- `https://zhanbing.site` 返回 `HTTP 200`
+- `http://zhanbing.site` 返回 `301` 到 HTTPS
+- `feed.xml` 和 `sitemap.xml` 返回 `HTTP 200`
+- `https://www.zhanbing.site` 不应有证书错误，并应跳转到 `https://zhanbing.site/`
 
-1. **立即**：修改 DNS 记录
-2. **1-6 小时**：DNS 开始传播
-3. **6-24 小时**：DNS 完全传播
-4. **DNS 传播后 1-6 小时**：GitHub 生成 SSL 证书
-5. **SSL 证书生成后**：可以启用 HTTPS
+## 如果本地 dig 显示 198.18.1.1
 
-## 🆘 故障排除
+如果 `dig zhanbing.site A` 显示 `198.18.1.1`，但 Google/Cloudflare DNS over HTTPS 显示 GitHub Pages 的 4 个 IP，通常是本地递归 DNS、代理、网络环境或缓存问题，不代表全球 DNS 配置错误。
 
-### 如果 24 小时后仍然有问题：
-1. 确认所有旧的 DNS 记录都已删除
-2. 检查是否有 CNAME 记录冲突
-3. 联系域名注册商技术支持
-4. 在 GitHub 中删除并重新添加自定义域名
+可以尝试：
 
-### 常见错误：
-- **混合记录类型**：不要同时使用 A 记录和 CNAME 记录指向根域名
-- **TTL 过长**：如果 TTL 设置过长，DNS 更改会很慢
-- **缓存问题**：清除本地 DNS 缓存 `sudo dscacheutil -flushcache`
+```bash
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder
+```
 
-## 📞 需要帮助？
+然后重新打开浏览器或切换网络测试。
 
-如果遇到问题，请提供：
-1. 域名注册商名称
-2. 当前 DNS 记录截图
-3. `nslookup zhanbing.site` 的输出结果
+## 参考
 
----
-
-**重要提醒**：在 DNS 配置完成并传播之前，不要启用 HTTPS。GitHub 需要先验证域名所有权才能生成 SSL 证书。 
+- GitHub Pages 自定义域名文档：https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+- GitHub Pages 自定义域名说明：https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages

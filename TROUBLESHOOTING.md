@@ -1,121 +1,109 @@
 # GitHub Pages 部署故障排除指南
 
-## 问题：Domain does not resolve to the GitHub Pages server
+最后检查时间：2026-04-23
 
-### 解决步骤
+## 当前已确认的状态
 
-#### 1. 检查 GitHub Pages 设置
+- `https://zhanbing.site/` 可访问，返回 `HTTP 200`
+- `http://zhanbing.site/` 会跳转到 HTTPS
+- `https://zhanbing.site/feed.xml` 可访问
+- `https://zhanbing.site/sitemap.xml` 可访问
+- GitHub Pages 构建本地验证通过：`npm run build`
 
-1. 访问你的 GitHub 仓库：https://github.com/Zhanbingli/zhanbing
-2. 点击 **Settings** 标签
-3. 在左侧菜单中找到 **Pages**
-4. 确保以下设置正确：
-   - **Source**: Deploy from a branch
-   - **Branch**: gh-pages (如果使用 peaceiris/actions-gh-pages)
-   - **Folder**: / (root)
+当前主要风险点是 `www.zhanbing.site` 的 HTTPS 证书。如果访问 `https://www.zhanbing.site` 出现证书不匹配，按下面步骤处理。
 
-#### 2. 配置自定义域名
+## 问题：www 子域名 HTTPS 证书不匹配
 
-在 Pages 设置中：
-1. 在 **Custom domain** 字段中输入：`zhanbing.site`
-2. 勾选 **Enforce HTTPS**（在 DNS 配置完成后）
+症状：
 
-#### 3. DNS 配置
-
-你需要在你的域名注册商（如阿里云、腾讯云等）配置 DNS 记录：
-
-**选项 A：使用 A 记录（推荐）**
-```
-类型: A
-名称: @
-值: 185.199.108.153
-TTL: 3600
-
-类型: A  
-名称: @
-值: 185.199.109.153
-TTL: 3600
-
-类型: A
-名称: @
-值: 185.199.110.153
-TTL: 3600
-
-类型: A
-名称: @
-值: 185.199.111.153
-TTL: 3600
+```text
+SSL: no alternative certificate subject name matches target host name 'www.zhanbing.site'
 ```
 
-**选项 B：使用 CNAME 记录**
-```
+处理方式：
+
+1. 登录 Hostinger。
+2. 打开 `zhanbing.site` 的 DNS Zone。
+3. 删除或修改当前 `www` 记录。
+4. 添加这条记录：
+
+```text
 类型: CNAME
 名称: www
 值: zhanbingli.github.io
-TTL: 3600
+TTL: 300 或 3600
 ```
 
-#### 4. 验证 DNS 配置
+不要把 `www` 指向 `zhanbing.site`。GitHub Pages 推荐 `www` 子域名直接 CNAME 到 `<user>.github.io`，本项目对应 `zhanbingli.github.io`。
 
-使用以下命令检查 DNS 是否正确配置：
+修改后等待 GitHub Pages 重新签发/更新证书，通常需要几分钟到 1 小时，最多可能 24 小时。
+
+## 问题：Domain does not resolve to the GitHub Pages server
+
+根域名 `zhanbing.site` 应有 4 条 A 记录：
+
+```text
+A @ 185.199.108.153
+A @ 185.199.109.153
+A @ 185.199.110.153
+A @ 185.199.111.153
+```
+
+如果 Hostinger 中还有 parking、转发或其他 A 记录，删除它们，避免和 GitHub Pages 冲突。
+
+## GitHub Pages 设置检查
+
+访问：
+
+```text
+https://github.com/Zhanbingli/zhanbing/settings/pages
+```
+
+应确认：
+
+- Source: GitHub Actions
+- Custom domain: `zhanbing.site`
+- Enforce HTTPS: enabled
+
+本仓库使用 GitHub Actions 发布到 Pages。`public/CNAME` 里保留 `zhanbing.site`，构建后会进入静态产物。
+
+## 验证命令
+
+DNS 验证：
 
 ```bash
-# 检查 A 记录
-dig zhanbing.site
-
-# 检查 CNAME 记录  
-dig www.zhanbing.site
-
-# 或使用 nslookup
-nslookup zhanbing.site
+curl -s 'https://dns.google/resolve?name=zhanbing.site&type=A'
+curl -s 'https://dns.google/resolve?name=www.zhanbing.site&type=CNAME'
 ```
 
-#### 5. 等待 DNS 传播
+访问验证：
 
-DNS 更改可能需要 24-48 小时才能完全传播。你可以使用以下工具检查传播状态：
-- https://www.whatsmydns.net/
-- https://dnschecker.org/
+```bash
+curl -I https://zhanbing.site
+curl -I http://zhanbing.site
+curl -I https://www.zhanbing.site
+curl -I https://zhanbing.site/feed.xml
+curl -I https://zhanbing.site/sitemap.xml
+```
 
-#### 6. 常见问题
+本地构建验证：
 
-**问题：Actions 构建失败**
-- 确保 GitHub Actions 已启用
-- 检查 `.github/workflows/deploy.yml` 文件是否正确
-- 查看 Actions 日志获取详细错误信息
+```bash
+npm run build
+```
 
-**问题：页面显示 404**
-- 确保 `gh-pages` 分支存在且包含构建后的文件
-- 检查 `out` 目录是否正确生成
-- 确认 `index.html` 文件在根目录
+## 如果本地 DNS 和公共 DNS 结果不一致
 
-**问题：CSS/JS 文件加载失败**
-- 检查 `next.config.ts` 中的 `output: 'export'` 配置
-- 确保没有使用服务器端功能（如 API routes）
+如果本地 `dig` 看到 `198.18.1.1`，但 Google/Cloudflare DNS over HTTPS 返回 GitHub Pages 的 4 个 IP，优先相信公共 DNS over HTTPS 结果。这通常是本地 DNS、代理或网络缓存问题。
 
-#### 7. 临时访问方法
+macOS 可清理本地 DNS 缓存：
 
-在 DNS 配置完成前，你可以通过以下地址访问你的博客：
-- https://zhanbingli.github.io/zhanbing/
+```bash
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder
+```
 
-#### 8. 检查列表
+## 参考
 
-- [ ] GitHub Actions 已启用并成功运行
-- [ ] GitHub Pages 设置正确（Source: gh-pages branch）
-- [ ] 自定义域名已在 GitHub Pages 中配置
-- [ ] DNS A 记录或 CNAME 记录已正确设置
-- [ ] DNS 传播已完成（可能需要 24-48 小时）
-- [ ] HTTPS 已启用
-
-## 联系支持
-
-如果问题仍然存在，请：
-1. 检查 GitHub Actions 日志
-2. 验证域名注册商的 DNS 设置
-3. 等待 DNS 传播完成
-4. 联系域名注册商技术支持
-
-## 有用的链接
-
-- [GitHub Pages 官方文档](https://docs.github.com/en/pages)
-- [配置自定义域名](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
-- [DNS 记录类型说明](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) 
+- GitHub Pages 自定义域名文档：https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+- GitHub Pages 故障排除文档：https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages
