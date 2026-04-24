@@ -30,7 +30,7 @@ tags: ['博客', '图片', 'Markdown', '教程']
 
 例如：
 ```markdown
-[![Next.js 官网](next.svg)](https://nextjs.org)
+[![站点预览图](/og-image.svg)](https://zhanbing.site)
 ```
 
 ## 2. 不同类型的图片使用

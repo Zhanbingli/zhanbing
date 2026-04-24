@@ -80,10 +80,10 @@ export default function TableOfContents({
 
   return (
     <div className={cls(className, sticky && 'lg:sticky lg:top-28')}>
-      <div className="overflow-hidden rounded-[1.5rem] border border-slate-200/80 bg-white/95 shadow-[0_24px_60px_-44px_rgba(15,23,42,0.4)] backdrop-blur">
-        <div className="flex items-center justify-between px-5 pt-5">
+      <div className="rounded-xl border border-slate-200 bg-white">
+        <div className="flex items-center justify-between px-4 pt-4">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">{title}</p>
+            <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">{title}</p>
             <p className="mt-1 text-sm font-medium text-slate-800">
               Quick jump · {headings.length} section{headings.length === 1 ? '' : 's'}
             </p>
@@ -91,7 +91,7 @@ export default function TableOfContents({
           {collapsible && (
             <button
               type="button"
-              className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
               onClick={() => setOpen((prev) => !prev)}
               aria-expanded={open}
             >
@@ -102,7 +102,7 @@ export default function TableOfContents({
 
         <div
           className={cls(
-            'px-3 pb-4 transition-[max-height,opacity] duration-200 ease-out',
+            'px-2 pb-3 transition-[max-height,opacity] duration-200 ease-out',
             visible ? 'opacity-100 max-h-[70vh]' : 'opacity-0 max-h-0 overflow-hidden'
           )}
         >
@@ -115,9 +115,9 @@ export default function TableOfContents({
                   href={`#${heading.id}`}
                   onClick={(event) => handleClick(heading.id, event)}
                   className={cls(
-                    'group flex items-start gap-3 rounded-xl border border-transparent px-3 py-2.5 transition-colors',
+                    'group flex items-start gap-3 rounded-lg border border-transparent px-3 py-2 transition-colors',
                     isActive
-                      ? 'border-[var(--accent)]/15 bg-[var(--accent-soft)] text-[var(--accent)] shadow-sm'
+                      ? 'border-[var(--accent)]/15 bg-[var(--accent-soft)] text-[var(--accent)]'
                       : 'hover:border-slate-200 hover:bg-slate-50 hover:text-slate-900',
                     heading.level === 3 && 'pl-6 text-[13px] text-slate-600'
                   )}
