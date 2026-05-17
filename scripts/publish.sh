@@ -60,7 +60,7 @@ if [[ -n $(git status -s) ]]; then
     git push --set-upstream origin "$current_branch"
     
     echo "✅ 博客发布成功！"
-    echo "🌐 网站将在 2-3 分钟后更新：https://zhanbing.site"
+    echo "🌐 网站将在 2-3 分钟后更新：https://zhanbing-blog.pages.dev"
 else
     echo "ℹ️  没有发现新的更改"
 fi 

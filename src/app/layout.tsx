@@ -4,12 +4,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Zhanbing Li | zhanbing.site",
+    default: "Zhanbing Li",
     template: "%s | Zhanbing Li"
   },
   description: "Personal notes on frontend engineering, learning systems, product building, and writing.",
   keywords: ["Zhanbing Li", "frontend", "engineering blog", "learning systems", "React", "Next.js", "writing"],
-  authors: [{ name: "Zhanbing Li", url: "https://zhanbing.site" }],
+  authors: [{ name: "Zhanbing Li", url: "https://zhanbing-blog.pages.dev" }],
   creator: "Zhanbing Li",
   publisher: "Zhanbing Li",
   icons: {
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://zhanbing.site"),
+  metadataBase: new URL("https://zhanbing-blog.pages.dev"),
   alternates: {
     canonical: "/",
     types: {
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://zhanbing.site",
+    url: "https://zhanbing-blog.pages.dev",
     title: "Zhanbing Li",
     description: "Personal notes on frontend engineering, learning systems, product building, and writing.",
     siteName: "Zhanbing Li",

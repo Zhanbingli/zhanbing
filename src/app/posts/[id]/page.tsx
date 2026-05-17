@@ -88,7 +88,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   try {
     const { id } = await params
     const postData = await getPostData(id)
-    const baseUrl = 'https://zhanbing.site'
+    const baseUrl = 'https://zhanbing-blog.pages.dev'
 
     return {
       title: postData.title,
@@ -148,25 +148,25 @@ export default async function Post({ params }: PostPageProps) {
     '@type': 'BlogPosting',
     headline: postData.title,
     description: postData.excerpt || postData.title,
-    image: ['https://zhanbing.site/og-image.svg'],
+    image: ['https://zhanbing-blog.pages.dev/og-image.svg'],
     author: {
       '@type': 'Person',
       name: 'Zhanbing Li',
-      url: 'https://zhanbing.site',
+      url: 'https://zhanbing-blog.pages.dev',
     },
     publisher: {
       '@type': 'Organization',
       name: 'Zhanbing Li',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://zhanbing.site/og-image.svg',
+        url: 'https://zhanbing-blog.pages.dev/og-image.svg',
       },
     },
     datePublished: postData.date,
     dateModified: postData.updatedAt ?? postData.date,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://zhanbing.site/posts/${id}`,
+      '@id': `https://zhanbing-blog.pages.dev/posts/${id}`,
     },
     keywords: postData.tags?.join(', ') || '',
     articleSection: 'Technology',

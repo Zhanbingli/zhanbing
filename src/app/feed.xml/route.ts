@@ -7,7 +7,7 @@ export const dynamic = 'force-static'
 
 export async function GET() {
   const posts = getSortedPostsData()
-  const baseUrl = 'https://zhanbing.site'
+  const baseUrl = 'https://zhanbing-blog.pages.dev'
   
   const itemsXml = await Promise.all(posts.map(async (post) => {
     // Convert Markdown to HTML for full content

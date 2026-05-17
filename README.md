@@ -1,8 +1,8 @@
 # Zhanbing Li Knowledge Site
 
-A personal knowledge site built with Next.js, Markdown, and GitHub Pages.
+A personal knowledge site built with Next.js, Markdown, and Cloudflare Pages.
 
-Live site: https://zhanbing.site
+Live site: https://zhanbing-blog.pages.dev
 
 This is not only a chronological blog. It is a working knowledge base for notes on AI tools, medical knowledge systems, learning by building, and writing as a way to think in public.
 
@@ -154,7 +154,7 @@ npm run preview
 ```text
 my_blog/
 ├── posts/                     # Markdown notes
-├── public/                    # Static assets and CNAME
+├── public/                    # Static assets
 ├── scripts/                   # Helper scripts
 ├── src/
 │   ├── app/
@@ -190,30 +190,25 @@ my_blog/
 
 ## Deployment
 
-The site is statically exported and deployed to GitHub Pages through GitHub Actions.
+The site is statically exported and deployed to Cloudflare Pages.
 
-Deployment flow:
+Manual deploy from local:
 
-1. Push to `main`
-2. GitHub Actions runs `npm ci` and `npm run build`
-3. The generated `out/` directory is deployed to GitHub Pages
-4. The site is served at https://zhanbing.site
-
-The custom domain is defined in:
-
-```text
-public/CNAME
+```bash
+npm run build
+npx wrangler pages deploy out --project-name=zhanbing-blog --branch=main
 ```
 
-DNS and Pages troubleshooting:
+The first deploy requires `npx wrangler login`. After that, every run of the
+two commands above pushes a new version to https://zhanbing-blog.pages.dev.
 
-- [DNS_SETUP.md](./DNS_SETUP.md)
-- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)
+Optional: connect the GitHub repo to the Pages project in the Cloudflare
+dashboard (Workers & Pages → zhanbing-blog → Settings → Builds & deployments
+→ Connect to Git) to auto-build on push to `main`.
 
 ## Links
 
-- Site: https://zhanbing.site
-- Legacy blog: https://zhanbingli.github.io/
+- Site: https://zhanbing-blog.pages.dev
 - GitHub: https://github.com/Zhanbingli
 - Repository: https://github.com/Zhanbingli/zhanbing
 

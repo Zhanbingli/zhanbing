@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/_next/', '/out/'],
     },
-    sitemap: 'https://zhanbing.site/sitemap.xml',
+    sitemap: 'https://zhanbing-blog.pages.dev/sitemap.xml',
   }
 } 

@@ -5,7 +5,7 @@ export const dynamic = 'force-static'
 
 export default function sitemap() {
   const posts = getSortedPostsData()
-  const baseUrl = 'https://zhanbing.site'
+  const baseUrl = 'https://zhanbing-blog.pages.dev'
 
   const postUrls = posts.map((post) => ({
     url: `${baseUrl}/posts/${post.id}`,
